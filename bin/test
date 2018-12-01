@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mix test "$@"
+cd assets
+npm test
+cd ..

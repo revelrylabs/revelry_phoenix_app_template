@@ -1,0 +1,81 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": [
+                "ie 11",
+                "last 2 Chrome versions",
+                "last 2 ChromeAndroid versions",
+                "last 2 Firefox versions",
+                "last 2 Safari versions",
+                "last 2 Edge versions",
+                "last 2 iOS versions"
+              ]
+            },
+            "useBuiltIns": "entry"
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": [
+                "ie 11",
+                "last 2 Chrome versions",
+                "last 2 ChromeAndroid versions",
+                "last 2 Firefox versions",
+                "last 2 Safari versions",
+                "last 2 Edge versions",
+                "last 2 iOS versions"
+              ]
+            },
+            "useBuiltIns": "entry"
+          }
+        ],
+        "@babel/preset-react",
+        "minify"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "useBuiltIns": "entry"
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings"
+      ]
+    }
+  }
+}

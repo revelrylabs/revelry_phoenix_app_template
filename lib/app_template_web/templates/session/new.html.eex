@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <div class="rev-Row">
+      <h1>Log In</h1>
+    </div>
+    <%= form_tag(Routes.session_path(@conn, :create), method: "post") do %>
+      <div class="rev-Row">
+        <label class="rev-InputStack rev-InputLabel is-invalid-label is-invalid">
+          <span>Email</span>
+          <input class="rev-Input" placeholder="Email" type="email">
+        </label>
+
+        <label class="rev-InputStack rev-InputLabel is-invalid-label is-invalid">
+          <span>Password</span>
+          <input class="rev-Input" placeholder="Password" type="password">
+        </label>
+
+        <div class="rev-Row">
+          <button class="rev-Button" type="submit">Log In</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

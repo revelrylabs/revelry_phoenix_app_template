@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sh ./bin/update
+
+echo "Running server"
+mix phx.server

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello app_template!</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="rev-TopBar">
+        <nav role="navigation">
+          <div class="rev-TopBar-item">
+            <ul class="rev-Menu rev-Menu--horizontalLeft">
+              <li class="rev-Menu-item">
+                <a href="<%= Routes.page_path(@conn, :index) %>">Home</a>
+              </li>
+              <li class="rev-Menu-item">
+                <a href="<%= Routes.session_path(@conn, :new) %>">Log In</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

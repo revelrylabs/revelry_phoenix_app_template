@@ -1,0 +1,46 @@
+sudo: false
+jobs:
+  include:
+    - stage: 'Tests' # naming the Tests stage
+      name: 'Unit Tests' # names the first Tests stage job
+      language: elixir
+      elixir:
+        - 1.7
+      otp_release:
+        - 21.0
+      cache:
+        directories:
+          - _build
+          - deps
+          - assets/node_modules
+      addons:
+        postgresql: '9.6'
+      services:
+        - postgresql
+      before_script:
+        - psql -c 'create database app_template_test;' -U postgres
+      install:
+        - mix local.hex --force
+        - mix local.rebar --force
+        - mix deps.get
+        - cd assets
+        - npm install
+      script:
+        - mix test
+        - cd assets
+        - npm test
+        - cd ..
+    - stage: deploy
+      name: 'Deploy'
+      script: skip
+      deploy:
+        - provider: deis
+          controller: deis.stage.revelry.net
+          app: app_template
+          cli_version: v2.7.0
+          username: '$DEIS_USERNAME'
+          password: '$DEIS_PASSWORD'
+          on:
+            branch: master
+      after_deploy:
+        - ./deis run "_build/prod/rel/app_template/bin/app_template migrate" -a app_template

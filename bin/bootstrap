@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Running brew bundle"
+brew bundle
+
+if which asdf >/dev/null; then
+    echo "Running asdf install"
+    asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+    asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+    asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+    asdf install
+else
+    echo "asdf not found. Please make sure required versions are installed"
+fi
+
+echo "Installing mix dependencies"
+mix local.hex --force
+mix local.rebar --force
+mix deps.get
+
+echo "Installing node dependencies"
+(cd assets && npm install && cd ..)

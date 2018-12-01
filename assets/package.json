@@ -1,0 +1,74 @@
+{
+  "repository": {},
+  "scripts": {
+    "build": "webpack --mode development",
+    "deploy": "BABEL_ENV=production NODE_ENV=production webpack --mode production",
+    "test": "NODE_ENV=test nyc --all --reporter=text --reporter=lcov mocha --require @babel/register --require jsdom-global/register --recursive test"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "core-js": "^2.5.5",
+    "harmonium": "^4.2.2",
+    "mustache": "^3.0.0",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "autoprefixer": "^9.1.5",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.0",
+    "babel-preset-minify": "^0.5.0",
+    "chai": "^4.1.2",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^1.0.0",
+    "csswring": "^7.0.0",
+    "eslint": "^5.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "exports-loader": "^0.7.0",
+    "image-webpack-loader": "^4.2.0",
+    "imagemin-webpack-plugin": "^2.2.0",
+    "imports-loader": "^0.8.0",
+    "jsdom": "^12.0.0",
+    "jsdom-global": "3.0.2",
+    "mini-css-extract-plugin": "^0.4.2",
+    "mocha": "^5.2.0",
+    "node-sass": "^4.9.3",
+    "nyc": "^13.0.1",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "script-loader": "^0.7.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0"
+  },
+  "browserslist": [
+    "ie 11",
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "last 2 iOS versions"
+  ],
+  "nyc": {
+    "exclude": [
+      "*.config.js",
+      "**/*_test.js",
+      "coverage/**/*"
+    ]
+  }
+}

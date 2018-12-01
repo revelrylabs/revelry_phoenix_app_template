@@ -1,0 +1,15 @@
+# Git data
+.git
+
+# Elixir build artifacts
+_build
+deps
+
+# Node build artifacts
+assets/node_modules
+
+# Tests
+test
+
+# Compiled static artifacts
+priv/static
