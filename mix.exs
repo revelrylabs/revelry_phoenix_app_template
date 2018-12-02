@@ -50,11 +50,11 @@ defmodule AppTemplate.Mixfile do
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
-      {:credo, "~> 0.10", only: :dev},
+      {:credo, "~> 1.0", only: :dev},
       {:excoveralls, "~> 0.7", only: :test},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:harmonium, "~> 0.2.0"},
+      {:harmonium, "~> 2.0.0"},
       {:distillery, "~> 2.0"},
       {:jason, "~> 1.0"}
     ]
