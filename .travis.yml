@@ -33,6 +33,7 @@ jobs:
         - cd ..
     - stage: deploy
       name: 'Deploy'
+      if: branch = master
       script: skip
       deploy:
         - provider: deis
