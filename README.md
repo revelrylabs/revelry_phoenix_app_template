@@ -1,15 +1,14 @@
-_Build Badges_
-
-Staging: [ ![Codeship Status for revelrylabs/changeme](https://app.codeship.com/projects/[ID]/status?branch=develop)](https://app.codeship.com/projects/[id])
-Production: ![Codeship Status for revelrylabs/changeme](https://app.codeship.com/projects/[ID]/status?branch=master)](https://app.codeship.com/projects/[id])
+|            | Build Status                                                                                                                                                                                   |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Production | [![Build Status](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template.svg?token=eDnMwv6sT4GHB9E2RzXt&branch=master)](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template) |
 
 # app_template
 
 Product Owner:
 
-* **Kickoff Date:**
-* **Project Duration:**
-* **Current end of contract Date:**
+- **Kickoff Date:**
+- **Project Duration:**
+- **Current end of contract Date:**
 
 ## Links to relevant docs, repos, etc.
 
@@ -75,8 +74,8 @@ Product Owner:
 
 # Tech Stack
 
-* Elixir
-* Phoenix Web Framework
+- Elixir
+- Phoenix Web Framework
 
 ## Project Setup
 

@@ -8,14 +8,17 @@ defmodule AppTemplateWeb.SessionController.Test do
   end
 
   test "POST /session/new with invalid credentials", %{conn: conn} do
-    conn = post(conn, Routes.session_path(conn, :new), email: "blah", password: "blah")
+    conn = post(conn, Routes.session_path(conn, :new), session: [email: "blah", password: "blah"])
     assert html_response(conn, 200) =~ "Invalid email or password"
   end
 
   describe "POST /session/new with valid credentials" do
     test "logs the normal user in and redirects to the main menu", %{conn: conn} do
       user = insert!(:user, password: Bcrypt.hashpwsalt("blah"))
-      conn = post(conn, Routes.session_path(conn, :new), email: user.email, password: "blah")
+
+      conn =
+        post(conn, Routes.session_path(conn, :new), session: [email: user.email, password: "blah"])
+
       assert redirected_to(conn) =~ Routes.page_path(conn, :index)
     end
   end
