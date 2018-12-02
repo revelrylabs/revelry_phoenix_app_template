@@ -41,6 +41,7 @@ defmodule AppTemplateWeb do
       alias AppTemplateWeb.Router.Helpers, as: Routes
       import AppTemplateWeb.ErrorHelpers
       import AppTemplateWeb.Gettext
+      import Harmonium
     end
   end
 

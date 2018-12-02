@@ -20,9 +20,11 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/", AppTemplateWeb do
-    pipe_through :browser # Use the default browser stack
+    # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
+    get "/styleguide", PageController, :styleguide
     get "/sessions/new", SessionController, :new
     post "/sessions/new", SessionController, :create
   end

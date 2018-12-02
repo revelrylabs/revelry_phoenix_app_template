@@ -16,20 +16,24 @@
       <div class="rev-TopBar">
         <nav role="navigation">
           <div class="rev-TopBar-item">
-            <ul class="rev-Menu rev-Menu--horizontalLeft">
-              <li class="rev-Menu-item">
-                <a href="<%= Routes.page_path(@conn, :index) %>">Home</a>
-              </li>
-              <li class="rev-Menu-item">
-                <a href="<%= Routes.session_path(@conn, :new) %>">Log In</a>
-              </li>
-            </ul>
+            <%= menu :ul, horizontalLeft: true do %>
+              <%= menu_item :li, [] do %>
+                <%= link "Home", to: Routes.page_path(@conn, :index) %>
+              <% end %>
+              <%= menu_item :li, [] do %>
+                <%= link "Log In", to: Routes.session_path(@conn, :new) %>
+              <% end %>
+            <% end %>
           </div>
         </nav>
       </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= unless is_nil(get_flash(@conn, :info)) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= unless is_nil(get_flash(@conn, :error)) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
