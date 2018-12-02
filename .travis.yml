@@ -25,6 +25,7 @@ jobs:
         - mix deps.get
         - cd assets
         - npm install
+        - cd ..
       script:
         - mix test
         - cd assets
