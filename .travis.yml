@@ -38,11 +38,11 @@ jobs:
       deploy:
         - provider: deis
           controller: deis.stage.revelry.net
-          app: app_template
+          app: app-template
           cli_version: v2.7.0
           username: '$DEIS_USERNAME'
           password: '$DEIS_PASSWORD'
           on:
             branch: master
       after_deploy:
-        - ./deis run "_build/prod/rel/app_template/bin/app_template migrate" -a app_template
+        - ./deis run "_build/prod/rel/app_template/bin/app_template migrate" -a app-template
