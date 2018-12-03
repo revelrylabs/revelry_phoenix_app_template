@@ -39,7 +39,7 @@ jobs:
         - provider: deis
           controller: deis.stage.revelry.net
           app: app-template
-          cli_version: v2.7.0
+          cli_version: v2.20.0
           username: '$DEIS_USERNAME'
           password: '$DEIS_PASSWORD'
           on:
