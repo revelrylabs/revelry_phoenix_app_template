@@ -18,3 +18,8 @@ config :app_template, AppTemplate.Repo,
   port: String.to_integer(System.get_env("PGPORT") || "5432"),
   pool: Ecto.Adapters.SQL.Sandbox,
   types: AppTemplate.PostgresTypes
+
+config :app_template, AppTemplate.Mailer, adapter: Bamboo.TestAdapter
+
+config :app_template,
+  s3_signer: AppTemplate.S3Signer.Mock

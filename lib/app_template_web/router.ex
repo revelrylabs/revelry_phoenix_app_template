@@ -1,6 +1,15 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
+  use Plug.ErrorHandler
   alias AppTemplateWeb.{RequireAuth, LoadUser}
+
+  defp handle_errors(conn, error_data) do
+    AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
+  end
+
+  if Mix.env() == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -25,6 +34,10 @@ defmodule AppTemplateWeb.Router do
 
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
+
+    get "/register", UserController, :new
+    post "/register", UserController, :create
+
     get "/sessions/new", SessionController, :new
     post "/sessions/new", SessionController, :create
   end
@@ -33,6 +46,12 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser, :require_auth]
 
     get "/sessions/delete", SessionController, :delete
+  end
+
+  scope "/images", AppTemplateWeb do
+    pipe_through([:browser, :require_auth])
+
+    get("/sign", S3Controller, :sign)
   end
 
   # Other scopes may use custom stacks.

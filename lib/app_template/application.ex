@@ -6,12 +6,24 @@ defmodule AppTemplate.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    statix_config = Application.get_env(:app_template, :statix)
+    Application.put_env(:statix, AppTemplate.Statix, statix_config)
+    :ok = AppTemplate.Statix.connect()
+
+    Telemetry.attach(
+      "record_ecto_metric",
+      [:app_template, :repo, :query],
+      AppTemplate.Metrics,
+      :record_ecto_metric,
+      nil
+    )
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
       supervisor(AppTemplate.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(AppTemplateWeb.Endpoint, []),
+      supervisor(AppTemplateWeb.Endpoint, [])
       # Start your own worker by calling: AppTemplate.Worker.start_link(arg1, arg2, arg3)
       # worker(AppTemplate.Worker, [arg1, arg2, arg3]),
     ]

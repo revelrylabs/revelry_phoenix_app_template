@@ -9,12 +9,12 @@ defmodule AppTemplateWeb.SessionController.Test do
 
   test "POST /session/new with invalid credentials", %{conn: conn} do
     conn = post(conn, Routes.session_path(conn, :new), session: [email: "blah", password: "blah"])
-    assert html_response(conn, 200) =~ "Invalid email or password"
+    assert html_response(conn, 422) =~ "Invalid email or password"
   end
 
   describe "POST /session/new with valid credentials" do
     test "logs the normal user in and redirects to the main menu", %{conn: conn} do
-      user = insert!(:user, password: Bcrypt.hashpwsalt("blah"))
+      user = insert(:user, password: Bcrypt.hashpwsalt("blah"))
 
       conn =
         post(conn, Routes.session_path(conn, :new), session: [email: user.email, password: "blah"])
@@ -29,7 +29,7 @@ defmodule AppTemplateWeb.SessionController.Test do
   end
 
   test "GET /session/delete when logged in", %{conn: conn} do
-    user = insert!(:user)
+    user = insert(:user)
 
     conn =
       conn

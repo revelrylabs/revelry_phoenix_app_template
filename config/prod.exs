@@ -18,3 +18,9 @@ config :app_template, AppTemplate.Repo,
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+config :rollbax, enable_crash_reports: true
+
+config :app_template, AppTemplate.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")

@@ -51,6 +51,8 @@ config :app_template, AppTemplate.Repo,
   pool_size: 10,
   types: AppTemplate.PostgresTypes
 
+config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
+
 if File.exists?(Path.join([__DIR__, "dev.secret.exs"])) do
   import_config "dev.secret.exs"
 end

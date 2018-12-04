@@ -20,8 +20,14 @@
               <%= menu_item :li, [] do %>
                 <%= link "Home", to: Routes.page_path(@conn, :index) %>
               <% end %>
-              <%= menu_item :li, [] do %>
-                <%= link "Log In", to: Routes.session_path(@conn, :new) %>
+              <%= if !@conn.assigns.current_user do %>
+                <%= menu_item :li, [] do %>
+                  <%= link "Register", to: Routes.user_path(@conn, :new) %>
+                <% end %>
+              <% else %>
+                <%= menu_item :li, [] do %>
+                  <%= link "Log In", to: Routes.session_path(@conn, :new) %>
+                <% end %>
               <% end %>
             <% end %>
           </div>

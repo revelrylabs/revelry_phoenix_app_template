@@ -11,6 +11,7 @@ defmodule AppTemplate.Auth do
     case verify_credentials(email, given_pass) do
       {:ok, user} ->
         {:ok, new_session(conn, user), user}
+
       {:error, reason} ->
         {:error, reason, conn}
     end

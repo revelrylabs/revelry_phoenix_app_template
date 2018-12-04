@@ -19,6 +19,7 @@ defmodule AppTemplateWeb.SessionController do
         changeset = Sessions.new(session)
 
         conn
+        |> put_status(:unprocessable_entity)
         |> put_flash(:error, "Invalid email or password.")
         |> render("new.html", changeset: changeset)
     end

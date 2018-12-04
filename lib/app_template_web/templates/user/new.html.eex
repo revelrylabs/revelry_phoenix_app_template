@@ -1,0 +1,21 @@
+<%= row do %>
+  <%= col do %>
+    <h1>Register</h1>
+  <% end %>
+<% end %>
+<%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
+  <%= row do %>
+    <%= col do %>
+      <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :new_password, label: "Password", input: [required: true, placeholder: "Password"] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :new_password_confirmation, label: "Confirm Password", input: [required: true, placeholder: "Confirm Password"] %>
+    <% end %>
+    <%= col do %>
+      <%= submit gettext("Register"), class: button_class() %>
+    <% end %>
+  <% end %>
+<% end %>

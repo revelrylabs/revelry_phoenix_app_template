@@ -56,7 +56,14 @@ defmodule AppTemplate.Mixfile do
       {:bcrypt_elixir, "~> 1.0"},
       {:harmonium, "~> 2.0.0"},
       {:distillery, "~> 2.0"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:rollbax, "~> 0.9"},
+      {:vmstats, "~> 2.3"},
+      {:statix, "~> 1.1"},
+      {:bamboo, "~> 1.1.0"},
+      {:ex_aws, "~> 2.1"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:ex_machina, "~> 2.2", only: :test}
     ]
   end
 

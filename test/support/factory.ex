@@ -1,22 +1,17 @@
 defmodule AppTemplate.Factory do
   alias AppTemplate.{User, Repo}
+  use ExMachina.Ecto, repo: Repo
 
-  def build(:user) do
+  def user_factory do
     %User{
       email: "test#{System.unique_integer([:positive])}@example.com",
-      password: Comeonin.Bcrypt.hashpwsalt("supersecretpassword"),
+      password: Comeonin.Bcrypt.hashpwsalt("supersecretpassword")
     }
   end
 
-  def build(factory_name, attributes \\ []) do
-    factory_name |> build() |> struct(attributes)
-  end
+  def random_string(max_length) do
+    length = Enum.random(1..max_length)
 
-  def params_for(factory_name, attributes \\ []) do
-    factory_name |> build() |> struct(attributes) |> Map.from_struct()
-  end
-
-  def insert!(factory_name, attributes \\ []) do
-    Repo.insert!(build(factory_name, attributes))
+    length |> :crypto.strong_rand_bytes() |> Base.url_encode64() |> binary_part(0, length)
   end
 end
