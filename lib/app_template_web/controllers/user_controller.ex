@@ -1,6 +1,6 @@
 defmodule AppTemplateWeb.UserController do
   use AppTemplateWeb, :controller
-  alias AppTemplate.{User, Users, EmailBuilder, Mailer}
+  alias AppTemplate.{Auth, EmailBuilder, Mailer, User, Users}
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -16,6 +16,7 @@ defmodule AppTemplateWeb.UserController do
 
         conn
         |> put_flash(:info, gettext("Registration successful!"))
+        |> Auth.new_session(user)
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, changeset} ->
