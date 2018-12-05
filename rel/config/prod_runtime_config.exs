@@ -17,7 +17,7 @@ config :rollbax,
   client_token: System.get_env("ROLLBAR_CLIENT_TOKEN"),
   access_token: System.get_env("ROLLBAR_SERVER_TOKEN"),
   environment: System.get_env("ROLLBAR_ENVIRONMENT"),
-  enabled: true
+  enabled: false
 
 config :app_template, :statix,
   prefix: "app_template",
