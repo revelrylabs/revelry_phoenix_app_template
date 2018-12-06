@@ -3,6 +3,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const nodeModulesPath = path.resolve(__dirname, 'node_modules')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+
+const devMode = process.env.NODE_ENV !== 'production'
+
+function minimizers() {
+  if (devMode) {
+    return []
+  } else {
+    return [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
+  }
+}
 
 // The webpack config
 module.exports = {
@@ -14,6 +26,9 @@ module.exports = {
     path: path.resolve(__dirname, '..', 'priv', 'static'),
     filename: 'js/[name].js',
   },
+  optimization: {
+    minimizer: minimizers(),
+  },
   plugins: [
     // Copy all of our assets to the priv/static folder
     new CopyWebpackPlugin([
@@ -23,7 +38,7 @@ module.exports = {
       },
     ]),
     new ImageminPlugin({
-      disable: process.env.NODE_ENV !== 'production',
+      disable: devMode,
       test: /\.(jpe?g|png|gif|svg)$/i,
     }),
     // Separate the css into it's own file
@@ -69,7 +84,7 @@ module.exports = {
           {
             loader: 'image-webpack-loader',
             options: {
-              disable: process.env.NODE_ENV !== 'production',
+              disable: devMode,
             },
           },
         ],
