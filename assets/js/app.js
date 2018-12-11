@@ -1,2 +1,38 @@
 import 'phoenix_html'
-import '../css/app.scss'
+import {DateTime} from 'luxon'
+
+/**
+ * Updates <time> tags with a datetime attribute in ISO 8601 format to
+ * display in the user's local time
+ * @returns {void}
+ */
+function updateTimeTags() {
+  const timeTags = document.querySelectorAll('time[datetime]')
+
+  for (let i = 0; i < timeTags.length; i++) {
+    const timeTag = timeTags[i]
+
+    const timestamp = DateTime.fromISO(timeTag.getAttribute('datetime'), {
+      zone: 'utc',
+    })
+
+    const localTimestamp = timestamp.toLocal()
+
+    timeTag.textContent = localTimestamp.toLocaleString(DateTime.DATETIME_FULL)
+  }
+}
+
+function init(_config) {
+  updateTimeTags()
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (self.app_template) {
+    self.app_template.components = {}
+    init(self.app_template)
+  }
+})
+
+export default {
+  init,
+}

@@ -4,6 +4,7 @@
 /deps
 /*.ez
 /.elixir_ls
+coverage
 
 # Generated on crash by the VM
 erl_crash.dump
