@@ -12,7 +12,7 @@ defmodule AppTemplateWeb.LayoutView do
     "null"
   end
 
-  defp module(module) do
-    {:safe, "'#{module}'"}
-  end
+  # defp module(module) do
+  #  {:safe, "'#{module}'"}
+  # end
 end

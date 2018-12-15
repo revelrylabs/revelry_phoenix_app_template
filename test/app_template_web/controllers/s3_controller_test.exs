@@ -1,5 +1,5 @@
 defmodule AppTemplateWeb.S3Controller.Test do
-  use AppTemplateWeb.ConnCase
+  use AppTemplateWeb.ConnCase, async: true
 
   test "GET /images/sign when signed out", %{conn: conn} do
     conn = get(conn, Routes.s3_path(conn, :sign))
@@ -31,6 +31,12 @@ defmodule AppTemplateWeb.S3Controller.Test do
       assert body["data"]["file_type"]
       assert body["data"]["signed_request"]
       assert body["data"]["url"]
+    end
+
+    test "with bad file", %{conn: conn} do
+      conn = get(conn, Routes.s3_path(conn, :sign), file_name: "badfile.bad")
+      body = json_response(conn, 400)
+      assert body["errors"]["all"]
     end
   end
 end

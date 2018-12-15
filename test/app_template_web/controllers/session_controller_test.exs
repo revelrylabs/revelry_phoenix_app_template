@@ -1,5 +1,5 @@
 defmodule AppTemplateWeb.SessionController.Test do
-  use AppTemplateWeb.ConnCase
+  use AppTemplateWeb.ConnCase, async: true
   alias Comeonin.Bcrypt
 
   test "GET /session/new", %{conn: conn} do

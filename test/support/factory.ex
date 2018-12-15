@@ -5,7 +5,7 @@ defmodule AppTemplate.Factory do
   def user_factory do
     %User{
       email: "test#{System.unique_integer([:positive])}@example.com",
-      password: Comeonin.Bcrypt.hashpwsalt("supersecretpassword")
+      password: "$2b$12$.6tY2BiVPAIhie1Zxh/ePexJ76CXLOycFXqvYlsb8AYfBCHHYhkMq"
     }
   end
 

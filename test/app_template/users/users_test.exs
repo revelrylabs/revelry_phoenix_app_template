@@ -1,5 +1,5 @@
 defmodule AppTemplate.Users.Test do
-  use AppTemplate.DataCase
+  use AppTemplate.DataCase, async: true
   alias AppTemplate.Users
 
   test "create" do
