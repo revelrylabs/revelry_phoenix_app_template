@@ -28,6 +28,22 @@ defmodule AppTemplate.ReleaseTasks do
     stop_services()
   end
 
+  def grant_admin([email]) do
+    start_services()
+
+    grant_admin_permissions(email)
+
+    stop_services()
+  end
+
+  def revoke_admin([email]) do
+    start_services()
+
+    revoke_admin_access(email)
+
+    stop_services()
+  end
+
   defp start_services do
     IO.puts("Loading #{@app}..")
 
@@ -85,5 +101,37 @@ defmodule AppTemplate.ReleaseTasks do
     priv_dir = "#{:code.priv_dir(app)}"
 
     Path.join([priv_dir, repo_underscore, filename])
+  end
+
+  def grant_admin_permissions(email) do
+    user = AppTemplate.Users.get_user_by_email(email)
+
+    if user do
+      case AppTemplate.Users.grant_user_admin_permissions(user) do
+        {:ok, _} ->
+          IO.puts("User<#{email}> is now an admin")
+
+        _ ->
+          IO.puts("Unable to make User<#{email}> into an admin")
+      end
+    else
+      IO.puts("Unable to find User<#{email}>")
+    end
+  end
+
+  def revoke_admin_access(email) do
+    user = AppTemplate.Users.get_user_by_email(email)
+
+    if user do
+      case AppTemplate.Users.revoke_user_admin_permissions(user) do
+        {:ok, _} ->
+          IO.puts("User<#{email}> admin access revoked")
+
+        _ ->
+          IO.puts("Unable to revoke User<#{email}> admin access")
+      end
+    else
+      IO.puts("Unable to find User<#{email}>")
+    end
   end
 end
