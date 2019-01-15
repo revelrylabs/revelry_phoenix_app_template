@@ -3,8 +3,7 @@ defmodule AppTemplateWeb.S3Controller.Test do
 
   test "GET /images/sign when signed out", %{conn: conn} do
     conn = get(conn, Routes.s3_path(conn, :sign))
-    body = response(conn, 403)
-    assert body =~ "Unauthorized"
+    assert redirected_to(conn) =~ Routes.session_path(conn, :new)
   end
 
   describe "GET /images/sign when signed in" do

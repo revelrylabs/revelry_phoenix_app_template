@@ -4,6 +4,7 @@ defmodule AppTemplateWeb.RequireAuth do
   """
 
   import Plug.Conn
+  alias AppTemplateWeb.Router.Helpers, as: Routes
 
   def init(opts) do
     opts
@@ -12,9 +13,14 @@ defmodule AppTemplateWeb.RequireAuth do
   def call(conn, _) do
     case conn.assigns.current_user do
       nil ->
+        path = "#{conn.request_path}?#{conn.query_string}"
+        encoded_path = URI.encode_www_form(path)
+        to_path = Routes.session_path(conn, :new, next: encoded_path)
+
         conn
-        |> send_resp(403, "Unauthorized")
+        |> Phoenix.Controller.redirect(to: to_path)
         |> halt()
+
       _user ->
         conn
     end

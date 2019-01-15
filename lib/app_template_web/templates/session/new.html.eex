@@ -2,7 +2,7 @@
   <%= col do %>
     <h1>Log In</h1>
   <% end %>
-  <%= form_for @changeset, Routes.session_path(@conn, :create), fn f -> %>
+  <%= form_for @changeset, @url, fn f -> %>
     <%= row do %>
       <%= col do %>
         <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
