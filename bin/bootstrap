@@ -10,7 +10,9 @@ if which asdf >/dev/null; then
     asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
     asdf install
 else
-    echo "asdf not found. Please make sure required versions are installed"
+    echo "asdf not found. Please make sure it is installed by following directions below"
+    echo "https://github.com/asdf-vm/asdf#basic-installation"
+    exit 1
 fi
 
 echo "Installing mix dependencies"
