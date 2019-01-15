@@ -5,7 +5,7 @@ jobs:
       name: 'Unit Tests' # names the first Tests stage job
       language: elixir
       elixir:
-        - 1.7
+        - 1.8
       otp_release:
         - 21.0
       cache:
