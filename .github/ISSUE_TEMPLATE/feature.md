@@ -1,3 +1,12 @@
+---
+name: Feature
+about: A guide to writing feature tickets
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 <!-- The issue title should follow the format of User Role/Type - Feature/Location - Function. e.g "Admin - Dashboard - Save Page" -->
 
 <!-- Blockers/Dependencies (optional): List any related Issues that are blocking this new Issue being worked or shipped. We try to avoid writing stories in a way that creates immediate blockers but sometimes it is unavoidable for complex issues. -->
