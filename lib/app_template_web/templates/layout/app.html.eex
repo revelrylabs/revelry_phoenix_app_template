@@ -24,9 +24,12 @@
                 <%= menu_item :li, [] do %>
                   <%= link "Register", to: Routes.user_path(@conn, :new) %>
                 <% end %>
+                <%= menu_item :li, [] do %>
+                  <%= link "Sign In", to: Routes.session_path(@conn, :new) %>
+                <% end %>
               <% else %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Log In", to: Routes.session_path(@conn, :new) %>
+                  <%= link "Sign Out", to: Routes.session_path(@conn, :delete) %>
                 <% end %>
               <% end %>
             <% end %>
