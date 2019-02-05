@@ -40,7 +40,7 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/", AppTemplateWeb do
-    pipe_through [:browser, :unauthenticated]
+    pipe_through [:browser, :require_unauth]
 
     get "/register", UserController, :new
     post "/register", UserController, :create
