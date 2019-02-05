@@ -1,7 +1,7 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuth, LoadUser}
+  alias AppTemplateWeb.{RequireAuth, LoadUser, RequireUnauth}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -24,16 +24,23 @@ defmodule AppTemplateWeb.Router do
     plug RequireAuth
   end
 
+  pipeline :require_unauth do
+    plug RequireUnauth
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", AppTemplateWeb do
     # Use the default browser stack
-    pipe_through :browser
-
+    pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
+  end
+
+  scope "/", AppTemplateWeb do
+    pipe_through [:browser, :require_unauth]
 
     get "/register", UserController, :new
     post "/register", UserController, :create
