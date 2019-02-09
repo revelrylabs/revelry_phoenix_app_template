@@ -3,13 +3,7 @@ defmodule AppTemplateWeb.UserController.Test do
   use Bamboo.Test
 
   setup %{conn: conn} do
-    user = insert(:user)
-
-    conn =
-      conn
-      |> assign(:current_user, user)
-
-    [user: user, conn: conn]
+    [conn: conn]
   end
 
   test "GET /register", %{conn: conn} do
