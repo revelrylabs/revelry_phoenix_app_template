@@ -7,10 +7,11 @@ defmodule AppTemplate.User do
   schema "users" do
     field(:email, :string)
     field(:password, :string)
-    field(:new_password, :string, virtual: true)
-    field(:new_password_confirmation, :string, virtual: true)
     field(:admin, :boolean, default: false)
     timestamps()
+
+    field(:new_password, :string, virtual: true)
+    field(:new_password_confirmation, :string, virtual: true)
   end
 
   def changeset(model, params \\ %{}) do
