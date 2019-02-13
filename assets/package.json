@@ -6,7 +6,7 @@
     "test": "NODE_ENV=test nyc --all --reporter=text --reporter=lcov mocha --require @babel/register --require jsdom-global/register --recursive test"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
+    "@babel/polyfill": "^7.2.5",
     "core-js": "^2.6.4",
     "harmonium": "^4.3.3",
     "mustache": "^3.0.0",
