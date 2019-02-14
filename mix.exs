@@ -52,8 +52,8 @@ defmodule AppTemplate.Mixfile do
       {:plug, "~> 1.7"},
       {:credo, "~> 1.0", only: :dev},
       {:excoveralls, "~> 0.7", only: :test},
-      {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"},
+      {:comeonin, "~> 5.0"},
+      {:bcrypt_elixir, "~> 2.0"},
       {:harmonium, "~> 2.0.0"},
       {:distillery, "~> 2.0"},
       {:jason, "~> 1.0"},
@@ -64,7 +64,7 @@ defmodule AppTemplate.Mixfile do
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
       {:ex_machina, "~> 2.2", only: :test},
-      {:stream_data, "~> 0.4.2", only: :test},
+      {:stream_data, "~> 0.4.2", only: :test}
     ]
   end
 

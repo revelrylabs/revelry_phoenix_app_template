@@ -10,11 +10,10 @@ defmodule AppTemplate.Application do
     Application.put_env(:statix, AppTemplate.Statix, statix_config)
     :ok = AppTemplate.Statix.connect()
 
-    Telemetry.attach(
+    :telemetry.attach(
       "record_ecto_metric",
       [:app_template, :repo, :query],
-      AppTemplate.Metrics,
-      :record_ecto_metric,
+      &AppTemplate.Metrics.record_ecto_metric/4,
       nil
     )
 

@@ -1,7 +1,7 @@
 defmodule AppTemplate.User do
   use Ecto.Schema
   import Ecto.{Query, Changeset}, warn: false
-  alias Comeonin.Bcrypt
+  alias Bcrypt
 
   @type t :: %__MODULE__{}
   schema "users" do
@@ -28,7 +28,7 @@ defmodule AppTemplate.User do
   defp hash_password(changeset) do
     if password = get_change(changeset, :new_password) do
       changeset
-      |> put_change(:password, Bcrypt.hashpwsalt(password))
+      |> put_change(:password, Bcrypt.hash_pwd_salt(password))
     else
       changeset
     end

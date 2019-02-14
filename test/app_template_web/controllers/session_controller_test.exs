@@ -1,6 +1,6 @@
 defmodule AppTemplateWeb.SessionController.Test do
   use AppTemplateWeb.ConnCase, async: true
-  alias Comeonin.Bcrypt
+  alias Bcrypt
 
   test "GET /session/new", %{conn: conn} do
     conn = get(conn, Routes.session_path(conn, :new))
@@ -19,7 +19,7 @@ defmodule AppTemplateWeb.SessionController.Test do
 
   describe "POST /session/new with valid credentials" do
     test "logs the normal user in and redirects to the main menu", %{conn: conn} do
-      user = insert(:user, password: Bcrypt.hashpwsalt("blah"))
+      user = insert(:user, password: Bcrypt.hash_pwd_salt("blah"))
 
       conn =
         post(conn, Routes.session_path(conn, :new), session: [email: user.email, password: "blah"])
@@ -28,7 +28,7 @@ defmodule AppTemplateWeb.SessionController.Test do
     end
 
     test "logs the normal user in and redirects to next page", %{conn: conn} do
-      user = insert(:user, password: Bcrypt.hashpwsalt("blah"))
+      user = insert(:user, password: Bcrypt.hash_pwd_salt("blah"))
 
       conn =
         post(conn, Routes.session_path(conn, :new, next: Routes.s3_path(conn, :sign)),

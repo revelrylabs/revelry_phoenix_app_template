@@ -4,7 +4,7 @@ defmodule AppTemplate.Auth do
   """
 
   import Plug.Conn
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+  import Bcrypt, only: [check_pass: 3, no_user_verify: 1]
   alias AppTemplate.Users
 
   def login(conn, email, given_pass) do
@@ -24,10 +24,10 @@ defmodule AppTemplate.Auth do
   def verify_credentials(email, given_pass) do
     user = Users.get_user_by_email(email)
 
-    if user && checkpw(given_pass, user.password) do
+    if user && check_pass(user, given_pass, []) do
       {:ok, user}
     else
-      dummy_checkpw()
+      no_user_verify([])
       {:error, :unauthorized}
     end
   end
