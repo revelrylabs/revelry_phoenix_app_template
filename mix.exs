@@ -60,7 +60,7 @@ defmodule AppTemplate.Mixfile do
       {:rollbax, "~> 0.9"},
       {:vmstats, "~> 2.3"},
       {:statix, "~> 1.1"},
-      {:bamboo, "~> 1.1.0"},
+      {:bamboo, "~> 1.2.0"},
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
       {:ex_machina, "~> 2.2", only: :test},
