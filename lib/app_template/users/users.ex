@@ -34,4 +34,9 @@ defmodule AppTemplate.Users do
     user_changeset = Changeset.change(user, admin: admin?)
     Repo.update(user_changeset)
   end
+
+  def update_email_verified(user) do
+    user_changeset = Changeset.change(user, email_verified: true)
+    Repo.update(user_changeset)
+  end
 end

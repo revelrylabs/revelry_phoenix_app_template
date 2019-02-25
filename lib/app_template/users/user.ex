@@ -8,6 +8,7 @@ defmodule AppTemplate.User do
     field(:email, :string)
     field(:password, :string)
     field(:admin, :boolean, default: false)
+    field(:email_verified, :boolean, default: false)
     timestamps()
 
     field(:new_password, :string, virtual: true)

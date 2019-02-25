@@ -53,6 +53,8 @@ config :app_template,
 
 config :app_template, :s3_bucket, System.get_env("AWS_S3_BUCKET")
 
+config :app_template, jwt_secret: "secret"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

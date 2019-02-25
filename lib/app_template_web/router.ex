@@ -37,6 +37,7 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
+    get "/email/verify", EmailVerificationController, :verify
   end
 
   scope "/", AppTemplateWeb do
