@@ -1,4 +1,4 @@
-defmodule AppTemplate.Auth do
+defmodule AppTemplate.Authentication do
   @moduledoc """
   Handles logging users in and out
   """

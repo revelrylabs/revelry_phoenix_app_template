@@ -1,6 +1,6 @@
 defmodule AppTemplateWeb.SessionController do
   use AppTemplateWeb, :controller
-  alias AppTemplate.{Auth, Session, Sessions}
+  alias AppTemplate.{Authentication, Session, Sessions}
 
   def new(conn, _params) do
     url = add_next_url(conn, Routes.session_path(conn, :create))
@@ -11,7 +11,7 @@ defmodule AppTemplateWeb.SessionController do
   def create(conn, %{"session" => session_params}) do
     {:ok, session} = Sessions.validate(%Session{}, session_params)
 
-    case Auth.login(conn, session.email, session.password) do
+    case Authentication.login(conn, session.email, session.password) do
       {:ok, conn, _user} ->
         conn
         |> put_flash(:info, "Signed in successfully.")
@@ -30,7 +30,7 @@ defmodule AppTemplateWeb.SessionController do
 
   def delete(conn, _params) do
     conn
-    |> Auth.logout()
+    |> Authentication.logout()
     |> put_flash(:info, "Signed out successfully.")
     |> redirect(to: Routes.session_path(conn, :new))
   end

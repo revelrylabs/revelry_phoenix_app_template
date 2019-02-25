@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.RequireAuth do
+defmodule AppTemplateWeb.RequireAuthentication do
   @moduledoc """
   Ensures user is logged in
   """

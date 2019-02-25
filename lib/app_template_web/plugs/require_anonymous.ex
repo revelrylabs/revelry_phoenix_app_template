@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.RequireUnauth do
+defmodule AppTemplateWeb.RequireAnonymous do
   @moduledoc """
   Ensures user is signed out
   """

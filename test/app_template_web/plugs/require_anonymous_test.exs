@@ -1,10 +1,10 @@
-defmodule AppTemplateWeb.RequireUnAuthTest do
+defmodule AppTemplateWeb.RequireAnonymousTest do
   use AppTemplateWeb.ConnCase, async: true
-  alias AppTemplateWeb.{RequireUnauth, LoadUser}
+  alias AppTemplateWeb.{RequireAnonymous, LoadUser}
   alias Plug.Conn
 
   test "init" do
-    assert RequireUnauth.init([]) == []
+    assert RequireAnonymous.init([]) == []
   end
 
   test "call without user" do
@@ -13,7 +13,7 @@ defmodule AppTemplateWeb.RequireUnAuthTest do
 
     assert conn
            |> LoadUser.call([])
-           |> RequireUnauth.call([]) == conn
+           |> RequireAnonymous.call([]) == conn
   end
 
   test "call with user" do
@@ -23,7 +23,7 @@ defmodule AppTemplateWeb.RequireUnAuthTest do
       |> LoadUser.call([])
 
     assert conn
-           |> RequireUnauth.call([])
+           |> RequireAnonymous.call([])
            |> redirected_to() =~ Routes.page_path(conn, :index)
   end
 end

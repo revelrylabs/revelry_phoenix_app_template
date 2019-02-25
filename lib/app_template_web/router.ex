@@ -1,7 +1,7 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuth, LoadUser, RequireUnauth}
+  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -21,11 +21,11 @@ defmodule AppTemplateWeb.Router do
   end
 
   pipeline :require_auth do
-    plug RequireAuth
+    plug RequireAuthentication
   end
 
   pipeline :require_unauth do
-    plug RequireUnauth
+    plug RequireAnonymous
   end
 
   pipeline :api do
