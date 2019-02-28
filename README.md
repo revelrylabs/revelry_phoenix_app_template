@@ -85,3 +85,7 @@ Note that Elixir 1.5 or greater is required in order to start it.
 Once run, follow directions and start app by running `sh ./bin/server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Production Environment Variables
+
+Look at https://github.com/revelrylabs/revelry_phoenix_app_template/blob/master/rel/config/prod_runtime_config.exs for what environment variables are expected to be set in production.
