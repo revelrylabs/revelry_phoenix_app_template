@@ -86,6 +86,8 @@ Once run, follow directions and start app by running `sh ./bin/server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-## Production Environment Variables
+## Deployment
 
-Look at https://github.com/revelrylabs/revelry_phoenix_app_template/blob/master/rel/config/prod_runtime_config.exs for what environment variables are expected to be set in production.
+- Create an app in the Revelry Cluster: http://wiki.revelry.co/index.php/How_to_create_a_new_app_in_cluster
+- Update the .travis.yml with the app name from deis in the deploy sections
+- Look at `rel/config/prod_runtime_config.exs` for what environment variables are expected to be set in production
