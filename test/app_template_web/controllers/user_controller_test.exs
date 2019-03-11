@@ -25,6 +25,23 @@ defmodule AppTemplateWeb.UserController.Test do
     assert html_response(conn, 422) =~ "Please fix the errors below."
   end
 
+  test "POST /register with used email", %{conn: conn} do
+    user = insert(:user)
+
+    conn =
+      post(
+        conn,
+        Routes.user_path(conn, :create),
+        user: %{
+          email: user.email,
+          new_password: "blahblah",
+          new_password_confirmation: "blahblah"
+        }
+      )
+
+    assert html_response(conn, 422) =~ "already in use"
+  end
+
   describe "POST /register with valid credentials" do
     test "registers the user and redirects to the home page", %{conn: conn} do
       conn =
