@@ -28,4 +28,5 @@ config :app_template, AppTemplate.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
-config :app_template, jwt_secret: System.get_env("JWT_SECRET")
+config :app_template,
+  jwt_secret: System.get_env("JWT_SECRET") || System.get_env("SECRET_KEY_BASE")
