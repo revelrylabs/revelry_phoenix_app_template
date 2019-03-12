@@ -8,7 +8,7 @@ update_configs:
   # Keep Dockerfile up to date, pulling new versions ASAP
   - package_manager: "docker"
     directory: "/"
-    update_schedule: "live"
+    update_schedule: "daily"
   # Keep Mix up to date, pulling new versions ASAP
   - package_manager: "elixir:hex"
     directory: "/"
