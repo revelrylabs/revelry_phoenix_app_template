@@ -5,7 +5,26 @@ defmodule AppTemplate.Authentication do
 
   import Plug.Conn
   import Bcrypt, only: [check_pass: 3, no_user_verify: 1]
-  alias AppTemplate.Users
+  alias AppTemplate.{AuthenticationToken, Users}
+
+  @doc """
+  Checks if valid credentials, but does not create a new session.
+  This is useful for API authorization
+  """
+  def authorize(conn, email, given_pass) do
+    case verify_credentials(email, given_pass) do
+      {:ok, user} ->
+        claims = user |> Map.from_struct() |> Map.take([:email])
+
+        {:ok, token, _} =
+          AuthenticationToken.generate_and_sign(claims, AuthenticationToken.signer())
+
+        {:ok, %{access_token: token, expires_in: AuthenticationToken.expires_in(), user: user}}
+
+      {:error, reason} ->
+        {:error, reason, conn}
+    end
+  end
 
   def login(conn, email, given_pass) do
     case verify_credentials(email, given_pass) do

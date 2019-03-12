@@ -20,11 +20,11 @@ defmodule AppTemplateWeb.Router do
     plug LoadUser
   end
 
-  pipeline :require_auth do
+  pipeline :require_authoritzation do
     plug RequireAuthentication
   end
 
-  pipeline :require_unauth do
+  pipeline :require_anonymous do
     plug RequireAnonymous
   end
 
@@ -41,7 +41,7 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/", AppTemplateWeb do
-    pipe_through [:browser, :require_unauth]
+    pipe_through [:browser, :require_anonymous]
 
     get "/register", UserController, :new
     post "/register", UserController, :create
@@ -51,19 +51,24 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/", AppTemplateWeb do
-    pipe_through [:browser, :require_auth]
+    pipe_through [:browser, :require_authoritzation]
 
     get "/sessions/delete", SessionController, :delete
   end
 
   scope "/images", AppTemplateWeb do
-    pipe_through([:browser, :require_auth])
+    pipe_through([:browser, :require_authoritzation])
 
     get("/sign", S3Controller, :sign)
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", AppTemplateWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AppTemplateWeb, as: :api do
+    pipe_through [:browser, :require_anonymous]
+
+    post("/authorize", AuthorizationController, :authorize)
+  end
+
+  scope "/api", AppTemplateWeb, as: :api do
+    pipe_through [:browser, :require_authoritzation]
+  end
 end
