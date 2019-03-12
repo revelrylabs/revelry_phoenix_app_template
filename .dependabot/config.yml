@@ -1,0 +1,15 @@
+version: 1
+update_configs:
+  # Keep package.json (& lockfiles) up to date as soon as
+  # new versions are published to the npm registry
+  - package_manager: "javascript"
+    directory: "/assets"
+    update_schedule: "live"
+  # Keep Dockerfile up to date, pulling new versions ASAP
+  - package_manager: "docker"
+    directory: "/"
+    update_schedule: "live"
+  # Keep Mix up to date, pulling new versions ASAP
+  - package_manager: "elixir:hex"
+    directory: "/"
+    update_schedule: "live"
