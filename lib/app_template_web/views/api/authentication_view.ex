@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.API.AuthorizationView do
+defmodule AppTemplateWeb.API.AuthenticationView do
   use AppTemplateWeb, :view
 
   def render("show.json", %{token: %{user: user, access_token: access_token, expires_in: expires}}) do

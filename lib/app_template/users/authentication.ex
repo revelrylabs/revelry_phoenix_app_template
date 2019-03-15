@@ -11,7 +11,7 @@ defmodule AppTemplate.Authentication do
   Checks if valid credentials, but does not create a new session.
   This is useful for API authorization
   """
-  def authorize(conn, email, given_pass) do
+  def authenticate(conn, email, given_pass) do
     case verify_credentials(email, given_pass) do
       {:ok, user} ->
         claims = user |> Map.from_struct() |> Map.take([:email])

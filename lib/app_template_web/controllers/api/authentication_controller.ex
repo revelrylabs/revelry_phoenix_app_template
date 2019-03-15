@@ -1,11 +1,13 @@
-defmodule AppTemplateWeb.API.AuthorizationController do
+defmodule AppTemplateWeb.API.AuthenticationController do
   use AppTemplateWeb, :controller
   alias AppTemplate.{Authentication, Session, Sessions}
 
-  def authorize(conn, %{"data" => session_params}) do
+  action_fallback(AppTemplateWeb.API.FallbackController)
+
+  def authenticate(conn, %{"data" => session_params}) do
     {:ok, session} = Sessions.validate(%Session{}, session_params)
 
-    case Authentication.authorize(conn, session.email, session.password) do
+    case Authentication.authenticate(conn, session.email, session.password) do
       {:ok, token} ->
         conn
         |> put_status(200)

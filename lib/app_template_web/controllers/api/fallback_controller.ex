@@ -4,13 +4,15 @@ defmodule AppTemplateWeb.API.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(AppTemplateWeb.API.ErrorView, "422.json", changeset: changeset)
+    |> put_view(AppTemplateWeb.API.ErrorView)
+    |> render("422.json", changeset: changeset)
   end
 
   def call(conn, {:error, errors}) do
     conn
     |> Plug.Conn.put_status(:unprocessable_entity)
-    |> render(AppTemplateWeb.API.ErrorView, "422.json", errors: errors)
+    |> put_view(AppTemplateWeb.API.ErrorView)
+    |> render("422.json", errors: errors)
   end
 
   def call(conn, :not_found) do
@@ -20,6 +22,7 @@ defmodule AppTemplateWeb.API.FallbackController do
 
     conn
     |> Plug.Conn.put_status(404)
-    |> render(AppTemplateWeb.API.ErrorView, "422.json", errors: errors)
+    |> put_view(AppTemplateWeb.API.ErrorView)
+    |> render("422.json", errors: errors)
   end
 end

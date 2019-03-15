@@ -5,7 +5,7 @@ defmodule AppTemplateWeb.LoadUser do
   """
 
   import Plug.Conn
-  alias AppTemplate.Users
+  alias AppTemplate.{Users, AuthenticationToken}
 
   def init(opts) do
     opts
@@ -16,6 +16,16 @@ defmodule AppTemplateWeb.LoadUser do
   end
 
   defp handle_auth(conn) do
+    case get_user_from_authorization_header(conn) do
+      nil ->
+        browser_auth(conn)
+
+      user ->
+        build_conn(conn, user)
+    end
+  end
+
+  defp browser_auth(conn) do
     user_id = conn.assigns[:user_id] || get_session(conn, :user_id) || nil
 
     cond do
@@ -27,6 +37,18 @@ defmodule AppTemplateWeb.LoadUser do
 
       true ->
         build_conn(conn, nil)
+    end
+  end
+
+  defp get_user_from_authorization_header(conn) do
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+         {:ok, %{"email" => email}} <-
+           AuthenticationToken.verify_and_validate(token, AuthenticationToken.signer()),
+         current_user when not is_nil(current_user) <- Users.get_user_by_email(email) do
+      current_user
+    else
+      _ ->
+        nil
     end
   end
 

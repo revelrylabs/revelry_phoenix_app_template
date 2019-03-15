@@ -62,13 +62,13 @@ defmodule AppTemplateWeb.Router do
     get("/sign", S3Controller, :sign)
   end
 
-  scope "/api", AppTemplateWeb, as: :api do
+  scope "/api", AppTemplateWeb.API, as: :api do
     pipe_through [:browser, :require_anonymous]
 
-    post("/authorize", AuthorizationController, :authorize)
+    post("/authenticate", AuthenticationController, :authenticate)
   end
 
-  scope "/api", AppTemplateWeb, as: :api do
+  scope "/api", AppTemplateWeb.API, as: :api do
     pipe_through [:browser, :require_authoritzation]
   end
 end
