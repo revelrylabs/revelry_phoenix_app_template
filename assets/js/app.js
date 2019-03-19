@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     self.app_template.components = {}
     init(self.app_template)
   }
-  Wave.wave()
 })
 
 export default {
