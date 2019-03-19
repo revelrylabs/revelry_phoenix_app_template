@@ -47,8 +47,24 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
   ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   module: {
     rules: [
+      // TS rules
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'ts-loader',
+          },
+        ],
+        exclude: /node_modules/,
+      },
       // JS rules
       {
         test: /\.js$/,

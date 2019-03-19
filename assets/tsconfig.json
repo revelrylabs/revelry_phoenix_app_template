@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "es2015",
+    "target": "es2017",
+    "jsx": "react",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "test/**/*_spec.tsx", "test/**/*_spec.ts"]
+}

@@ -3,7 +3,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "deploy": "BABEL_ENV=production NODE_ENV=production webpack --mode production",
-    "test": "NODE_ENV=test nyc --all --reporter=text --reporter=lcov mocha --require @babel/register --require jsdom-global/register --recursive test"
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"esModuleInterop\": true}' NODE_ENV=test nyc --all --reporter=text --reporter=lcov mocha --require jsdom-global/register --require mocha.setup.js --require ts-node/register test/**/*.[jt]s* test/*.[jt]s*"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -54,7 +54,10 @@
     "terser-webpack-plugin": "^1.2.3",
     "url-loader": "^1.1.1",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.3333"
   },
   "browserslist": [
     "ie 11",
