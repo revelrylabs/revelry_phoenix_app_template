@@ -20,7 +20,13 @@ function minimizers() {
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: ['@babel/polyfill', 'phoenix_html', './css/app.scss', './js/app.js'],
+    app: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      'phoenix_html',
+      './css/app.scss',
+      './js/app.js',
+    ],
   },
   output: {
     path: path.resolve(__dirname, '..', 'priv', 'static'),
