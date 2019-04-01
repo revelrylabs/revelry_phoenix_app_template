@@ -23,14 +23,39 @@ jobs:
         - mix local.hex --force
         - mix local.rebar --force
         - mix deps.get
-        - cd assets
-        - npm install
-        - cd ..
+        - npm install --prefix assets
       script:
         - mix test
-        - cd assets
-        - npm test
-        - cd ..
+        - npm test --prefix assets
+    - stage: 'Tests' # naming the Tests stage
+      name: 'Integration Tests' # names the first Tests stage job
+      language: elixir
+      elixir:
+        - 1.8
+      otp_release:
+        - 21.0
+      cache:
+        directories:
+          - _build
+          - deps
+          - assets/node_modules
+      addons:
+        postgresql: '9.6'
+        chrome: stable
+      before_install:
+        -  # start your web application and listen on `localhost`
+        - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+      services:
+        - postgresql
+      before_script:
+        - psql -c 'create database app_template_test;' -U postgres
+      install:
+        - mix local.hex --force
+        - mix local.rebar --force
+        - mix deps.get
+        - npm install --prefix assets
+      script:
+        - mix integration
     - stage: deploy
       name: 'Deploy'
       if: branch = master

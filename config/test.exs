@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :app_template, AppTemplateWeb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :app_template, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -23,3 +25,6 @@ config :app_template, AppTemplate.Mailer, adapter: Bamboo.TestAdapter
 
 config :app_template,
   s3_signer: AppTemplate.S3Signer.Mock
+
+config :wallaby,
+  driver: Wallaby.Experimental.Chrome
