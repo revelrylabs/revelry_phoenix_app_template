@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
@@ -17,6 +17,14 @@ jobs:
         postgresql: '9.6'
       services:
         - postgresql
+      before_install:
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+        - curl -L -O "http://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+        - unzip chromedriver_linux64.zip
+        - sudo chmod +x chromedriver
+        - sudo mv chromedriver /usr/local/bin
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
       install:
@@ -41,10 +49,14 @@ jobs:
           - assets/node_modules
       addons:
         postgresql: '9.6'
-        chrome: stable
       before_install:
-        -  # start your web application and listen on `localhost`
-        - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+        - curl -L -O "http://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+        - unzip chromedriver_linux64.zip
+        - sudo chmod +x chromedriver
+        - sudo mv chromedriver /usr/local/bin
       services:
         - postgresql
       before_script:
