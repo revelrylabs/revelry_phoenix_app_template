@@ -1,0 +1,22 @@
+<h1><%= String.capitalize(@schema) %></h1>
+
+<div class="rev-TableContainer">
+<table class="rev-Table">
+  <thead class="rev-Table-head">
+    <tr class="rev-Table-row">
+    <%= for field <- @fields do %>
+      <th class="rev-Table-header"><%= Phoenix.Naming.humanize(field) %></th>
+    <% end %>
+    </tr>
+  </thead>
+  <tbody class="rev-Table-body">
+    <%= for model <- @models do %>
+      <tr class="rev-Table-row">
+        <%= for field <- @fields do %>
+          <td class="rev-Table-Data"><%= Map.get(model, field) %></td>
+        <% end %>
+      <tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
