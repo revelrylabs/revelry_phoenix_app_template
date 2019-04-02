@@ -60,8 +60,8 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser, :require_authoritzation]
 
     get("/:schema/", AdminController, :index)
-    get("/new/:schema/:pk", AdminController, :new)
-    post("/new/:schema/:pk", AdminController, :create)
+    get("/new/:schema", AdminController, :new)
+    post("/new/:schema", AdminController, :create)
     get("/edit/:schema/:pk", AdminController, :edit)
     put("/update/:schema/:pk", AdminController, :update)
   end
