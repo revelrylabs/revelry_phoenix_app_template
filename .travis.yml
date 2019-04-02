@@ -1,4 +1,6 @@
 sudo: false
+git:
+  depth: false
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
