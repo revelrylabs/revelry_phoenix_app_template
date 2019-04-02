@@ -3,6 +3,7 @@ defmodule AppTemplateWeb.HomePageTest do
 
   import Wallaby.Query
 
+  @tag :integration
   test "Home Page says welcome", %{session: session} do
     session
     |> visit("/")

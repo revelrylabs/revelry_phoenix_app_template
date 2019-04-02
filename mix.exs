@@ -82,12 +82,12 @@ defmodule AppTemplate.Mixfile do
       compile: ["compile --warnings-as-errors"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test --exclude test/integration"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
       integration: [
         "assets.compile",
         "ecto.create --quiet",
         "ecto.migrate",
-        "test test/integration"
+        "test --only integration"
       ],
       "assets.compile": &compile_assets/1
     ]
