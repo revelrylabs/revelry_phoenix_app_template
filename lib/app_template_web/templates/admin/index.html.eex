@@ -1,0 +1,49 @@
+<%= row do %>
+  <%= col do %>
+    <h1><%= String.capitalize(@schema) %></h1>
+  <% end %>
+<% end %>
+
+<%= row do %>
+  <%= col do %>
+    <%= link "New #{String.capitalize(@schema)}", to: Routes.admin_path(@conn, :new, @schema), class: button_class() %>
+  <% end %>
+<% end %>
+
+<%= row do %>
+  <%= col do %>
+    <div class="rev-TableContainer">
+    <table class="rev-Table">
+      <thead class="rev-Table-head">
+        <tr class="rev-Table-row">
+        <%= for field <- AppTemplateWeb.Adminable.index_fields(struct(@schema_module)) do %>
+          <th class="rev-Table-header"><%= Phoenix.Naming.humanize(field) %></th>
+        <% end %>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody class="rev-Table-body">
+        <%= for schema <- @schemas do %>
+          <tr class="rev-Table-row">
+            <%= for field <- AppTemplateWeb.Adminable.index_fields(struct(@schema_module)) do %>
+              <td class="rev-Table-Data"><%= Map.get(schema, field) %></td>
+            <% end %>
+            <td>
+              <%= link "Edit", to: Routes.admin_path(@conn, :edit, @schema, schema.id), class: button_class(secondary: true) %>
+            </td>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+
+    <%= render "_pagination.html",
+      conn: @conn,
+      page_number: @page_number,
+      page_size: @page_size,
+      total_entries: @total_entries,
+      total_pages: @total_pages,
+      url: Routes.admin_path(@conn, :index, @schema)
+    %>
+  <% end %>
+<% end %>

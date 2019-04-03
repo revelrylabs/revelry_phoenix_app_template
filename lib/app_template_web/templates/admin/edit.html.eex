@@ -1,0 +1,25 @@
+<%= row do %>
+  <%= col class: "rev-Col--medium7 rev-Col--smallCentered" do %>
+    <%= row do %>
+      <%= col do %>
+        <h2 class="u-break-word">Edit <%= String.capitalize(@schema) %></h2>
+      <% end %>
+    <% end %>
+    <%= form_for @changeset, Routes.admin_path(@conn, :update, @schema, @pk), [as: :data], fn f -> %>
+      <%= row do %>
+        <%= for field <- AppTemplateWeb.Adminable.editable_fields(@changeset.data) do %>
+          <%= field(f, @schema_module, field) %>
+        <% end %>
+      <% end %>
+
+      <%= row do %>
+        <%= col do %>
+          <section class="u-noBorder-bottom u-flexAlignEnd">
+            <button class="rev-Button" type="submit">Edit</button>
+          </section>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  <% end %>
+<% end %>

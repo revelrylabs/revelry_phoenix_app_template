@@ -15,7 +15,7 @@ defmodule AppTemplate.Metrics do
     end
   end
 
-  def record_ecto_metric([:app_template, :repo, :query], _latency, entry, _config) do
+  def record_ecto_metric([:app_template, :repo, :query], latency, entry, _config) do
     try do
       tags =
         Statix.base_tags() ++
@@ -24,8 +24,8 @@ defmodule AppTemplate.Metrics do
             "table:#{entry.source}"
           ]
 
-      queue_time = entry.queue_time || 0
-      duration = entry.query_time + queue_time
+      queue_time = latency.queue_time || 0
+      duration = latency.query_time + queue_time
 
       Statix.increment(
         "ecto.query.count",
