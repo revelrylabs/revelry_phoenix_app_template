@@ -40,16 +40,19 @@ defmodule AppTemplateWeb.AdminController do
     render(conn, "new.html", opts)
   end
 
-  def create(conn, %{"schema" => schema, "pk" => pk, "data" => data}) do
+  def create(conn, %{"schema" => schema, "data" => data}) do
     schema_module = @schemas[schema]
 
-    changeset = Ecto.Changeset.change(struct(schema_module), data)
+    new_schema = struct(schema_module)
+
+    changeset =
+      Ecto.Changeset.cast(new_schema, data, AppTemplateWeb.Adminable.editable_fields(new_schema))
 
     case AppTemplate.Repo.insert(changeset) do
-      {:ok, _created} ->
+      {:ok, created} ->
         conn
         |> put_flash(:info, "#{String.capitalize(schema)} created!")
-        |> redirect(to: Routes.admin_path(conn, :edit, schema, pk))
+        |> redirect(to: Routes.admin_path(conn, :edit, schema, created.id))
 
       {:error, changeset} ->
         opts = [

@@ -61,4 +61,76 @@ defmodule AppTemplateWeb.AdminView do
   def show_page_link?(page, page_number) do
     page >= page_number - @page_links_to_show and page <= page_number + @page_links_to_show
   end
+
+  def field(form, schema_module, field, opts \\ []) do
+    case schema_module.__schema__(:type, field) do
+      :boolean ->
+        ~E"""
+        <%= col do %>
+          <%= single_checkbox(form, field, Keyword.merge([label: String.capitalize(to_string(field))], opts)) %>
+        <% end %>
+        """
+
+      :integer ->
+        ~E"""
+        <%= col do %>
+          <%= number_input_stack(
+              form,
+              field,
+              label: String.capitalize(to_string(field)),
+              input: Keyword.merge([placeholder: String.capitalize(to_string(field))], opts))
+          %>
+        <% end %>
+        """
+
+      _ ->
+        ~E"""
+        <%= col do %>
+          <%= text_input_stack(
+              form,
+              field,
+              label: String.capitalize(to_string(field)),
+              input: Keyword.merge([placeholder: String.capitalize(to_string(field))], opts))
+          %>
+        <% end %>
+        """
+    end
+  end
+
+  def association(form, schema_module, association, opts \\ []) do
+    association = schema_module.__schema__(:association, association)
+
+    # make sure your schemas implement the `String.Chars` protocol so they can
+    # look nice in a select!
+    # obviously, if you have massive tables, `Repo.all/1` is a bad idea!
+    options =
+      AppTemplate.Repo.all(association.queryable)
+      |> Enum.map(&{&1.id, to_string(&1)})
+
+    case association.cardinality do
+      :many ->
+        ~E"""
+        <%= col do %>
+          <%= multiple_select_stack(
+              form,
+              association,
+              options,
+              Keyword.merge([label: String.capitalize(to_string(association))], opts))
+          %>
+        <% end %>
+        """
+
+      _ ->
+        ~E"""
+        <%= col do %>
+          <%= select_stack(
+              form,
+              association,
+              options,
+              Keyword.merge([label: String.capitalize(to_string(association))], opts))
+          %>
+        <% end %>
+        """
+    end
+  end
 end
