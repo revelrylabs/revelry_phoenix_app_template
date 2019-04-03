@@ -1,6 +1,5 @@
 defmodule AppTemplateWeb.AdminController do
   use AppTemplateWeb, :controller
-  alias AppTemplateWeb.Adminable
 
   @schemas %{
     "user" => AppTemplate.User
@@ -17,7 +16,6 @@ defmodule AppTemplateWeb.AdminController do
       schema_module: schema_module,
       schema: schema,
       schemas: schemas,
-      fields: Adminable.index_fields(struct(schema_module)),
       schemas: page.entries,
       page_number: page.page_number,
       page_size: page.page_size,

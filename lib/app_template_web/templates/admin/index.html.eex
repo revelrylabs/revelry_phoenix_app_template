@@ -16,7 +16,7 @@
     <table class="rev-Table">
       <thead class="rev-Table-head">
         <tr class="rev-Table-row">
-        <%= for field <- @fields do %>
+        <%= for field <- AppTemplateWeb.Adminable.index_fields(struct(@schema_module)) do %>
           <th class="rev-Table-header"><%= Phoenix.Naming.humanize(field) %></th>
         <% end %>
           <th>Edit</th>
@@ -25,7 +25,7 @@
       <tbody class="rev-Table-body">
         <%= for schema <- @schemas do %>
           <tr class="rev-Table-row">
-            <%= for field <- @fields do %>
+            <%= for field <- AppTemplateWeb.Adminable.index_fields(struct(@schema_module)) do %>
               <td class="rev-Table-Data"><%= Map.get(schema, field) %></td>
             <% end %>
             <td>
