@@ -54,6 +54,8 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser, :require_authoritzation]
 
     get "/sessions/delete", SessionController, :delete
+    get "/account/settings", AccountController, :edit
+    put "/account/settings", AccountController, :update
   end
 
   scope "/admin", AppTemplateWeb do

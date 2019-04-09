@@ -1,6 +1,6 @@
 defmodule AppTemplateWeb.AccountController do
   use AppTemplateWeb, :controller
-  alias AppTemplateWeb.{User, Users}
+  alias AppTemplate.{User, Users}
 
   def edit(conn, _params) do
     current_user = conn.assigns[:current_user]

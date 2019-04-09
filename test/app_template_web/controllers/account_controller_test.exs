@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.PageControllerTest do
+defmodule AppTemplateWeb.AccountControllerTest do
   use AppTemplateWeb.ConnCase, async: true
 
   describe "Account Details" do
@@ -13,13 +13,13 @@ defmodule AppTemplateWeb.PageControllerTest do
     end
 
     test "GET /account/settings", %{conn: conn} do
-      conn = get(conn, account_path(conn, :edit))
+      conn = get(conn, Routes.account_path(conn, :edit))
       assert html_response(conn, 200) =~ "User Account Details"
     end
 
     test "PUT /account/settings", %{conn: conn} do
       conn =
-        put(conn, account_path(conn, :update), %{
+        put(conn, Routes.account_path(conn, :update), %{
           "user" => %{
             "email" => "test@test.com"
           }
