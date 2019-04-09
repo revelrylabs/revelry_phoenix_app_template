@@ -27,6 +27,16 @@ defmodule AppTemplate.User do
     |> hash_password
   end
 
+  def update_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:email])
+    |> validate_required([:email])
+    |> update_change(:email, &String.downcase/1)
+    |> update_change(:email, &String.trim/1)
+    |> unique_constraint(:email, message: "already in use", name: :users_lower_email_index)
+    |> validate_format(:email, email_format(), message: "not a valid email address")
+  end
+
   defp hash_password(changeset) do
     if password = get_change(changeset, :new_password) do
       changeset
