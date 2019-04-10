@@ -29,6 +29,9 @@
                 <% end %>
               <% else %>
                 <%= menu_item :li, [] do %>
+                  <%= link "Settings", to: Routes.account_path(@conn, :edit) %>
+                <% end %>
+                <%= menu_item :li, [] do %>
                   <%= link "Sign Out", to: Routes.session_path(@conn, :delete) %>
                 <% end %>
               <% end %>

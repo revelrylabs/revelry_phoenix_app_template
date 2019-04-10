@@ -1,0 +1,24 @@
+<section>
+  <%= col medium: 8, smallCentered: true, collapse: true do %>
+    <%= card do %>
+      <%= form_for @changeset, Routes.forgot_password_path(@conn, :create), fn f -> %>
+        <%= row do %>
+          <%= col do %>
+            <h2>Forgot Password?</h2>
+            <p>Please enter your email address.</p>
+          <% end %>
+        <% end %>
+
+        <%= row do %>
+          <%= col do %>
+            <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+          <% end %>
+          <%= col do %>
+            <%= submit "Request Reset Password Link", class: button_class() %>
+          <% end %>
+        <% end %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+</section>
