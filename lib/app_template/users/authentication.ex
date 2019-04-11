@@ -43,11 +43,13 @@ defmodule AppTemplate.Authentication do
   def verify_credentials(email, given_pass) do
     user = Users.get_user_by_email(email)
 
-    if user && check_pass(user, given_pass, []) do
-      {:ok, user}
-    else
-      no_user_verify([])
-      {:error, :unauthorized}
+    case check_pass(user, given_pass, hash_key: :password) do
+      {:ok, _} ->
+        {:ok, user}
+
+      {:error, _} ->
+        no_user_verify([])
+        {:error, :unauthorized}
     end
   end
 
