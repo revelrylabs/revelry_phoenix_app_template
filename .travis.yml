@@ -22,6 +22,7 @@ jobs:
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
       install:
+        - gem install coveralls-multi
         - mix local.hex --force
         - mix local.rebar --force
         - mix deps.get
@@ -29,10 +30,11 @@ jobs:
         - npm install
         - cd ..
       script:
-        - mix test
+        - MIX_ENV=test mix coveralls.json
         - cd assets
         - npm test
         - cd ..
+        - coveralls-multi
     - stage: deploy
       name: 'Deploy'
       if: branch = master
