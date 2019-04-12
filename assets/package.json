@@ -6,7 +6,7 @@
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"esModuleInterop\": true}' NODE_ENV=test nyc --all --reporter=text --reporter=lcov mocha --require jsdom-global/register --require mocha.setup.js --require ts-node/register test/**/*.[jt]s* test/*.[jt]s*"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.0",
+    "@babel/polyfill": "^7.4.3",
     "core-js": "^3.0.1",
     "harmonium": "^4.4.0",
     "mustache": "^3.0.0",
