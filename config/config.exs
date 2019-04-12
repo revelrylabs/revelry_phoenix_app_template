@@ -18,7 +18,7 @@ config :app_template, AppTemplateWeb.Endpoint,
   secret_key_base: "ot1FLrZNFgZtCRO1Qm3mPuleg4WZoEZURicyDhj4/Y/++uGBPQBz390gYH3L3Oda",
   render_errors: [view: AppTemplateWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AppTemplate.PubSub, adapter: Phoenix.PubSub.PG2],
-  instrumenters: [AppTemplateWeb.Instrumenter]
+  instrumenters: [Metairie.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -36,7 +36,7 @@ config :app_template, :statix,
 
 config(
   :vmstats,
-  sink: AppTemplate.Metrics,
+  sink: Metairie.VMStats.Sink,
   base_key: "app_template.erlang",
   key_separator: ".",
   interval: 1_000
