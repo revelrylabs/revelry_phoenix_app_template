@@ -48,12 +48,17 @@ defmodule AppTemplateWeb.Router do
 
     get "/sessions/new", SessionController, :new
     post "/sessions/new", SessionController, :create
+
+    resources("/forgot_password", ForgotPasswordController, only: [:new, :create, :edit])
+    post("/forgot_password/reset", ForgotPasswordController, :reset)
   end
 
   scope "/", AppTemplateWeb do
     pipe_through [:browser, :require_authoritzation]
 
     get "/sessions/delete", SessionController, :delete
+    get "/account/settings", AccountController, :edit
+    put "/account/update_password", AccountController, :update_password
   end
 
   scope "/admin", AppTemplateWeb do
