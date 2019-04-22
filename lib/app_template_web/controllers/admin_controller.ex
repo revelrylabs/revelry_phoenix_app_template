@@ -90,7 +90,9 @@ defmodule AppTemplateWeb.AdminController do
   def update(conn, %{"schema" => schema, "pk" => pk, "data" => data}) do
     schema_module = @schemas[schema]
 
-    changeset = Ecto.Changeset.change(AppTemplate.Repo.get!(schema_module, pk), data)
+    item = AppTemplate.Repo.get!(schema_module, pk)
+
+    changeset = Ecto.Changeset.cast(item, data, AppTemplateWeb.Adminable.editable_fields(item))
 
     case AppTemplate.Repo.update(changeset) do
       {:ok, _updated_model} ->
