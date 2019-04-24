@@ -1,7 +1,7 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous}
+  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous, RequireAdmin}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -26,6 +26,10 @@ defmodule AppTemplateWeb.Router do
 
   pipeline :require_anonymous do
     plug RequireAnonymous
+  end
+
+  pipeline :require_admin do
+    plug RequireAdmin
   end
 
   pipeline :api do
@@ -61,14 +65,14 @@ defmodule AppTemplateWeb.Router do
     put "/account/update_password", AccountController, :update_password
   end
 
-  scope "/admin", AppTemplateWeb do
-    pipe_through [:browser, :require_authoritzation]
+  scope "/admin" do
+    pipe_through [:browser, :require_authoritzation, :require_admin]
 
-    get("/:schema/", AdminController, :index)
-    get("/new/:schema", AdminController, :new)
-    post("/new/:schema", AdminController, :create)
-    get("/edit/:schema/:pk", AdminController, :edit)
-    put("/update/:schema/:pk", AdminController, :update)
+    forward("/", Adminable.Plug,
+      otp_app: :app_template,
+      repo: AppTemplate.Repo,
+      layout: {AppTemplateWeb.LayoutView, "app.html"}
+    )
   end
 
   scope "/images", AppTemplateWeb do
