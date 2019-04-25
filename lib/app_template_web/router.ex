@@ -66,11 +66,12 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/admin" do
-    pipe_through [:browser, :require_authoritzation, :require_admin]
+    pipe_through [:browser]
 
     forward("/", Adminable.Plug,
       otp_app: :app_template,
       repo: AppTemplate.Repo,
+      schemas: [AppTemplate.User],
       layout: {AppTemplateWeb.LayoutView, "app.html"}
     )
   end

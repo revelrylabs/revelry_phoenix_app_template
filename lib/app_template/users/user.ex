@@ -1,5 +1,6 @@
 defmodule AppTemplate.User do
   use Ecto.Schema
+  use Adminable
   import Ecto.{Query, Changeset}, warn: false
   alias Bcrypt
 
@@ -96,18 +97,8 @@ defmodule AppTemplate.User do
   defp email_format do
     ~r/\A[^@]+@[^@]+\z/
   end
-end
 
-defimpl Adminable, for: AppTemplate.User do
-  def fields(_schema) do
-    AppTemplate.User.__schema__(:fields)
-  end
-
-  def create_changeset(s, data) do
-    AppTemplate.User.changeset(s, data)
-  end
-
-  def edit_changeset(s, data) do
-    AppTemplate.User.edit_changeset(s, data)
+  def create_changeset(schema, data) do
+    changeset(schema, data)
   end
 end
