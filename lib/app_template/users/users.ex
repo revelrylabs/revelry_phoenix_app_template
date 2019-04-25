@@ -28,6 +28,18 @@ defmodule AppTemplate.Users do
     |> Repo.update()
   end
 
+  def update_password_for_user(user, params) do
+    user
+    |> User.update_password_changeset(params)
+    |> Repo.update()
+  end
+
+  def update_password_for_user_forgot(user, params) do
+    user
+    |> User.forgot_password_changeset(params)
+    |> Repo.update()
+  end
+
   def grant_user_admin_permissions(user) do
     update_admin_permissions(user, true)
   end

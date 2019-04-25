@@ -1,0 +1,25 @@
+<section>
+  <%= col medium: 8, smallCentered: true, collapse: true do %>
+    <%= card do %>
+      <%= row do %>
+        <%= col do %>
+          <h1>Reset Password</h1>
+        <% end %>
+      <% end %>
+      <%= form_for @conn, Routes.forgot_password_path(@conn, :reset), fn f -> %>
+        <%= row do %>
+          <%= col do %>
+            <%= password_input_stack f, :new_password, placeholder: "New Password", required: true, label: "New Password *" %>
+          <% end %>
+          <%= col do %>
+            <%= password_input_stack f, :new_password_confirmation, placeholder: "Confirm New Password", required: true, label: "Confirm New Password *" %>
+          <% end %>
+          <%= hidden_input(f, :token, value: @token) %>
+          <%= col do %>
+            <%= submit "Reset Password", class: "rev-Button" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

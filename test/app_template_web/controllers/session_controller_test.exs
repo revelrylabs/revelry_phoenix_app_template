@@ -8,7 +8,7 @@ defmodule AppTemplateWeb.SessionController.Test do
   end
 
   test "GET /session/new with a next url", %{conn: conn} do
-    conn = get(conn, Routes.session_path(conn, :new, next: Routes.s3_path(conn, :sign)))
+    conn = get(conn, Routes.session_path(conn, :new, next: Routes.session_path(conn, :delete)))
     assert html_response(conn, 200) =~ "Log In"
   end
 
@@ -31,11 +31,11 @@ defmodule AppTemplateWeb.SessionController.Test do
       user = insert(:user, password: Bcrypt.hash_pwd_salt("blah"))
 
       conn =
-        post(conn, Routes.session_path(conn, :new, next: Routes.s3_path(conn, :sign)),
+        post(conn, Routes.session_path(conn, :new, next: Routes.session_path(conn, :delete)),
           session: [email: user.email, password: "blah"]
         )
 
-      assert redirected_to(conn) =~ Routes.s3_path(conn, :sign)
+      assert redirected_to(conn) =~ Routes.session_path(conn, :delete)
     end
   end
 

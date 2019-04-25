@@ -66,7 +66,10 @@ defmodule AppTemplate.Mixfile do
       {:ex_machina, "~> 2.2", only: :test},
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
-      {:scrivener_ecto, "~> 2.0"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:transmit, "~> 0.1"},
+      {:metairie, "~> 0.1"},
+      {:adminable, github: "revelrylabs/adminable"}
     ]
   end
 
