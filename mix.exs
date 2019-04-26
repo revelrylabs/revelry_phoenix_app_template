@@ -69,7 +69,7 @@ defmodule AppTemplate.Mixfile do
       {:scrivener_ecto, "~> 2.0"},
       {:transmit, "~> 0.1"},
       {:metairie, "~> 0.1"},
-      {:adminable, github: "revelrylabs/adminable"}
+      {:adminable, "~> 0.1"}
     ]
   end
 
