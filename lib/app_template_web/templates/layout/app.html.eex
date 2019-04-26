@@ -22,7 +22,7 @@
               <% end %>
               <%= if Map.has_key?(@conn.assigns, :current_user) == false do %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Register", to: Routes.user_path(@conn, :new) %>
+                  <%= link "Register", to: Routes.account_path(@conn, :new) %>
                 <% end %>
                 <%= menu_item :li, [] do %>
                   <%= link "Sign In", to: Routes.session_path(@conn, :new) %>

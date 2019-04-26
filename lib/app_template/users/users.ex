@@ -22,6 +22,12 @@ defmodule AppTemplate.Users do
     Repo.get(User, id)
   end
 
+  def update_user_account_details(%User{} = user, attrs) do
+    user
+    |> User.update_changeset(attrs)
+    |> Repo.update()
+  end
+
   def update_password_for_user(user, params) do
     user
     |> User.update_password_changeset(params)

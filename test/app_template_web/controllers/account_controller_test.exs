@@ -13,6 +13,22 @@ defmodule AppTemplateWeb.AccountControllerTest do
       {:ok, [conn: conn, user: user]}
     end
 
+    test "GET /account/settings", %{conn: conn} do
+      conn = get(conn, Routes.account_path(conn, :edit))
+      assert html_response(conn, 200) =~ "User Account Details"
+    end
+
+    test "PUT /account/settings", %{conn: conn} do
+      conn =
+        put(conn, Routes.account_path(conn, :update), %{
+          "user" => %{
+            "email" => "test@test.com"
+          }
+        })
+
+      assert html_response(conn, 200) =~ "test@test.com"
+    end
+
     test "PUT /account/password with valid credentials", %{conn: conn} do
       conn =
         put(
@@ -42,6 +58,64 @@ defmodule AppTemplateWeb.AccountControllerTest do
         )
 
       assert html_response(conn, 422) =~ "invalid"
+    end
+  end
+
+  describe "Account Registration" do
+    setup %{conn: conn} do
+      [conn: conn]
+    end
+
+    test "GET /register", %{conn: conn} do
+      conn = get(conn, Routes.account_path(conn, :new))
+      assert html_response(conn, 200) =~ "Register"
+    end
+
+    test "POST /register with invalid credentials", %{conn: conn} do
+      conn =
+        post(
+          conn,
+          Routes.account_path(conn, :create),
+          user: %{
+            email: "blah",
+            new_password: "blahblah"
+          }
+        )
+
+      assert html_response(conn, 422) =~ "Please fix the errors below."
+    end
+
+    test "POST /register with used email", %{conn: conn} do
+      user = insert(:user)
+
+      conn =
+        post(
+          conn,
+          Routes.account_path(conn, :create),
+          user: %{
+            email: user.email,
+            new_password: "blahblah",
+            new_password_confirmation: "blahblah"
+          }
+        )
+
+      assert html_response(conn, 422) =~ "already in use"
+    end
+
+    test "POST /register with valid credentials", %{conn: conn} do
+      conn =
+        post(
+          conn,
+          Routes.account_path(conn, :create),
+          user: %{
+            email: "blah@blah.co",
+            new_password: "blahblah",
+            new_password_confirmation: "blahblah"
+          }
+        )
+
+      assert_email_delivered_with(subject: "Welcome to AppTemplate!")
+      assert redirected_to(conn) =~ Routes.page_path(conn, :index)
     end
   end
 end

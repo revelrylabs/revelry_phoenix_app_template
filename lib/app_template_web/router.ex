@@ -47,8 +47,8 @@ defmodule AppTemplateWeb.Router do
   scope "/", AppTemplateWeb do
     pipe_through [:browser, :require_anonymous]
 
-    get "/register", UserController, :new
-    post "/register", UserController, :create
+    get "/register", AccountController, :new
+    post "/register", AccountController, :create
 
     get "/sessions/new", SessionController, :new
     post "/sessions/new", SessionController, :create
@@ -62,6 +62,7 @@ defmodule AppTemplateWeb.Router do
 
     get "/sessions/delete", SessionController, :delete
     get "/account/settings", AccountController, :edit
+    put "/account/settings", AccountController, :update
     put "/account/update_password", AccountController, :update_password
   end
 
