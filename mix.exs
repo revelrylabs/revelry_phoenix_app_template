@@ -67,7 +67,7 @@ defmodule AppTemplate.Mixfile do
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
       {:scrivener_ecto, "~> 2.0"},
-      {:transmit, "~> 0.1"},
+      {:transmit, "~> 0.2"},
       {:metairie, "~> 0.1"},
       {:adminable, "~> 0.1"}
     ]
