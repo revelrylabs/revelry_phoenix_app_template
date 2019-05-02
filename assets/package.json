@@ -58,7 +58,7 @@
     "webpack-cli": "^3.3.1",
     "ts-loader": "^5.4.5",
     "ts-node": "^8.1.0",
-    "typescript": "^3.4.4"
+    "typescript": "^3.4.5"
   },
   "browserslist": [
     "ie 11",
