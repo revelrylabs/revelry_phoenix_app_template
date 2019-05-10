@@ -1,2 +1,7 @@
 /* This file is for your main application css. */
+@import 'color-palette';
+@import 'harmonium-settings';
 @import '~harmonium/scss/app';
+@import 'mixins/mixins';
+@import 'components/components';
+@import 'views/views';
