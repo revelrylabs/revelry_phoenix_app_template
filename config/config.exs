@@ -18,7 +18,7 @@ config :app_template, AppTemplateWeb.Endpoint,
   secret_key_base: "ot1FLrZNFgZtCRO1Qm3mPuleg4WZoEZURicyDhj4/Y/++uGBPQBz390gYH3L3Oda",
   render_errors: [view: AppTemplateWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AppTemplate.PubSub, adapter: Phoenix.PubSub.PG2],
-  instrumenters: [AppTemplateWeb.Instrumenter]
+  instrumenters: [Metairie.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -36,7 +36,7 @@ config :app_template, :statix,
 
 config(
   :vmstats,
-  sink: AppTemplate.Metrics,
+  sink: Metairie.VMStats.Sink,
   base_key: "app_template.erlang",
   key_separator: ".",
   interval: 1_000
@@ -44,14 +44,11 @@ config(
 
 config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
 
+config :bamboo, :json_library, Jason
+
 config :ex_aws,
   access_key_id: [System.get_env("AWS_ACCESS_KEY_ID"), :instance_role],
   secret_access_key: [System.get_env("AWS_SECRET_ACCESS_KEY"), :instance_role]
-
-config :app_template,
-  s3_signer: AppTemplate.S3Signer
-
-config :app_template, :s3_bucket, System.get_env("AWS_S3_BUCKET")
 
 config :app_template, jwt_secret: "secret"
 

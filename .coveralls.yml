@@ -1,0 +1,5 @@
+service_name: travis-pro
+endpoint: https://opencov.prod.revelry.net
+multi:
+  lcov: assets/coverage/lcov.info
+  excoveralls: cover/excoveralls.json

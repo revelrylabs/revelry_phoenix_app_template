@@ -1,0 +1,44 @@
+<section>
+  <%= col medium: 8, smallCentered: true, collapse: true do %>
+    <%= card do %>
+      <%= form_for @account_changeset, Routes.account_path(@conn, :update), fn f -> %>
+        <%= row do %>
+          <%= col do %>
+            <h2>User Account Details</h2>
+          <% end %>
+        <% end %>
+
+        <%= row do %>
+          <%= col do %>
+            <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+          <% end %>
+          <%= col do %>
+            <%= submit "Save Account Details", class: button_class() %>
+
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= form_for @password_changeset, Routes.account_path(@conn, :update_password), fn f -> %>
+        <%= row do %>
+          <%= col do %>
+            <h2>Reset Password</h2>
+          <% end %>
+        <% end %>
+        <%= row do %>
+          <%= col do %>
+            <%= password_input_stack f, :current_password, placeholder: "Current Password", required: true, label: "Current Password *" %>
+          <% end %>
+          <%= col do %>
+            <%= password_input_stack f, :new_password, placeholder: "New Password", required: true, label: "New Password *" %>
+          <% end %>
+          <%= col do %>
+            <%= password_input_stack f, :new_password_confirmation, placeholder: "Confirm New Password", required: true, label: "Confirm New Password *" %>
+          <% end %>
+          <%= col do %>
+            <%= submit "Reset Password", class: button_class() %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

@@ -20,14 +20,17 @@
               <%= menu_item :li, [] do %>
                 <%= link "Home", to: Routes.page_path(@conn, :index) %>
               <% end %>
-              <%= if !@conn.assigns.current_user do %>
+              <%= if Map.has_key?(@conn.assigns, :current_user) == false do %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Register", to: Routes.user_path(@conn, :new) %>
+                  <%= link "Register", to: Routes.account_path(@conn, :new) %>
                 <% end %>
                 <%= menu_item :li, [] do %>
                   <%= link "Sign In", to: Routes.session_path(@conn, :new) %>
                 <% end %>
               <% else %>
+                <%= menu_item :li, [] do %>
+                  <%= link "Settings", to: Routes.account_path(@conn, :edit) %>
+                <% end %>
                 <%= menu_item :li, [] do %>
                   <%= link "Sign Out", to: Routes.session_path(@conn, :delete) %>
                 <% end %>

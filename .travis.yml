@@ -1,4 +1,6 @@
 sudo: required
+git:
+  depth: false
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
@@ -25,20 +27,27 @@ jobs:
         - sudo apt-get install libnss3
         - sudo cp chromedriver /usr/local/bin/.
         - sudo chmod +x /usr/local/bin/chromedriver
+        - pip install --user awscli
+        - export PATH=$PATH:$HOME/.local/bin
+        - mkdir -p $HOME/src
+        - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+        - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
         - export DISPLAY=:99.0
         - sh -e /etc/init.d/xvfb start
         - sleep 3
         - chromedriver > /dev/null 2>&1 &
       install:
+        - gem install coveralls-multi
         - mix local.hex --force
         - mix local.rebar --force
         - mix deps.get
         - npm install --prefix assets
       script:
-        - mix test
+        - MIX_ENV=test mix coveralls.json
         - npm test --prefix assets
-    - stage: 'Tests' # naming the Tests stage
-      name: 'Integration Tests' # names the first Tests stage job
+        - coveralls-multi
+    - stage: 'Tests'
+      name: 'Integration Tests'
       language: elixir
       elixir:
         - 1.8
@@ -61,6 +70,11 @@ jobs:
         - sudo apt-get install libnss3
         - sudo cp chromedriver /usr/local/bin/.
         - sudo chmod +x /usr/local/bin/chromedriver
+        - pip install --user awscli
+        - export PATH=$PATH:$HOME/.local/bin
+        - mkdir -p $HOME/src
+        - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+        - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
         - export DISPLAY=:99.0
         - sh -e /etc/init.d/xvfb start
         - sleep 3

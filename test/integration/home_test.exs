@@ -1,12 +1,11 @@
 defmodule AppTemplateWeb.HomePageTest do
   use AppTemplateWeb.FeatureCase, async: true
 
-  import Wallaby.Query
-
   @tag :integration
-  test "Home Page says welcome", %{session: session} do
-    session
-    |> visit("/")
-    |> assert_has(xpath(".//h1", text: "Welcome"))
+  test "Home Page says welcome" do
+    navigate_to("/")
+
+    element = find_element(:tag, "h1")
+    assert inner_html(element) == "Welcome"
   end
 end

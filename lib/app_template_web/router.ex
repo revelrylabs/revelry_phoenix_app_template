@@ -1,7 +1,7 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous}
+  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous, RequireAdmin}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -28,6 +28,10 @@ defmodule AppTemplateWeb.Router do
     plug RequireAnonymous
   end
 
+  pipeline :require_admin do
+    plug RequireAdmin
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -43,23 +47,44 @@ defmodule AppTemplateWeb.Router do
   scope "/", AppTemplateWeb do
     pipe_through [:browser, :require_anonymous]
 
-    get "/register", UserController, :new
-    post "/register", UserController, :create
+    get "/register", AccountController, :new
+    post "/register", AccountController, :create
 
     get "/sessions/new", SessionController, :new
     post "/sessions/new", SessionController, :create
+
+    resources("/forgot_password", ForgotPasswordController, only: [:new, :create, :edit])
+    post("/forgot_password/reset", ForgotPasswordController, :reset)
   end
 
   scope "/", AppTemplateWeb do
     pipe_through [:browser, :require_authoritzation]
 
     get "/sessions/delete", SessionController, :delete
+    get "/account/settings", AccountController, :edit
+    put "/account/settings", AccountController, :update
+    put "/account/update_password", AccountController, :update_password
   end
 
-  scope "/images", AppTemplateWeb do
+  scope "/admin" do
+    pipe_through [:browser, :require_authoritzation, :require_admin]
+
+    forward("/", Adminable.Plug,
+      otp_app: :app_template,
+      repo: AppTemplate.Repo,
+      schemas: [AppTemplate.User],
+      layout: {AppTemplateWeb.LayoutView, "app.html"}
+    )
+  end
+
+  scope "/images" do
     pipe_through([:browser, :require_authoritzation])
 
-    get("/sign", S3Controller, :sign)
+    forward("/sign", Transmit,
+      signer: Transmit.S3Signer,
+      bucket: "app-template",
+      path: "uploads"
+    )
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do

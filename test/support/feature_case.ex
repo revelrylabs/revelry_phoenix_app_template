@@ -17,7 +17,7 @@ defmodule AppTemplateWeb.FeatureCase do
 
   using do
     quote do
-      use Wallaby.DSL
+      use Hound.Helpers
 
       alias AppTemplateWeb.Router.Helpers, as: Routes
       import AppTemplate.Factory
@@ -31,8 +31,10 @@ defmodule AppTemplateWeb.FeatureCase do
       Ecto.Adapters.SQL.Sandbox.mode(AppTemplate.Repo, {:shared, self()})
     end
 
-    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(AppTemplate.Repo, self())
-    {:ok, session} = Wallaby.start_session(metadata: metadata)
-    {:ok, session: session}
+    hound_session = Hound.start_session()
+
+    on_exit(fn ->
+      Hound.end_session(hound_session)
+    end)
   end
 end

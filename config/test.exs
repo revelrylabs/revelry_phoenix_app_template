@@ -26,5 +26,8 @@ config :app_template, AppTemplate.Mailer, adapter: Bamboo.TestAdapter
 config :app_template,
   s3_signer: AppTemplate.S3Signer.Mock
 
-config :wallaby,
-  driver: Wallaby.Experimental.Chrome
+config :hound,
+  driver: "selenium",
+  browser: "chrome",
+  app_port: 4001,
+  genserver_timeout: 480_000

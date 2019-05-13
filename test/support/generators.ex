@@ -16,7 +16,7 @@ defmodule AppTemplate.Generators do
     gen all email <- generator(:email) do
       %User{
         email: email,
-        password: "$2b$12$H73XsGG9ht0EE/btHEqDReWGcYKuZIbDWoBu88nVeRbXYS8mDa9tW"
+        password: Bcrypt.hash_pwd_salt("password")
       }
     end
   end
