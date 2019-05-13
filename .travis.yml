@@ -16,6 +16,7 @@ jobs:
           - deps
           - assets/node_modules
       addons:
+        chrome: stable
         postgresql: '9.6'
       services:
         - postgresql
@@ -59,6 +60,7 @@ jobs:
           - deps
           - assets/node_modules
       addons:
+        chrome: stable
         postgresql: '9.6'
       services:
         - postgresql
