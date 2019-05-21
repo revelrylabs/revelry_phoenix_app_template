@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Starting remote iex session into app-template using kubectl. Current context is $(kubectl config current-context)"
+
 # Either uses the given pod from arguments or gets the first pod from the namespace
 POD=${1:-$(kubectl get pods --namespace=app-template -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | head -n 1)}
 
