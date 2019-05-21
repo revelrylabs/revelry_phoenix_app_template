@@ -6,7 +6,7 @@ defmodule AppTemplate.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    Metairie.init(:app_template)
+    setup()
 
     # Define workers and child supervisors to be supervised
     children = [
@@ -29,5 +29,21 @@ defmodule AppTemplate.Application do
   def config_change(changed, _new, removed) do
     AppTemplateWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp setup do
+    Metairie.init(:app_template)
+    AppTemplateWeb.Phoenix.Instrumenter.setup()
+    AppTemplateWeb.PipelineInstrumenter.setup()
+    Prometheus.Registry.register_collector(:prometheus_process_collector)
+    AppTemplateWeb.MetricsExporter.setup()
+
+    :ok =
+      :telemetry.attach(
+        "prometheus-ecto",
+        [:app_template, :repo, :query],
+        &AppTemplateWeb.Repo.Instrumenter.handle_event/4,
+        %{}
+      )
   end
 end

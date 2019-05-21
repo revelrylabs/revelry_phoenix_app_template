@@ -43,6 +43,8 @@ defmodule AppTemplateWeb.Endpoint do
     signing_salt: "SOzvicWj"
   )
 
+  plug(AppTemplateWeb.MetricsExporter)
+  plug AppTemplateWeb.PipelineInstrumenter
   plug(AppTemplateWeb.Router)
 
   @doc """
