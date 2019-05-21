@@ -18,7 +18,7 @@ config :app_template, AppTemplateWeb.Endpoint,
   secret_key_base: "ot1FLrZNFgZtCRO1Qm3mPuleg4WZoEZURicyDhj4/Y/++uGBPQBz390gYH3L3Oda",
   render_errors: [view: AppTemplateWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AppTemplate.PubSub, adapter: Phoenix.PubSub.PG2],
-  instrumenters: [Metairie.Phoenix.Instrumenter]
+  instrumenters: [Metairie.Phoenix.Instrumenter, AppTemplateWeb.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
