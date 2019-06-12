@@ -1,6 +1,11 @@
-sudo: false
+sudo: true
 git:
   depth: false
+services:
+  - docker
+env:
+  global:
+    - DOCKER_USERNAME=travis
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
@@ -35,18 +40,7 @@ jobs:
         - npm test
         - cd ..
         - coveralls-multi
-    - stage: deploy
-      name: 'Deploy'
+    - stage: docker deploy
       if: branch = master
-      script: skip
-      deploy:
-        - provider: deis
-          controller: deis.prod.revelry.net
-          app: app-template
-          cli_version: v2.20.0
-          username: '$DEIS_USERNAME'
-          password: '$DEIS_PASSWORD'
-          on:
-            branch: master
-      after_deploy:
-        - ./deis run "_build/prod/rel/app_template/bin/app_template migrate" -a app-template
+      script:
+        - bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
