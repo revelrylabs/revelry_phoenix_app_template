@@ -3,12 +3,11 @@
 DOCKER_REPO=$1
 DOCKER_HOST=$2
 
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
 HEAD_SHA=$(git rev-parse --short HEAD)
 
 IMAGE_TAG=$DOCKER_HOST/$DOCKER_REPO
 LATEST_TAG=$IMAGE_TAG:latest
-VERSIONED_TAG=$IMAGE_TAG:$BRANCH-$HEAD_SHA
+VERSIONED_TAG=$IMAGE_TAG:$TRAVIS_BRANCH-$HEAD_SHA
 
 docker pull $LATEST_TAG || true
 docker build --cache-from $LATEST_TAG -t $VERSIONED_TAG . || exit 1
