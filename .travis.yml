@@ -48,4 +48,7 @@ jobs:
       before_deploy:
         - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net
       deploy:
-        - bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
+        provider: script
+        script: bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
+        on:
+          branch: master
