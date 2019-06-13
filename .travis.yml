@@ -2,8 +2,8 @@
 # dist: trusty
 git:
   depth: false
-services:
-  - docker
+# services:
+#   - docker
 env:
   global:
     - DOCKER_USERNAME=travis
@@ -41,10 +41,10 @@ jobs:
         - npm test
         - cd ..
         - coveralls-multi
-    - stage: docker deploy
-      if: branch = master
-      script: skip
-      before_deploy:
-        - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net
-      deploy:
-        - bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
+    # - stage: docker deploy
+    #   if: branch = master
+    #   script: skip
+    #   before_deploy:
+    #     - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net
+    #   deploy:
+    #     - bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
