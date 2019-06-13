@@ -2,11 +2,11 @@ sudo: true
 dist: trusty
 git:
   depth: false
-services:
-  - docker
-env:
-  global:
-    - DOCKER_USERNAME=travis
+# services:
+#   - docker
+# env:
+#   global:
+#     - DOCKER_USERNAME=travis
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
