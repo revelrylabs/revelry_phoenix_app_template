@@ -16,8 +16,6 @@ jobs:
         - 1.8
       otp_release:
         - 21.0
-      node_js:
-        - node
       cache:
         directories:
           - _build
@@ -28,6 +26,7 @@ jobs:
       services:
         - postgresql
       before_script:
+        - nvm install 12.4.0 && nvm use 12.4.0
         - psql -c 'create database app_template_test;' -U postgres
       install:
         - gem install coveralls-multi
