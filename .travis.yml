@@ -16,6 +16,8 @@ jobs:
         - 1.8
       otp_release:
         - 21.0
+      node_js:
+        - node
       cache:
         directories:
           - _build
