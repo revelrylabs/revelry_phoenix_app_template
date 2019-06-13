@@ -7,12 +7,14 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 HEAD_SHA=$(git rev-parse --short HEAD)
 
 IMAGE_TAG=$DOCKER_HOST/$DOCKER_REPO
-PULL_TAG=$IMAGE_TAG:latest
-PUSH_TAG=$IMAGE_TAG:$BRANCH-$HEAD_SHA
+LATEST_TAG=$IMAGE_TAG:latest
+VERSIONED_TAG=$IMAGE_TAG:$BRANCH-$HEAD_SHA
 
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin $DOCKER_HOST
+docker pull $LATEST_TAG || true
+docker build --cache-from $LATEST_TAG -t $VERSIONED_TAG . || exit 1
+docker push $VERSIONED_TAG || exit 1
 
-# try to pull the image first so we can use it as cache. keep going if it fails
-docker pull $PULL_TAG || true
-docker build --cache-from $PULL_TAG -t $PUSH_TAG . || exit 1
-docker push $IMAGE_TAG || exit 1
+if [ "$BRANCH" = "master" ]; then
+  docker tag $VERSIONED_TAG $LATEST_TAG
+  docker push $LATEST_TAG
+fi

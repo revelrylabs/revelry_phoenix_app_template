@@ -42,5 +42,7 @@ jobs:
         - coveralls-multi
     - stage: docker deploy
       if: branch = master
+      before_script:
+        - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net
       script:
         - bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
