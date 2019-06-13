@@ -2,8 +2,8 @@
 # dist: trusty
 git:
   depth: false
-# services:
-#   - docker
+services:
+  - docker
 env:
   global:
     - DOCKER_USERNAME=travis
