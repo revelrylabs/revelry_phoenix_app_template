@@ -1,5 +1,5 @@
 # Set the Docker image you want to base your image off.
-FROM elixir:1.8
+FROM elixir:1.9
 
 ENV MIX_ENV="prod" \
   PORT="5000"
@@ -8,7 +8,7 @@ ENV MIX_ENV="prod" \
 EXPOSE 5000
 
 # Add nodejs
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # Install other stable dependencies that don't change often
 RUN apt-get update && \
@@ -38,4 +38,4 @@ COPY . .
 RUN mix do compile, phx.digest, release
 
 # The command to run when this image starts up
-CMD ["_build/prod/rel/app_template/bin/app_template", "foreground"]
+CMD ["_build/prod/rel/app_template/bin/app_template", "start"]
