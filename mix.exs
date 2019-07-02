@@ -16,7 +16,8 @@ defmodule AppTemplate.Mixfile do
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
-        "coveralls.html": :test
+        "coveralls.html": :test,
+        integration: :test
       ]
     ]
   end
@@ -66,6 +67,7 @@ defmodule AppTemplate.Mixfile do
       {:ex_machina, "~> 2.2", only: :test},
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
+      {:hound, "~> 1.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:transmit, "~> 0.2"},
       {:metairie, "~> 0.1"},
@@ -89,7 +91,18 @@ defmodule AppTemplate.Mixfile do
       compile: ["compile --warnings-as-errors"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      integration: [
+        "assets.compile",
+        "ecto.create --quiet",
+        "ecto.migrate",
+        "test --only integration"
+      ],
+      "assets.compile": &compile_assets/1
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("npm run --prefix assets build")
   end
 end

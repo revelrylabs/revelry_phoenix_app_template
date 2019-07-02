@@ -4,6 +4,7 @@ brew 'automake'
 brew 'fop'
 brew 'libtool'
 brew 'openssl'
+brew 'selenium-server-standalone'
 
 # web app tools
 cask 'postgres'

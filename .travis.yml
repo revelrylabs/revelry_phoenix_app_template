@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 git:
   depth: false
 jobs:
@@ -16,25 +16,76 @@ jobs:
           - deps
           - assets/node_modules
       addons:
+        chrome: stable
         postgresql: '9.6'
       services:
         - postgresql
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
+      before_install:
+        - wget http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
+        - unzip chromedriver_linux64.zip
+        - sudo apt-get install libnss3
+        - sudo cp chromedriver /usr/local/bin/.
+        - sudo chmod +x /usr/local/bin/chromedriver
+        - pip install --user awscli
+        - export PATH=$PATH:$HOME/.local/bin
+        - mkdir -p $HOME/src
+        - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+        - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
+        - export DISPLAY=:99.0
+        - sleep 3
+        - chromedriver > /dev/null 2>&1 &
       install:
         - gem install coveralls-multi
         - mix local.hex --force
         - mix local.rebar --force
         - mix deps.get
-        - cd assets
-        - npm install
-        - cd ..
+        - npm install --prefix assets
       script:
         - MIX_ENV=test mix coveralls.json
-        - cd assets
-        - npm test
-        - cd ..
+        - npm test --prefix assets
         - coveralls-multi
+    - stage: 'Tests'
+      name: 'Integration Tests'
+      language: elixir
+      elixir:
+        - 1.8
+      otp_release:
+        - 21.0
+      cache:
+        directories:
+          - _build
+          - deps
+          - assets/node_modules
+      addons:
+        chrome: stable
+        postgresql: '9.6'
+      services:
+        - postgresql
+      before_script:
+        - psql -c 'create database app_template_test;' -U postgres
+      before_install:
+        - wget http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
+        - unzip chromedriver_linux64.zip
+        - sudo apt-get install libnss3
+        - sudo cp chromedriver /usr/local/bin/.
+        - sudo chmod +x /usr/local/bin/chromedriver
+        - pip install --user awscli
+        - export PATH=$PATH:$HOME/.local/bin
+        - mkdir -p $HOME/src
+        - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+        - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
+        - export DISPLAY=:99.0
+        - sleep 3
+        - chromedriver > /dev/null 2>&1 &
+      install:
+        - mix local.hex --force
+        - mix local.rebar --force
+        - mix deps.get
+        - npm install --prefix assets
+      script:
+        - xvfb-run mix integration
     - stage: deploy
       name: 'Deploy'
       if: branch = master
