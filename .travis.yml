@@ -22,20 +22,6 @@ jobs:
         - postgresql
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
-      before_install:
-        - wget http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
-        - unzip chromedriver_linux64.zip
-        - sudo apt-get install libnss3
-        - sudo cp chromedriver /usr/local/bin/.
-        - sudo chmod +x /usr/local/bin/chromedriver
-        - pip install --user awscli
-        - export PATH=$PATH:$HOME/.local/bin
-        - mkdir -p $HOME/src
-        - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
-        - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
-        - export DISPLAY=:99.0
-        - sleep 3
-        - chromedriver > /dev/null 2>&1 &
       install:
         - gem install coveralls-multi
         - mix local.hex --force
@@ -66,7 +52,7 @@ jobs:
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
       before_install:
-        - wget http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
+        - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip
         - sudo apt-get install libnss3
         - sudo cp chromedriver /usr/local/bin/.
@@ -77,6 +63,7 @@ jobs:
         - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
         - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
         - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
         - sleep 3
         - chromedriver > /dev/null 2>&1 &
       install:
@@ -85,7 +72,7 @@ jobs:
         - mix deps.get
         - npm install --prefix assets
       script:
-        - xvfb-run mix integration
+        - xvfb-run mix integration_tests
     - stage: deploy
       name: 'Deploy'
       if: branch = master
