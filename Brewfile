@@ -4,7 +4,10 @@ brew 'automake'
 brew 'fop'
 brew 'libtool'
 brew 'openssl'
-brew 'selenium-server-standalone'
+
+# integration testing dependencies
+brew "selenium-server-standalone"
+cask "chromedriver"
 
 # web app tools
 cask 'postgres'
