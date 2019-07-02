@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.FeatureCase do
+defmodule AppTemplateWeb.IntegrationCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -18,9 +18,9 @@ defmodule AppTemplateWeb.FeatureCase do
   using do
     quote do
       use Hound.Helpers
-
       alias AppTemplateWeb.Router.Helpers, as: Routes
       import AppTemplate.Factory
+      @moduletag :feature
     end
   end
 
@@ -31,7 +31,22 @@ defmodule AppTemplateWeb.FeatureCase do
       Ecto.Adapters.SQL.Sandbox.mode(AppTemplate.Repo, {:shared, self()})
     end
 
-    hound_session = Hound.start_session()
+    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(AppTemplate.Repo, self())
+
+    # starts hound session in a headless chrome instance
+    hound_session = Hound.start_session(
+      additional_capabilities: %{
+        javascriptEnabled: true,
+        chromeOptions: %{
+          "args" => [
+            "--user-agent=#{Hound.Browser.user_agent(:chrome) |> Hound.Metadata.append(metadata)}",
+            "--headless",
+            "--disable-gpu",
+            "--window-size=1024x768"
+          ]
+        }
+      }
+    )
 
     on_exit(fn ->
       Hound.end_session(hound_session)
