@@ -17,7 +17,7 @@ defmodule AppTemplate.Mixfile do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test,
-        integration: :test
+        integration_tests: :test
       ]
     ]
   end
@@ -33,7 +33,7 @@ defmodule AppTemplate.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/integration"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -67,7 +67,8 @@ defmodule AppTemplate.Mixfile do
       {:ex_machina, "~> 2.2", only: :test},
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
-      {:hound, "~> 1.0"},
+      {:hound, "~> 1.0", only: :test},
+      {:cabbage, "~> 0.3.5", only: :test},
       {:scrivener_ecto, "~> 2.0"},
       {:transmit, "~> 0.2"},
       {:metairie, "~> 0.1"},
@@ -92,17 +93,18 @@ defmodule AppTemplate.Mixfile do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      integration: [
-        "assets.compile",
+      integration_tests: [
+        "webpack",
         "ecto.create --quiet",
         "ecto.migrate",
-        "test --only integration"
+        "test --only feature"
       ],
-      "assets.compile": &compile_assets/1
+      webpack: &run_webpack/1,
     ]
   end
 
-  defp compile_assets(_) do
-    Mix.shell().cmd("npm run --prefix assets build")
+  defp run_webpack(_) do
+    System.cmd("npm", ["install"], cd: "assets")
+    System.cmd("npm", ["run", "build"], cd: "assets")
   end
 end
