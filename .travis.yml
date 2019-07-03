@@ -1,6 +1,11 @@
 sudo: required
 git:
   depth: false
+services:
+  - docker
+env:
+  global:
+    - DOCKER_USERNAME=travis
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
@@ -21,6 +26,7 @@ jobs:
       services:
         - postgresql
       before_script:
+        - nvm install 12.4.0 && nvm use 12.4.0
         - psql -c 'create database app_template_test;' -U postgres
       install:
         - gem install coveralls-multi
@@ -72,18 +78,14 @@ jobs:
         - npm install --prefix assets
       script:
         - mix integration_tests
-    - stage: deploy
+    - stage: docker deploy
       name: 'Deploy'
       if: branch = master
       script: skip
+      before_deploy:
+        - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net -u $DOCKER_USERNAME --password-stdin
       deploy:
-        - provider: deis
-          controller: deis.prod.revelry.net
-          app: app-template
-          cli_version: v2.20.0
-          username: '$DEIS_USERNAME'
-          password: '$DEIS_PASSWORD'
-          on:
-            branch: master
-      after_deploy:
-        - ./deis run "_build/prod/rel/app_template/bin/app_template migrate" -a app-template
+        provider: script
+        script: bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
+        on:
+          branch: master

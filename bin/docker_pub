@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DOCKER_REPO=$1
+DOCKER_HOST=$2
+
+HEAD_SHA=$(git rev-parse --short HEAD)
+
+IMAGE_TAG=$DOCKER_HOST/$DOCKER_REPO
+LATEST_TAG=$IMAGE_TAG:latest
+VERSIONED_TAG=$IMAGE_TAG:$TRAVIS_BRANCH-$HEAD_SHA
+
+docker pull $LATEST_TAG || true
+docker build --cache-from $LATEST_TAG -t $VERSIONED_TAG . || exit 1
+docker push $VERSIONED_TAG || exit 1
+
+if [ "$TRAVIS_BRANCH" = "master" ]; then
+  docker tag $VERSIONED_TAG $LATEST_TAG
+  docker push $LATEST_TAG
+fi
