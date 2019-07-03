@@ -21,4 +21,6 @@ mix local.rebar --force
 mix deps.get
 
 echo "Installing node dependencies"
-(cd assets && npm install && cd ..)
+npm install --prefix assets
+
+brew services start selenium-server-standalone

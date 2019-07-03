@@ -1,6 +1,10 @@
 defmodule AppTemplateWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :app_template
 
+  if Application.get_env(:app_template, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   socket("/socket", AppTemplateWeb.UserSocket, websocket: true)
 
   # Serve at "/" the static files from "priv/static" directory.
