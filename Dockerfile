@@ -1,5 +1,5 @@
 # Set the Docker image you want to base your image off.
-FROM elixir:1.8.2 as builder
+FROM elixir:1.9 as builder
 
 ENV MIX_ENV="prod" \
   PORT="5000"
@@ -28,7 +28,7 @@ RUN npm install --prefix assets && npm run deploy --prefix assets
 COPY . .
 
 # Make release
-RUN mix do compile, phx.digest, distillery.release
+RUN mix do compile, phx.digest, release
 
 FROM ubuntu:bionic
 
@@ -54,4 +54,4 @@ WORKDIR /app
 COPY --from=builder /opt/app/_build/prod/rel/app_template .
 
 # The command to run when this image starts up
-CMD ["./bin/app_template", "foreground"]
+CMD ["./bin/app_template", "start"]
