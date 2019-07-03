@@ -5,6 +5,10 @@ brew 'fop'
 brew 'libtool'
 brew 'openssl'
 
+# integration testing dependencies
+brew "selenium-server-standalone"
+cask "chromedriver"
+
 # web app tools
 cask 'postgres'
 
