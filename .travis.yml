@@ -49,9 +49,11 @@ jobs:
         postgresql: '9.6'
       services:
         - postgresql
-        - xvfb
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
+        - "export DISPLAY=:99.0"
+        - "sh -e /etc/init.d/xvfb start"
+        - sleep 3 # give xvfb some time to start
       before_install:
         - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip
@@ -70,7 +72,7 @@ jobs:
         - mix deps.get
         - npm install --prefix assets
       script:
-        - xvfb-run mix integration_tests
+        - mix integration_tests
     - stage: deploy
       name: 'Deploy'
       if: branch = master
