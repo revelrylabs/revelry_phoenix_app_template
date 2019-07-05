@@ -47,7 +47,7 @@ EXPOSE 5000
 # Install other stable dependencies that don't change often
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
-  apt-utils nodejs postgresql-client && \
+  postgresql-client && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
