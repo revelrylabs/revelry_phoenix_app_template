@@ -32,7 +32,6 @@ defmodule AppTemplate.Application do
   end
 
   defp setup do
-    Metairie.init(:app_template)
     AppTemplateWeb.Phoenix.Instrumenter.setup()
     AppTemplateWeb.PipelineInstrumenter.setup()
     Prometheus.Registry.register_collector(:prometheus_process_collector)
