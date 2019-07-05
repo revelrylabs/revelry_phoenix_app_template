@@ -30,7 +30,7 @@ COPY . .
 # Make release
 RUN mix do compile, phx.digest, release
 
-FROM ubuntu:bionic
+FROM debian:stretch-slim
 
 RUN apt-get -qq update
 RUN apt-get -qq install -y locales
@@ -43,6 +43,10 @@ ENV MIX_ENV="prod" \
 
 # Exposes this port from the docker container to the host machine
 EXPOSE 5000
+
+# Because these dirs were stripped from the slim package and
+# caused issues installing postgres-client
+RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{}
 
 # Install other stable dependencies that don't change often
 RUN apt-get update && \
