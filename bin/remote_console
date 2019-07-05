@@ -6,4 +6,4 @@ echo "Starting remote iex session into app-template using kubectl. Current conte
 POD=${1:-$(kubectl get pods --namespace=app-template -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | head -n 1)}
 
 # Remote iex into the above pod
-kubectl exec -it $POD --namespace app-template -- /bin/bash -c "./_build/prod/rel/app_template/bin/app_template remote_console"
+kubectl exec -it $POD --namespace app-template -- /bin/bash -c "./bin/app_template remote"
