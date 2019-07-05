@@ -56,11 +56,8 @@ defmodule AppTemplate.Mixfile do
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:harmonium, "~> 2.0.0"},
-      {:distillery, "~> 2.1"},
       {:jason, "~> 1.0"},
       {:rollbax, "~> 0.9"},
-      {:vmstats, "~> 2.3"},
-      {:statix, "~> 1.1"},
       {:bamboo, "~> 1.2.0"},
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
@@ -71,7 +68,6 @@ defmodule AppTemplate.Mixfile do
       {:cabbage, "~> 0.3.5", only: :test},
       {:scrivener_ecto, "~> 2.0"},
       {:transmit, "~> 0.2"},
-      {:metairie, "~> 0.1"},
       {:adminable, "~> 0.1"},
       {:telemetry, "~> 0.4.0"},
       {:prometheus_phoenix, "~> 1.2"},
@@ -99,7 +95,7 @@ defmodule AppTemplate.Mixfile do
         "ecto.migrate",
         "test --only feature"
       ],
-      webpack: &run_webpack/1,
+      webpack: &run_webpack/1
     ]
   end
 
