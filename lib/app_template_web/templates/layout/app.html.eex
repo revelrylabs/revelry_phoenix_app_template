@@ -20,7 +20,7 @@
               <%= menu_item :li, [] do %>
                 <%= link "Home", to: Routes.page_path(@conn, :index) %>
               <% end %>
-              <%= if Map.has_key?(@conn.assigns, :current_user) == false do %>
+              <%= if @conn.assigns[:current_user] == nil do %>
                 <%= menu_item :li, [] do %>
                   <%= link "Register", to: Routes.account_path(@conn, :new) %>
                 <% end %>
