@@ -5,12 +5,9 @@ config :app_template, AppTemplate.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
-port = String.to_integer(System.get_env("PORT"))
-
 config :app_template, AppTemplateWeb.Endpoint,
-  http: [port: port],
-  url: [host: "localhost", port: port],
-  root: ".",
+  http: [port: String.to_integer(System.get_env("PORT"))],
+  url: [scheme: "https", host: System.get_env("APP_DOMAIN"), port: 443],
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 config :rollbax,
