@@ -33,10 +33,11 @@ RUN mix do compile, phx.digest, release
 FROM debian:stretch-slim
 
 RUN apt-get -qq update
-RUN apt-get -qq install -y locales
+RUN apt-get -qq install -y locales language-pack-en
 
 # Set LOCALE to UTF8
 RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 ENV MIX_ENV="prod" \
   PORT="5000"

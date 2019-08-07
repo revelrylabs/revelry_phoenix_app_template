@@ -12,9 +12,9 @@ jobs:
       name: 'Unit Tests' # names the first Tests stage job
       language: elixir
       elixir:
-        - 1.8
+        - 1.9
       otp_release:
-        - 21.0
+        - 22.0
       cache:
         directories:
           - _build
@@ -60,7 +60,7 @@ jobs:
       before_script:
         - psql -c 'create database app_template_test;' -U postgres
       before_install:
-        - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+        - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip
         - sudo apt-get install libnss3
         - sudo cp chromedriver /usr/local/bin/.
