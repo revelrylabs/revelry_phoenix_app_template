@@ -33,7 +33,7 @@ RUN mix do compile, phx.digest, release
 FROM debian:stretch-slim
 
 RUN apt-get -qq update
-RUN apt-get -qq install -y locales language-pack-en
+RUN apt-get -qq install -y locales locales-all
 
 # Set LOCALE to UTF8
 RUN locale-gen en_US.UTF-8
