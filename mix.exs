@@ -73,7 +73,8 @@ defmodule AppTemplate.Mixfile do
       {:prometheus_phoenix, "~> 1.2"},
       {:prometheus_ecto, "~> 1.4"},
       {:prometheus_plugs, "~> 1.1"},
-      {:prometheus_process_collector, "~> 1.4"}
+      {:prometheus_process_collector, "~> 1.4"},
+      {:libcluster, "~> 3.0"}
     ]
   end
 

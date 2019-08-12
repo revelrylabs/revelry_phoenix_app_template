@@ -24,3 +24,13 @@ config :rollbax, enable_crash_reports: true
 config :app_template, AppTemplate.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
+
+config :app_template, cluster_topologies: [
+  k8s: [
+    strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+    config: [
+      service: "app-template-nodes",
+      application_name: "app-template",
+    ]
+  ]
+]
