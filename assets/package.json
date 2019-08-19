@@ -14,7 +14,7 @@
     "phoenix_html": "file:../deps/phoenix_html",
     "transmit": "file:../deps/transmit",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.9.0",
     "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
