@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "core-js": "^3.1.4",
+    "core-js": "^3.2.1",
     "harmonium": "^4.5.0",
     "mustache": "^3.0.0",
     "phoenix": "file:../deps/phoenix",
