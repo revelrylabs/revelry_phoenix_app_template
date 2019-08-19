@@ -26,13 +26,6 @@ function init(_config) {
   updateTimeTags()
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (self.app_template) {
-    self.app_template.components = {}
-    init(self.app_template)
-  }
-})
-
 export default {
   init,
 }

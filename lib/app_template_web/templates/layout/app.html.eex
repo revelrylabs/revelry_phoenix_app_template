@@ -52,12 +52,6 @@
       </main>
 
     </div> <!-- /container -->
-    <script>
-      const app_template = {
-        jsModuleToLoad: <%= init_js_module(@view_module, @view_template) %>
-      };
-      self.app_template = self.app_template || app_template;
-    </script>
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
