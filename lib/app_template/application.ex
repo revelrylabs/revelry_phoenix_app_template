@@ -8,14 +8,17 @@ defmodule AppTemplate.Application do
 
     setup()
 
+    topologies = Application.get_env(:app_template, :cluster_topologies)
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
       supervisor(AppTemplate.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(AppTemplateWeb.Endpoint, [])
+      supervisor(AppTemplateWeb.Endpoint, []),
       # Start your own worker by calling: AppTemplate.Worker.start_link(arg1, arg2, arg3)
       # worker(AppTemplate.Worker, [arg1, arg2, arg3]),
+      {Cluster.Supervisor, [topologies, [name: AppTemplate.ClusterSupervisor]]},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

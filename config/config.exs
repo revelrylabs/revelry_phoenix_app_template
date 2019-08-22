@@ -39,6 +39,9 @@ config :ex_aws,
 
 config :app_template, jwt_secret: "secret"
 
+# see prod.exs for production config
+config :app_template, cluster_topologies: []
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
