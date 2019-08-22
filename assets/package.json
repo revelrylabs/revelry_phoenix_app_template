@@ -9,13 +9,12 @@
     "@babel/polyfill": "^7.4.4",
     "core-js": "^3.2.1",
     "harmonium": "^4.5.0",
-    "mustache": "^3.0.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "transmit": "file:../deps/transmit",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "transmit": "file:../deps/transmit"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
