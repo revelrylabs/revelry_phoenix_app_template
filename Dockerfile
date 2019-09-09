@@ -15,20 +15,29 @@ RUN apt-get update && \
 
 WORKDIR /opt/app
 
-# Install and compile project dependencies
-# We do this before all other files to make container build faster
-# when configuration and dependencies are not changed
-COPY mix.* ./
-RUN mix do local.rebar --force, local.hex --force, deps.get --only prod, deps.compile
+# install hex + rebar
+RUN mix local.hex --force && \
+  mix local.rebar --force
 
-COPY assets ./assets
-RUN npm install --prefix assets && npm run deploy --prefix assets
+# install mix dependencies
+COPY mix.exs mix.lock ./
+COPY config config
+RUN mix deps.get
+RUN mix deps.compile
 
-# Add the files to the image
-COPY . .
+# build assets
+COPY assets assets
+RUN cd assets && npm install && npm run deploy
+RUN mix phx.digest
 
-# Make release
-RUN mix do compile, phx.digest, release
+# build project
+COPY priv priv
+COPY lib lib
+RUN mix compile
+
+# build release
+COPY rel rel
+RUN mix release
 
 FROM debian:stretch-slim
 
@@ -56,7 +65,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY --from=builder /opt/app/_build/prod/rel/app_template .
+COPY --from=builder /opt/app/_build/prod/rel/app_template ./
 
 # The command to run when this image starts up
 CMD ["./bin/app_template", "start"]
