@@ -28,3 +28,16 @@ config :app_template, AppTemplate.Mailer,
 
 config :app_template,
   jwt_secret: System.get_env("JWT_SECRET") || System.get_env("SECRET_KEY_BASE")
+
+app_name = System.get_env("APP_NAME") || "app-template"
+config :app_template, cluster_topologies: [
+  k8s: [
+    strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+    config: [
+      # the name of the "headless" service in the app's k8s configuration
+      service: "#{app_name}-nodes",
+      # the `app` tag applied to k8s resources for this app
+      application_name: app_name,
+    ]
+  ]
+]
