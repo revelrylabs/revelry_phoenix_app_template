@@ -37,6 +37,7 @@ defmodule AppTemplate.Application do
   defp setup do
     AppTemplateWeb.Phoenix.Instrumenter.setup()
     AppTemplateWeb.PipelineInstrumenter.setup()
+    AppTemplateWeb.Repo.Instrumenter.setup()
     Prometheus.Registry.register_collector(:prometheus_process_collector)
     AppTemplateWeb.MetricsExporter.setup()
 
