@@ -1,0 +1,44 @@
+#!/bin/bash
+
+STAGE=$1
+
+if [ "$STAGE" = "" ]; then
+  echo "Please provide a stage argument: 'started', 'succeeded', 'failed', or 'timed_out'"
+  echo "e.g. 'rollbar_release started'"
+  exit 1
+fi
+
+if [ "$ROLLBAR_ACCESS_TOKEN" = "" ]; then
+  echo "No ROLLBAR_ACCESS_TOKEN found in the environment. Skipping release ping"
+  exit 1
+fi
+
+if [ "$TRAVIS_BRANCH" != "master" ]; then
+  # if you want to track non-prod deploys, add some logic
+  # to set the environment (in OUTPUT below) based on $TRAVIS_BRANCH
+  echo "Skipping release ping for branch $TRAVIS_BRANCH"
+  exit 0
+fi
+
+if [ "$STAGE" = "started" ]; then
+  OUTPUT=$(
+    curl --request POST \
+      --url https://api.rollbar.com/api/1/deploy/ \
+      --silent \
+      --data "access_token=$ROLLBAR_ACCESS_TOKEN" \
+      --data "environment=production" \
+      --data "revision=$TRAVIS_COMMIT" \
+      --data "comment=$TRAVIS_TAG" \
+      --data "status=$STAGE"
+  )
+  DEPLOY_ID_REGEX='"deploy_id": ([0-9]+)'
+  [[ $OUTPUT =~ $DEPLOY_ID_REGEX ]]
+  ROLLBAR_DEPLOY_ID=${BASH_REMATCH[1]}
+  echo $ROLLBAR_DEPLOY_ID
+else
+  curl --request PATCH \
+    --url "https://api.rollbar.com/api/1/deploy/$ROLLBAR_DEPLOY_ID" \
+    --data "access_token=$ROLLBAR_ACCESS_TOKEN" \
+    --data "status=$STAGE"
+  echo "updated rollbar deployment $ROLLBAR_DEPLOY_ID"
+fi
