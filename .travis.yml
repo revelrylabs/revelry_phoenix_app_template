@@ -26,13 +26,13 @@ jobs:
       services:
         - postgresql
       before_script:
-        - nvm install 12.4.0 && nvm use 12.4.0
         - psql -c 'create database app_template_test;' -U postgres
       install:
         - gem install coveralls-multi
         - mix local.hex --force
         - mix local.rebar --force
         - mix deps.get
+        - nvm install 12.4.0 && nvm use 12.4.0
         - npm install --prefix assets
       script:
         - MIX_ENV=test mix coveralls.json
