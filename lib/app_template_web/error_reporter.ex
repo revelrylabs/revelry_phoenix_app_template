@@ -3,7 +3,14 @@ defmodule AppTemplateWeb.ErrorReporter do
   Takes care of reporting router errors.
   """
   alias Plug.Conn
-  @filtered_params ["password"]
+
+  @filtered_params [
+    "current_password",
+    "new_password",
+    "new_password_confirmation",
+    "password",
+    "password_confirmation"
+  ]
   @ignore_error_routes [
     "/wp-login.php",
     "/favicon.ico"
@@ -21,22 +28,13 @@ defmodule AppTemplateWeb.ErrorReporter do
       |> Conn.fetch_cookies()
       |> Conn.fetch_query_params()
 
-    params =
-      for {key, _value} = tuple <- conn.params, into: %{} do
-        if key in @filtered_params do
-          {key, "[FILTERED]"}
-        else
-          tuple
-        end
-      end
-
     conn_data = %{
       "request" => %{
         "cookies" => conn.req_cookies,
         "url" => "#{conn.scheme}://#{conn.host}:#{conn.port}#{conn.request_path}",
         "user_ip" => conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
         "headers" => Enum.into(conn.req_headers, %{}),
-        "params" => params,
+        "params" => sanitize(conn.params),
         "method" => conn.method
       }
     }
@@ -55,5 +53,23 @@ defmodule AppTemplateWeb.ErrorReporter do
       end
 
     Rollbax.report(kind, reason, stacktrace, %{}, conn_data)
+  end
+
+  def sanitize(data) do
+    for {key, value} <- data, into: %{} do
+      sanitize(key, value)
+    end
+  end
+
+  defp sanitize(key, value) when is_map(value) do
+    {key, sanitize(value)}
+  end
+
+  defp sanitize(key, value) do
+    if key in @filtered_params do
+      {key, "[FILTERED]"}
+    else
+      {key, value}
+    end
   end
 end
