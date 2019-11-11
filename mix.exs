@@ -55,7 +55,7 @@ defmodule AppTemplate.Mixfile do
       {:excoveralls, "~> 0.7", only: :test},
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:harmonium, "~> 2.0.0"},
+      {:harmonium, "~> 2.1.0", override: true},
       {:jason, "~> 1.0"},
       {:rollbax, "~> 0.9"},
       {:bamboo, "~> 1.3.0"},

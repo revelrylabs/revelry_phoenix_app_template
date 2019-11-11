@@ -27,12 +27,12 @@ Product Owner:
 
 ### Web App Browser Compatibility Targets
 
-| OS      | Browsers                                                 |
-| ------- | -------------------------------------------------------- |
-| Windows | IE 11+, Chrome (latest), Firefox (latest), Edge (latest) |
-| Mac     | Chrome (latest), Firefox (latest), Safari (latest)       |
-| iOS     | Safari (latest)                                          |
-| Android | Chrome (latest)                                          |
+| OS      | Browsers                                           |
+| ------- | -------------------------------------------------- |
+| Windows | Chrome (latest), Firefox (latest), Edge (latest)   |
+| Mac     | Chrome (latest), Firefox (latest), Safari (latest) |
+| iOS     | Safari (latest)                                    |
+| Android | Chrome (latest)                                    |
 
 ### Native App OS Compatibility Targets
 
