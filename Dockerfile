@@ -65,7 +65,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY --from=builder /opt/app/_build/prod/rel/app_template ./
+COPY --from=builder /opt/app/_build/prod/rel/mapp_construction ./
 
 # The command to run when this image starts up
-CMD ["./bin/app_template", "start"]
+CMD ["./bin/mapp_construction", "start"]

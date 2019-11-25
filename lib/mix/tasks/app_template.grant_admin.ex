@@ -1,7 +1,7 @@
-defmodule Mix.Tasks.AppTemplate.GrantAdmin do
+defmodule Mix.Tasks.MappConstruction.GrantAdmin do
   use Mix.Task
 
-  alias AppTemplate.{ReleaseTasks}
+  alias MappConstruction.{ReleaseTasks}
 
   @shortdoc "Grants the given user admin access"
 
@@ -10,7 +10,7 @@ defmodule Mix.Tasks.AppTemplate.GrantAdmin do
 
   usage:
 
-  mix app_template.grant_admin <email>
+  mix mapp_construction.grant_admin <email>
   """
 
   @doc false

@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.PageControllerTest do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.PageControllerTest do
+  use MappConstructionWeb.ConnCase, async: true
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

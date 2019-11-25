@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.MetricsExporter do
+defmodule MappConstructionWeb.MetricsExporter do
   use Prometheus.PlugExporter
 end

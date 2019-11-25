@@ -1,7 +1,7 @@
-defmodule AppTemplate.Factory do
-  alias AppTemplate.{Repo}
+defmodule MappConstruction.Factory do
+  alias MappConstruction.{Repo}
   use ExMachina.Ecto, repo: Repo
-  alias AppTemplate.Generators
+  alias MappConstruction.Generators
 
   def user_factory do
     Generators.generate(:user)

@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.SessionController.Test do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.SessionController.Test do
+  use MappConstructionWeb.ConnCase, async: true
   alias Bcrypt
 
   test "GET /session/new", %{conn: conn} do

@@ -2,29 +2,29 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :app_template, AppTemplateWeb.Endpoint,
+config :mapp_construction, MappConstructionWeb.Endpoint,
   http: [port: 4001],
   server: true
 
-config :app_template, :sql_sandbox, true
+config :mapp_construction, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
 
 # Configure your database
-config :app_template, AppTemplate.Repo,
+config :mapp_construction, MappConstruction.Repo,
   username: "postgres",
   password: "postgres",
-  database: "app_template_test",
+  database: "mapp_construction_test",
   hostname: "localhost",
   port: String.to_integer(System.get_env("PGPORT") || "5432"),
   pool: Ecto.Adapters.SQL.Sandbox,
-  types: AppTemplate.PostgresTypes
+  types: MappConstruction.PostgresTypes
 
-config :app_template, AppTemplate.Mailer, adapter: Bamboo.TestAdapter
+config :mapp_construction, MappConstruction.Mailer, adapter: Bamboo.TestAdapter
 
-config :app_template,
-  s3_signer: AppTemplate.S3Signer.Mock
+config :mapp_construction,
+  s3_signer: MappConstruction.S3Signer.Mock
 
   config :hound,
   driver: "selenium",

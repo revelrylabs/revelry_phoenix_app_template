@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.ErrorReporter.Test do
-  use AppTemplateWeb.ConnCase, async: true
-  alias AppTemplateWeb.ErrorReporter
+defmodule MappConstructionWeb.ErrorReporter.Test do
+  use MappConstructionWeb.ConnCase, async: true
+  alias MappConstructionWeb.ErrorReporter
 
   test "handle_errors when one of ignored routes" do
     assert ErrorReporter.handle_errors(%{request_path: "/wp-login.php"}, []) == nil

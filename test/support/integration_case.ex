@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.IntegrationCase do
+defmodule MappConstructionWeb.IntegrationCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -18,20 +18,20 @@ defmodule AppTemplateWeb.IntegrationCase do
   using do
     quote do
       use Hound.Helpers
-      alias AppTemplateWeb.Router.Helpers, as: Routes
-      import AppTemplate.Factory
+      alias MappConstructionWeb.Router.Helpers, as: Routes
+      import MappConstruction.Factory
       @moduletag :feature
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AppTemplate.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MappConstruction.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AppTemplate.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(MappConstruction.Repo, {:shared, self()})
     end
 
-    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(AppTemplate.Repo, self())
+    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(MappConstruction.Repo, self())
 
     # starts hound session in a headless chrome instance
     hound_session = Hound.start_session(

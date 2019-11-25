@@ -1,8 +1,8 @@
-defmodule AppTemplateWeb.LoadUserTest do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.LoadUserTest do
+  use MappConstructionWeb.ConnCase, async: true
   alias Plug.Conn
-  alias AppTemplateWeb.LoadUser
-  alias AppTemplate.{AuthenticationToken}
+  alias MappConstructionWeb.LoadUser
+  alias MappConstruction.{AuthenticationToken}
 
   test "init" do
     assert LoadUser.init([]) == []

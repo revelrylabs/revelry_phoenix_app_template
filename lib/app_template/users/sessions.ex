@@ -1,9 +1,9 @@
-defmodule AppTemplate.Sessions do
+defmodule MappConstruction.Sessions do
   @moduledoc """
   Module for handling session changeset actions
   """
   import Ecto.Changeset
-  alias AppTemplate.Session
+  alias MappConstruction.Session
 
   def new(model \\ %Session{}, params \\ %{}) do
     model

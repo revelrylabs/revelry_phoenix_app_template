@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.UserPasswordController.Test do
-  use AppTemplateWeb.ConnCase, async: true
-  alias AppTemplate.{EmailToken}
+defmodule MappConstructionWeb.UserPasswordController.Test do
+  use MappConstructionWeb.ConnCase, async: true
+  alias MappConstruction.{EmailToken}
   use Bamboo.Test
 
   setup %{conn: conn} do
@@ -13,8 +13,8 @@ defmodule AppTemplateWeb.UserPasswordController.Test do
 
       claims = %{
         "user_id" => user.id,
-        "aud" => "AppTemplate",
-        "iss" => "AppTemplate"
+        "aud" => "MappConstruction",
+        "iss" => "MappConstruction"
       }
 
       token = EmailToken.generate_and_sign!(claims, EmailToken.signer())
@@ -33,8 +33,8 @@ defmodule AppTemplateWeb.UserPasswordController.Test do
 
       claims = %{
         "user_id" => user.id,
-        "aud" => "AppTemplate",
-        "iss" => "AppTemplate"
+        "aud" => "MappConstruction",
+        "iss" => "MappConstruction"
       }
 
       token = EmailToken.generate_and_sign!(claims, EmailToken.signer())

@@ -1,3 +1,3 @@
-Postgrex.Types.define(AppTemplate.PostgresTypes, [] ++ Ecto.Adapters.Postgres.extensions(),
+Postgrex.Types.define(MappConstruction.PostgresTypes, [] ++ Ecto.Adapters.Postgres.extensions(),
   json: Jason
 )

@@ -1,6 +1,6 @@
-defmodule AppTemplate do
+defmodule MappConstruction do
   @moduledoc """
-  AppTemplate keeps the contexts that define your domain
+  MappConstruction keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

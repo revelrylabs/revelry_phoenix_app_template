@@ -1,16 +1,16 @@
-defmodule AppTemplateWeb.RequireAdmin do
+defmodule MappConstructionWeb.RequireAdmin do
   @moduledoc """
   Ensures user is logged in
   """
 
   import Plug.Conn
-  alias AppTemplateWeb.Router.Helpers, as: Routes
+  alias MappConstructionWeb.Router.Helpers, as: Routes
 
   def init(opts) do
     opts
   end
 
-  def call(%Plug.Conn{assigns: %{current_user: %AppTemplate.User{admin: true}}} = conn, _),
+  def call(%Plug.Conn{assigns: %{current_user: %MappConstruction.User{admin: true}}} = conn, _),
     do: conn
 
   def call(conn, _) do

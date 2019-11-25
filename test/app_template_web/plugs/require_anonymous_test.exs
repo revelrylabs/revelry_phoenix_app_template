@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.RequireAnonymousTest do
-  use AppTemplateWeb.ConnCase, async: true
-  alias AppTemplateWeb.{RequireAnonymous, LoadUser}
+defmodule MappConstructionWeb.RequireAnonymousTest do
+  use MappConstructionWeb.ConnCase, async: true
+  alias MappConstructionWeb.{RequireAnonymous, LoadUser}
   alias Plug.Conn
 
   test "init" do

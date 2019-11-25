@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.EmailVerificationController do
-  use AppTemplateWeb, :controller
-  alias AppTemplate.{EmailToken, Users}
+defmodule MappConstructionWeb.EmailVerificationController do
+  use MappConstructionWeb, :controller
+  alias MappConstruction.{EmailToken, Users}
 
   def verify(conn, %{"token" => token}) do
     with(

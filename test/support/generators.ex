@@ -1,4 +1,4 @@
-defmodule AppTemplate.Generators do
+defmodule MappConstruction.Generators do
   @moduledoc """
   Holds generator functions to provide generative data for testing
 
@@ -8,7 +8,7 @@ defmodule AppTemplate.Generators do
 
   use ExUnitProperties
 
-  alias AppTemplate.{
+  alias MappConstruction.{
     User
   }
 

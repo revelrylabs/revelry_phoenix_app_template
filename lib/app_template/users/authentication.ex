@@ -1,11 +1,11 @@
-defmodule AppTemplate.Authentication do
+defmodule MappConstruction.Authentication do
   @moduledoc """
   Handles logging users in and out
   """
 
   import Plug.Conn
   import Bcrypt, only: [check_pass: 3, no_user_verify: 1]
-  alias AppTemplate.{AuthenticationToken, Users}
+  alias MappConstruction.{AuthenticationToken, Users}
 
   @doc """
   Checks if valid credentials, but does not create a new session.

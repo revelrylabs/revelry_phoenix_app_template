@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.Phoenix.Instrumenter do
+defmodule MappConstructionWeb.Phoenix.Instrumenter do
   use Prometheus.PhoenixInstrumenter
 end

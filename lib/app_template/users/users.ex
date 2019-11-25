@@ -1,11 +1,11 @@
-defmodule AppTemplate.Users do
+defmodule MappConstruction.Users do
   @moduledoc """
   Module for interacting with Users
   """
 
   import Ecto.{Query}, warn: false
   alias Ecto.Changeset
-  alias AppTemplate.{Repo, User}
+  alias MappConstruction.{Repo, User}
 
   def create_user(params) do
     %User{}

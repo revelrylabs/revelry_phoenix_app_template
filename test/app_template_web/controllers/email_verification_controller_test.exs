@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.EmailVerificationController.Test do
-  use AppTemplateWeb.ConnCase, async: true
-  alias AppTemplate.EmailToken
+defmodule MappConstructionWeb.EmailVerificationController.Test do
+  use MappConstructionWeb.ConnCase, async: true
+  alias MappConstruction.EmailToken
 
   test "verify without token", %{conn: conn} do
     conn = get(conn, Routes.email_verification_path(conn, :verify))

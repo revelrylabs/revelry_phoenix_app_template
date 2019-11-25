@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.API.AuthenticationView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.API.AuthenticationView do
+  use MappConstructionWeb, :view
 
   def render("show.json", %{token: %{user: user, access_token: access_token, expires_in: expires}}) do
     %{

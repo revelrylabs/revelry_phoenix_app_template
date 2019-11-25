@@ -1,9 +1,9 @@
-defmodule AppTemplateWeb.ForgotPasswordController do
+defmodule MappConstructionWeb.ForgotPasswordController do
   @moduledoc """
     handles user password resets
   """
-  use AppTemplateWeb, :controller
-  alias AppTemplate.{EmailToken, Users, User, EmailBuilder, Mailer}
+  use MappConstructionWeb, :controller
+  alias MappConstruction.{EmailToken, Users, User, EmailBuilder, Mailer}
 
   plug(:ensure_valid_token when action in [:edit, :reset])
 

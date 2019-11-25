@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.SessionController do
-  use AppTemplateWeb, :controller
-  alias AppTemplate.{Authentication, Session, Sessions}
+defmodule MappConstructionWeb.SessionController do
+  use MappConstructionWeb, :controller
+  alias MappConstruction.{Authentication, Session, Sessions}
 
   def new(conn, _params) do
     url = add_next_url(conn, Routes.session_path(conn, :create))

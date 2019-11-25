@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.API.AuthenticationController.Test do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.API.AuthenticationController.Test do
+  use MappConstructionWeb.ConnCase, async: true
   alias Bcrypt
 
   test "POST /api/authenticate with invalid credentials", %{conn: conn} do

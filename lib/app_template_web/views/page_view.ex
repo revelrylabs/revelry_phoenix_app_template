@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.PageView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.PageView do
+  use MappConstructionWeb, :view
 end

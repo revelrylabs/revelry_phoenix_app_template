@@ -1,11 +1,11 @@
-defmodule AppTemplateWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :app_template
+defmodule MappConstructionWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :mapp_construction
 
-  if Application.get_env(:app_template, :sql_sandbox) do
+  if Application.get_env(:mapp_construction, :sql_sandbox) do
     plug Phoenix.Ecto.SQL.Sandbox
   end
 
-  socket("/socket", AppTemplateWeb.UserSocket, websocket: true)
+  socket("/socket", MappConstructionWeb.UserSocket, websocket: true)
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -13,7 +13,7 @@ defmodule AppTemplateWeb.Endpoint do
   # when deploying your static files in production.
   plug(Plug.Static,
     at: "/",
-    from: :app_template,
+    from: :mapp_construction,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
   )
@@ -43,13 +43,13 @@ defmodule AppTemplateWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug(Plug.Session,
     store: :cookie,
-    key: "_app_template_key",
+    key: "_mapp_construction_key",
     signing_salt: "SOzvicWj"
   )
 
-  plug(AppTemplateWeb.MetricsExporter)
-  plug AppTemplateWeb.PipelineInstrumenter
-  plug(AppTemplateWeb.Router)
+  plug(MappConstructionWeb.MetricsExporter)
+  plug MappConstructionWeb.PipelineInstrumenter
+  plug(MappConstructionWeb.Router)
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

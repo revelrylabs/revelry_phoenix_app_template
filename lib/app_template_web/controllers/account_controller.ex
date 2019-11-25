@@ -1,6 +1,6 @@
-defmodule AppTemplateWeb.AccountController do
-  use AppTemplateWeb, :controller
-  alias AppTemplate.{Authentication, EmailBuilder, Mailer, User, Users}
+defmodule MappConstructionWeb.AccountController do
+  use MappConstructionWeb, :controller
+  alias MappConstruction.{Authentication, EmailBuilder, Mailer, User, Users}
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})

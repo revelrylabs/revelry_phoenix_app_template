@@ -1,4 +1,4 @@
-defmodule AppTemplate.ReleaseTasks do
+defmodule MappConstruction.ReleaseTasks do
   @start_apps [
     :crypto,
     :ssl,
@@ -7,7 +7,7 @@ defmodule AppTemplate.ReleaseTasks do
     :ecto_sql
   ]
 
-  @app :app_template
+  @app :mapp_construction
   @repos Application.get_env(@app, :ecto_repos, [])
 
   def migrate() do
@@ -104,10 +104,10 @@ defmodule AppTemplate.ReleaseTasks do
   end
 
   def grant_admin_permissions(email) do
-    user = AppTemplate.Users.get_user_by_email(email)
+    user = MappConstruction.Users.get_user_by_email(email)
 
     if user do
-      case AppTemplate.Users.grant_user_admin_permissions(user) do
+      case MappConstruction.Users.grant_user_admin_permissions(user) do
         {:ok, _} ->
           IO.puts("User<#{email}> is now an admin")
 
@@ -120,10 +120,10 @@ defmodule AppTemplate.ReleaseTasks do
   end
 
   def revoke_admin_access(email) do
-    user = AppTemplate.Users.get_user_by_email(email)
+    user = MappConstruction.Users.get_user_by_email(email)
 
     if user do
-      case AppTemplate.Users.revoke_user_admin_permissions(user) do
+      case MappConstruction.Users.revoke_user_admin_permissions(user) do
         {:ok, _} ->
           IO.puts("User<#{email}> admin access revoked")
 

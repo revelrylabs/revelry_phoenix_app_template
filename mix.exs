@@ -1,9 +1,9 @@
-defmodule AppTemplate.Mixfile do
+defmodule MappConstruction.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :app_template,
+      app: :mapp_construction,
       version: System.get_env("APP_VERSION") || "0.0.1",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -27,7 +27,7 @@ defmodule AppTemplate.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {AppTemplate.Application, []},
+      mod: {MappConstruction.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

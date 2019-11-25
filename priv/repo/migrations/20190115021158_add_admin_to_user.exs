@@ -1,4 +1,4 @@
-defmodule AppTemplate.Repo.Migrations.AddAdminToUser do
+defmodule MappConstruction.Repo.Migrations.AddAdminToUser do
   use Ecto.Migration
 
   def change do

@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.AccountControllerTest do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.AccountControllerTest do
+  use MappConstructionWeb.ConnCase, async: true
   use Bamboo.Test
 
   describe "Account Details" do
@@ -114,7 +114,7 @@ defmodule AppTemplateWeb.AccountControllerTest do
           }
         )
 
-      assert_email_delivered_with(subject: "Welcome to AppTemplate!")
+      assert_email_delivered_with(subject: "Welcome to MappConstruction!")
       assert redirected_to(conn) =~ Routes.page_path(conn, :index)
     end
   end

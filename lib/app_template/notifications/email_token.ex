@@ -1,4 +1,4 @@
-defmodule AppTemplate.EmailToken do
+defmodule MappConstruction.EmailToken do
   @moduledoc """
   Configures behavior of JSON web tokens for emails
   """
@@ -7,9 +7,9 @@ defmodule AppTemplate.EmailToken do
 
   @impl true
   def token_config do
-    default_claims(iss: "AppTemplate", aud: "AppTemplate")
+    default_claims(iss: "MappConstruction", aud: "MappConstruction")
   end
 
   def signer,
-    do: Signer.create("HS256", Application.get_env(:app_template, :jwt_secret, nil))
+    do: Signer.create("HS256", Application.get_env(:mapp_construction, :jwt_secret, nil))
 end

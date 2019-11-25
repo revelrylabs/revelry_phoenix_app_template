@@ -1,11 +1,11 @@
-defmodule AppTemplateWeb.LoadUser do
+defmodule MappConstructionWeb.LoadUser do
   @moduledoc """
   Loads user into connection if
   user has session
   """
 
   import Plug.Conn
-  alias AppTemplate.{Users, AuthenticationToken}
+  alias MappConstruction.{Users, AuthenticationToken}
 
   def init(opts) do
     opts

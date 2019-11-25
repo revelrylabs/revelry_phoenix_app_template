@@ -1,10 +1,10 @@
-defmodule Mix.Tasks.AppTemplate.GrantAdmin.Test do
-  use AppTemplate.DataCase, async: true
-  alias Mix.Tasks.AppTemplate.GrantAdmin
-  alias AppTemplate.Users
+defmodule Mix.Tasks.MappConstruction.GrantAdmin.Test do
+  use MappConstruction.DataCase, async: true
+  alias Mix.Tasks.MappConstruction.GrantAdmin
+  alias MappConstruction.Users
   import ExUnit.CaptureIO
 
-  test "app_template.make_admin" do
+  test "mapp_construction.make_admin" do
     user = insert(:user)
 
     assert capture_io(fn ->

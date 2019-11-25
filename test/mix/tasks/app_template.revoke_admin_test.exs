@@ -1,10 +1,10 @@
-defmodule Mix.Tasks.AppTemplate.RevokeAdmin.Test do
-  use AppTemplate.DataCase, async: true
-  alias Mix.Tasks.AppTemplate.RevokeAdmin
-  alias AppTemplate.Users
+defmodule Mix.Tasks.MappConstruction.RevokeAdmin.Test do
+  use MappConstruction.DataCase, async: true
+  alias Mix.Tasks.MappConstruction.RevokeAdmin
+  alias MappConstruction.Users
   import ExUnit.CaptureIO
 
-  test "app_template.revoke_admin" do
+  test "mapp_construction.revoke_admin" do
     user = insert(:user)
 
     assert capture_io(fn ->

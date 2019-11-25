@@ -1,4 +1,4 @@
-defmodule AppTemplate.AuthenticationToken do
+defmodule MappConstruction.AuthenticationToken do
   @moduledoc """
   Configures behavior of JSON web tokens for authentication
   """
@@ -10,11 +10,11 @@ defmodule AppTemplate.AuthenticationToken do
 
   @impl true
   def token_config do
-    default_claims(iss: "AppTemplate", aud: "AppTemplate", default_exp: @expiration_in_seconds)
+    default_claims(iss: "MappConstruction", aud: "MappConstruction", default_exp: @expiration_in_seconds)
   end
 
   def signer,
-    do: Signer.create("HS256", Application.get_env(:app_template, :jwt_secret, nil))
+    do: Signer.create("HS256", Application.get_env(:mapp_construction, :jwt_secret, nil))
 
   def expires_in, do: @expiration_in_seconds
 end

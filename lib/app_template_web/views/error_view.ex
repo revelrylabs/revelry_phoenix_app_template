@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.ErrorView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.ErrorView do
+  use MappConstructionWeb, :view
 
   def render("403.html", _assigns) do
     "Unauthorized"

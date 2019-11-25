@@ -1,5 +1,5 @@
-defmodule AppTemplate.Repo do
-  use Ecto.Repo, otp_app: :app_template, adapter: Ecto.Adapters.Postgres
+defmodule MappConstruction.Repo do
+  use Ecto.Repo, otp_app: :mapp_construction, adapter: Ecto.Adapters.Postgres
   use Scrivener, page_size: 10
 
   @doc """

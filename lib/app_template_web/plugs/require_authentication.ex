@@ -1,10 +1,10 @@
-defmodule AppTemplateWeb.RequireAuthentication do
+defmodule MappConstructionWeb.RequireAuthentication do
   @moduledoc """
   Ensures user is logged in
   """
 
   import Plug.Conn
-  alias AppTemplateWeb.Router.Helpers, as: Routes
+  alias MappConstructionWeb.Router.Helpers, as: Routes
 
   def init(opts) do
     opts

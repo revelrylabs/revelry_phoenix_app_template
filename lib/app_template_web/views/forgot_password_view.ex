@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.ForgotPasswordView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.ForgotPasswordView do
+  use MappConstructionWeb, :view
 end

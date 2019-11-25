@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.ErrorReporter do
+defmodule MappConstructionWeb.ErrorReporter do
   @moduledoc """
   Takes care of reporting router errors.
   """

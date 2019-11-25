@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.API.ErrorView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.API.ErrorView do
+  use MappConstructionWeb, :view
   alias Plug.Conn.Status
   alias Ecto.Changeset
 

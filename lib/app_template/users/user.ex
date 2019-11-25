@@ -1,4 +1,4 @@
-defmodule AppTemplate.User do
+defmodule MappConstruction.User do
   use Ecto.Schema
   use Adminable
   import Ecto.{Query, Changeset}, warn: false
@@ -62,7 +62,7 @@ defmodule AppTemplate.User do
 
   defp validate_current_password(changeset, field) do
     if current_password = get_change(changeset, field) do
-      case AppTemplate.Authentication.verify_credentials(changeset.data.email, current_password) do
+      case MappConstruction.Authentication.verify_credentials(changeset.data.email, current_password) do
         {:ok, _user} ->
           changeset
 

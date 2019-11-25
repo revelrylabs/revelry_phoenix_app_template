@@ -1,10 +1,10 @@
-defmodule AppTemplateWeb.RequireAnonymous do
+defmodule MappConstructionWeb.RequireAnonymous do
   @moduledoc """
   Ensures user is signed out
   """
 
   import Plug.Conn
-  alias AppTemplateWeb.Router.Helpers, as: Routes
+  alias MappConstructionWeb.Router.Helpers, as: Routes
 
   def init(opts) do
     opts

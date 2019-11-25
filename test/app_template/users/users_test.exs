@@ -1,6 +1,6 @@
-defmodule AppTemplate.Users.Test do
-  use AppTemplate.DataCase, async: true
-  alias AppTemplate.Users
+defmodule MappConstruction.Users.Test do
+  use MappConstruction.DataCase, async: true
+  alias MappConstruction.Users
 
   test "create" do
     {:ok, user} =

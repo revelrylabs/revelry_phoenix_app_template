@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.AccountView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.AccountView do
+  use MappConstructionWeb, :view
 end

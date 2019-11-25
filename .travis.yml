@@ -26,7 +26,7 @@ jobs:
       services:
         - postgresql
       before_script:
-        - psql -c 'create database app_template_test;' -U postgres
+        - psql -c 'create database mapp_construction_test;' -U postgres
       install:
         - gem install coveralls-multi
         - mix local.hex --force
@@ -58,7 +58,7 @@ jobs:
         - postgresql
         - xvfb
       before_script:
-        - psql -c 'create database app_template_test;' -U postgres
+        - psql -c 'create database mapp_construction_test;' -U postgres
       before_install:
         - wget https://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip

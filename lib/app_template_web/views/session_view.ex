@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.SessionView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.SessionView do
+  use MappConstructionWeb, :view
 end

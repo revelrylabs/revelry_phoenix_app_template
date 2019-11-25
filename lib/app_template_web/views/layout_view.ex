@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.LayoutView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.LayoutView do
+  use MappConstructionWeb, :view
 end

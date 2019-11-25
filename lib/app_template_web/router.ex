@@ -1,10 +1,10 @@
-defmodule AppTemplateWeb.Router do
-  use AppTemplateWeb, :router
+defmodule MappConstructionWeb.Router do
+  use MappConstructionWeb, :router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous, RequireAdmin}
+  alias MappConstructionWeb.{RequireAuthentication, LoadUser, RequireAnonymous, RequireAdmin}
 
   defp handle_errors(conn, error_data) do
-    AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
+    MappConstructionWeb.ErrorReporter.handle_errors(conn, error_data)
   end
 
   if Mix.env() == :dev do
@@ -36,7 +36,7 @@ defmodule AppTemplateWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AppTemplateWeb do
+  scope "/", MappConstructionWeb do
     # Use the default browser stack
     pipe_through [:browser]
     get "/", PageController, :index
@@ -44,7 +44,7 @@ defmodule AppTemplateWeb.Router do
     get "/email/verify", EmailVerificationController, :verify
   end
 
-  scope "/", AppTemplateWeb do
+  scope "/", MappConstructionWeb do
     pipe_through [:browser, :require_anonymous]
 
     get "/register", AccountController, :new
@@ -57,7 +57,7 @@ defmodule AppTemplateWeb.Router do
     post("/forgot_password/reset", ForgotPasswordController, :reset)
   end
 
-  scope "/", AppTemplateWeb do
+  scope "/", MappConstructionWeb do
     pipe_through [:browser, :require_authoritzation]
 
     get "/sessions/delete", SessionController, :delete
@@ -70,10 +70,10 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser, :require_authoritzation, :require_admin]
 
     forward("/", Adminable.Plug,
-      otp_app: :app_template,
-      repo: AppTemplate.Repo,
-      schemas: [AppTemplate.User],
-      layout: {AppTemplateWeb.LayoutView, "app.html"}
+      otp_app: :mapp_construction,
+      repo: MappConstruction.Repo,
+      schemas: [MappConstruction.User],
+      layout: {MappConstructionWeb.LayoutView, "app.html"}
     )
   end
 
@@ -87,13 +87,13 @@ defmodule AppTemplateWeb.Router do
     )
   end
 
-  scope "/api", AppTemplateWeb.API, as: :api do
+  scope "/api", MappConstructionWeb.API, as: :api do
     pipe_through [:browser, :require_anonymous]
 
     post("/authenticate", AuthenticationController, :authenticate)
   end
 
-  scope "/api", AppTemplateWeb.API, as: :api do
+  scope "/api", MappConstructionWeb.API, as: :api do
     pipe_through [:browser, :require_authoritzation]
   end
 end

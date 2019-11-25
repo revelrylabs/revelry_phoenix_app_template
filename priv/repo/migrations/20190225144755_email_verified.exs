@@ -1,4 +1,4 @@
-defmodule AppTemplate.Repo.Migrations.EmailVerified do
+defmodule MappConstruction.Repo.Migrations.EmailVerified do
   use Ecto.Migration
 
   def change do

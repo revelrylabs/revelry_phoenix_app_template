@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.ConnCase do
+defmodule MappConstructionWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,19 +19,19 @@ defmodule AppTemplateWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias AppTemplateWeb.Router.Helpers, as: Routes
-      import AppTemplate.Factory
+      alias MappConstructionWeb.Router.Helpers, as: Routes
+      import MappConstruction.Factory
 
       # The default endpoint for testing
-      @endpoint AppTemplateWeb.Endpoint
+      @endpoint MappConstructionWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AppTemplate.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MappConstruction.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AppTemplate.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(MappConstruction.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

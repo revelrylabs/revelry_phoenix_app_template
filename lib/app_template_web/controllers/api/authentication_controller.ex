@@ -1,8 +1,8 @@
-defmodule AppTemplateWeb.API.AuthenticationController do
-  use AppTemplateWeb, :controller
-  alias AppTemplate.{Authentication, Session, Sessions}
+defmodule MappConstructionWeb.API.AuthenticationController do
+  use MappConstructionWeb, :controller
+  alias MappConstruction.{Authentication, Session, Sessions}
 
-  action_fallback(AppTemplateWeb.API.FallbackController)
+  action_fallback(MappConstructionWeb.API.FallbackController)
 
   def authenticate(conn, %{"data" => session_params}) do
     {:ok, session} = Sessions.validate(%Session{}, session_params)

@@ -1,6 +1,6 @@
-defmodule AppTemplate.Mailer do
+defmodule MappConstruction.Mailer do
   @moduledoc """
-  AppTemplate mailer
+  MappConstruction mailer
   """
-  use Bamboo.Mailer, otp_app: :app_template
+  use Bamboo.Mailer, otp_app: :mapp_construction
 end

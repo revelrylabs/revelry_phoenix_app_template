@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.Repo.Instrumenter do
+defmodule MappConstructionWeb.Repo.Instrumenter do
   use Prometheus.EctoInstrumenter
 end

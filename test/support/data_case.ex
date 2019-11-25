@@ -1,4 +1,4 @@
-defmodule AppTemplate.DataCase do
+defmodule MappConstruction.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,21 +16,21 @@ defmodule AppTemplate.DataCase do
 
   using do
     quote do
-      alias AppTemplate.Repo
+      alias MappConstruction.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import AppTemplate.DataCase
-      import AppTemplate.Factory
+      import MappConstruction.DataCase
+      import MappConstruction.Factory
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AppTemplate.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MappConstruction.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AppTemplate.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(MappConstruction.Repo, {:shared, self()})
     end
 
     :ok

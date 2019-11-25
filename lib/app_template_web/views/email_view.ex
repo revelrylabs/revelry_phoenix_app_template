@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.EmailView do
-  use AppTemplateWeb, :view
+defmodule MappConstructionWeb.EmailView do
+  use MappConstructionWeb, :view
 end

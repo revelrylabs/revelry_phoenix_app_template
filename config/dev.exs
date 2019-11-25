@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :app_template, AppTemplateWeb.Endpoint,
+config :mapp_construction, MappConstructionWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -24,13 +24,13 @@ config :app_template, AppTemplateWeb.Endpoint,
   ]
 
 # Watch static and templates for browser reloading.
-config :app_template, AppTemplateWeb.Endpoint,
+config :mapp_construction, MappConstructionWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/app_template_web/views/.*(ex)$},
-      ~r{lib/app_template_web/templates/.*(eex)$}
+      ~r{lib/mapp_construction_web/views/.*(ex)$},
+      ~r{lib/mapp_construction_web/templates/.*(eex)$}
     ]
   ]
 
@@ -42,16 +42,16 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :app_template, AppTemplate.Repo,
+config :mapp_construction, MappConstruction.Repo,
   username: "postgres",
   password: "postgres",
-  database: "app_template_dev",
+  database: "mapp_construction_dev",
   hostname: "localhost",
   port: String.to_integer(System.get_env("PGPORT") || "5432"),
   pool_size: 10,
-  types: AppTemplate.PostgresTypes
+  types: MappConstruction.PostgresTypes
 
-config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
+config :mapp_construction, MappConstruction.Mailer, adapter: Bamboo.LocalAdapter
 
 if File.exists?(Path.join([__DIR__, "dev.secret.exs"])) do
   import_config "dev.secret.exs"

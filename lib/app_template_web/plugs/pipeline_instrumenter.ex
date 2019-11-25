@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.PipelineInstrumenter do
+defmodule MappConstructionWeb.PipelineInstrumenter do
   use Prometheus.PlugPipelineInstrumenter
 end

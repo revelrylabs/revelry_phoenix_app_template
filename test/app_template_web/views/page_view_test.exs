@@ -1,3 +1,3 @@
-defmodule AppTemplateWeb.PageViewTest do
-  use AppTemplateWeb.ConnCase, async: true
+defmodule MappConstructionWeb.PageViewTest do
+  use MappConstructionWeb.ConnCase, async: true
 end

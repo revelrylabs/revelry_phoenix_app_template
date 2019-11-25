@@ -1,7 +1,7 @@
-defmodule Mix.Tasks.AppTemplate.RevokeAdmin do
+defmodule Mix.Tasks.MappConstruction.RevokeAdmin do
   use Mix.Task
 
-  alias AppTemplate.{ReleaseTasks}
+  alias MappConstruction.{ReleaseTasks}
 
   @shortdoc "Revokes the given user admin access"
 
@@ -10,7 +10,7 @@ defmodule Mix.Tasks.AppTemplate.RevokeAdmin do
 
   usage:
 
-  mix app_template.revoke_admin <email>
+  mix mapp_construction.revoke_admin <email>
   """
 
   @doc false

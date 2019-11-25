@@ -1,11 +1,11 @@
-defmodule AppTemplate.Session do
+defmodule MappConstruction.Session do
   @moduledoc """
   Defines an embedded schema + changeset for a user session.
   There's no corresponding db table - this is just for use in forms.
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias AppTemplate.Session
+  alias MappConstruction.Session
 
   embedded_schema do
     field(:email, :string, primary_key: true)

@@ -1,5 +1,5 @@
-defmodule AppTemplateWeb.PageController do
-  use AppTemplateWeb, :controller
+defmodule MappConstructionWeb.PageController do
+  use MappConstructionWeb, :controller
 
   def index(conn, _params) do
     render(conn, "index.html")
