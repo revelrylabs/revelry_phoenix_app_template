@@ -18,10 +18,10 @@ defmodule AppTemplateWeb.RequireAdmin do
     encoded_path = URI.encode_www_form(path)
 
     to_path =
-      if Routes.session_path(conn, :delete) === conn.request_path do
-        Routes.session_path(conn, :new)
+      if Routes.pow_session_path(conn, :delete) === conn.request_path do
+        Routes.pow_session_path(conn, :new)
       else
-        Routes.session_path(conn, :new, next: encoded_path)
+        Routes.pow_session_path(conn, :new, next: encoded_path)
       end
 
     conn

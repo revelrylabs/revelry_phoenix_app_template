@@ -24,34 +24,6 @@ defmodule AppTemplate.EmailBuilder do
     |> render("welcome.html")
   end
 
-  def build_email_password_reset(user) do
-    claims = Map.merge(%{user_id: user.id}, %{"aud" => "AppTemplate", "iss" => "AppTemplate"})
-    {:ok, token, _} = EmailToken.generate_and_sign(claims, EmailToken.signer())
-
-    change_password_url =
-      AppTemplateWeb.Router.Helpers.forgot_password_url(
-        AppTemplateWeb.Endpoint,
-        :edit,
-        user.id,
-        token: token
-      )
-
-    base_email()
-    |> to(user.email)
-    |> assign(:user, user)
-    |> assign(:url, change_password_url)
-    |> subject("AppTemplate Reset Password")
-    |> render("forgot_password.html")
-  end
-
-  def build_password_changed_email(user) do
-    base_email()
-    |> to(user.email)
-    |> assign(:user, user)
-    |> subject("AppTemplate Password Changed")
-    |> render("password_changed.html")
-  end
-
   defp base_email do
     new_email()
     |> from({"AppTemplate", "noreply@app_template.org"})

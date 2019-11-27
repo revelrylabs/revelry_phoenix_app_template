@@ -14,7 +14,7 @@ defmodule AppTemplateWeb.API.AuthenticationController.Test do
 
   describe "POST /api/authenticate with valid credentials" do
     test "logs the normal user in and redirects to the main menu", %{conn: conn} do
-      user = insert(:user, password: Bcrypt.hash_pwd_salt("blah"))
+      user = insert(:user, password_hash: Bcrypt.hash_pwd_salt("blah"))
 
       conn =
         post(conn, Routes.api_authentication_path(conn, :authenticate),

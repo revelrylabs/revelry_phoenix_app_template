@@ -1,0 +1,23 @@
+<%= row do %>
+  <%= col do %>
+    <h1>Log In</h1>
+  <% end %>
+<% end %>
+<%= form_for @changeset, @action, [as: :user], fn f -> %>
+  <%= row do %>
+    <%= col do %>
+      <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :password, label: "Password", input: [required: true, placeholder: "Password"] %>
+    <% end %>
+    <%= col do %>
+      <%= submit "Log In", class: button_class() %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= row do %>
+  <%= col do %>
+    <%= link "Register", to: Routes.pow_registration_path(@conn, :new) %>
+  <% end %>
+<% end %>

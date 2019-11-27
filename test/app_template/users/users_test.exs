@@ -6,8 +6,8 @@ defmodule AppTemplate.Users.Test do
     {:ok, user} =
       Users.create_user(%{
         "email" => "joe@example.com",
-        "new_password" => "hi",
-        "new_password_confirmation" => "hi"
+        "password" => "hihihihihi",
+        "confirm_password" => "hihihihihi"
       })
 
     assert user.email == "joe@example.com"
