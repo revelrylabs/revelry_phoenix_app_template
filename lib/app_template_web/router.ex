@@ -2,7 +2,7 @@ defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Pow.Phoenix.Router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAdmin, LoadUser}
+  alias AppTemplateWeb.{RequireAdmin, BrowserAuthentication, APIAuthentication}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -18,12 +18,12 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug LoadUser, otp_app: :my_app
+    plug BrowserAuthentication, otp_app: :my_app
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug LoadUser, otp_app: :my_app
+    plug APIAuthentication, otp_app: :my_app
   end
 
   pipeline :require_admin do
@@ -50,7 +50,6 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
-    get "/email/verify", EmailVerificationController, :verify
   end
 
   scope "/admin" do
@@ -75,12 +74,8 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:browser, :anonymous]
+    pipe_through [:api]
 
-    post("/authenticate", AuthenticationController, :authenticate)
-  end
-
-  scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:browser, :protected]
+    get "/", MeController, :show
   end
 end

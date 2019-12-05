@@ -1,9 +1,0 @@
-<p>
-  Welcome to AppTemplate!
-</p>
-<p>
- Please click below to verify your email
-</p>
- <a target="_blank" rel="noopener" href="<%= @url %>">
-  Verify email
-</a>

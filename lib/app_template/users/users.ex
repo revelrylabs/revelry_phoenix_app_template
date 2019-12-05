@@ -5,7 +5,7 @@ defmodule AppTemplate.Users do
 
   import Ecto.{Query}, warn: false
   alias Ecto.Changeset
-  alias AppTemplate.{Repo, User}
+  alias AppTemplate.{Repo, User, APIKey}
 
   def create_user(params) do
     %User{}
@@ -35,8 +35,34 @@ defmodule AppTemplate.Users do
     Repo.update(user_changeset)
   end
 
-  def update_email_verified(user) do
-    user_changeset = Changeset.change(user, email_verified: true)
-    Repo.update(user_changeset)
+  def create_api_key_for_user(params) do
+    %APIKey{}
+    |> APIKey.create_changeset(params)
+    |> Repo.insert()
+  end
+
+  def update_api_key_for_user(api_key, params) do
+    api_key
+    |> APIKey.update_changeset(params)
+    |> Repo.update()
+  end
+
+  def get_api_key_for_user(prefix) do
+    APIKey
+    |> where([api_key], api_key.prefix == ^prefix)
+    |> preload(:user)
+    |> Repo.one()
+  end
+
+  def list_api_keys_for_user(user_id) do
+    APIKey
+    |> where([api_key], api_key.user_id == ^user_id)
+    |> Repo.all()
+  end
+
+  def delete_api_key_for_user(api_key_id) do
+    APIKey
+    |> Repo.get(api_key_id)
+    |> Repo.delete()
   end
 end
