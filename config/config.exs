@@ -42,6 +42,17 @@ config :app_template, jwt_secret: "secret"
 # see releases.exs for production config
 config :app_template, cluster_topologies: []
 
+config :app_template, email: {"AppTemplate", "noreply@app_template.org"}
+
+config :app_template, :pow,
+  user: AppTemplate.User,
+  repo: AppTemplate.Repo,
+  web_module: AppTemplateWeb,
+  mailer_backend: AppTemplate.Mailer,
+  extensions: [PowResetPassword, PowEmailConfirmation],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  web_mailer_module: AppTemplateWeb
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -1,7 +1,12 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
+  use Pow.Phoenix.Router
+
+  use Pow.Extension.Phoenix.Router,
+    extensions: [PowResetPassword, PowEmailConfirmation]
+
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAuthentication, LoadUser, RequireAnonymous, RequireAdmin}
+  alias AppTemplateWeb.{RequireAdmin, BrowserAuthentication, APIAuthentication}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -17,23 +22,32 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug LoadUser
+    plug BrowserAuthentication, otp_app: :app_template
   end
 
-  pipeline :require_authoritzation do
-    plug RequireAuthentication
-  end
-
-  pipeline :require_anonymous do
-    plug RequireAnonymous
+  pipeline :api do
+    plug :accepts, ["json"]
+    plug APIAuthentication, otp_app: :app_template
   end
 
   pipeline :require_admin do
     plug RequireAdmin
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  pipeline :anonymous do
+    plug Pow.Plug.RequireNotAuthenticated, error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+    pow_extension_routes()
   end
 
   scope "/", AppTemplateWeb do
@@ -41,33 +55,10 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
-    get "/email/verify", EmailVerificationController, :verify
-  end
-
-  scope "/", AppTemplateWeb do
-    pipe_through [:browser, :require_anonymous]
-
-    get "/register", AccountController, :new
-    post "/register", AccountController, :create
-
-    get "/sessions/new", SessionController, :new
-    post "/sessions/new", SessionController, :create
-
-    resources("/forgot_password", ForgotPasswordController, only: [:new, :create, :edit])
-    post("/forgot_password/reset", ForgotPasswordController, :reset)
-  end
-
-  scope "/", AppTemplateWeb do
-    pipe_through [:browser, :require_authoritzation]
-
-    get "/sessions/delete", SessionController, :delete
-    get "/account/settings", AccountController, :edit
-    put "/account/settings", AccountController, :update
-    put "/account/update_password", AccountController, :update_password
   end
 
   scope "/admin" do
-    pipe_through [:browser, :require_authoritzation, :require_admin]
+    pipe_through [:browser, :protected, :require_admin]
 
     forward("/", Adminable.Plug,
       otp_app: :app_template,
@@ -78,7 +69,7 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/images" do
-    pipe_through([:browser, :require_authoritzation])
+    pipe_through([:browser, :protected])
 
     forward("/sign", Transmit,
       signer: Transmit.S3Signer,
@@ -88,12 +79,8 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:browser, :require_anonymous]
+    pipe_through [:api]
 
-    post("/authenticate", AuthenticationController, :authenticate)
-  end
-
-  scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:browser, :require_authoritzation]
+    get "/", MeController, :show
   end
 end

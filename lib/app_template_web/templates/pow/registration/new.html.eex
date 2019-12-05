@@ -1,0 +1,35 @@
+<%= row do %>
+  <%= col do %>
+    <h1>Register</h1>
+  <% end %>
+<% end %>
+<%= form_for @changeset, @action, [as: :user], fn f -> %>
+  <%= row do %>
+    <%= col do %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= row do %>
+    <%= col do %>
+      <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :password, label: "Password", input: [required: true, placeholder: "Password"] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :confirm_password, label: "Confirm Password", input: [required: true, placeholder: "Confirm Password"] %>
+    <% end %>
+    <%= col do %>
+      <%= submit gettext("Register"), class: button_class() %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= row do %>
+  <%= col do %>
+    <span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
+  <% end %>
+<% end %>

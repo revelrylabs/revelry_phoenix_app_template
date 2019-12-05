@@ -60,6 +60,16 @@ defmodule AppTemplateWeb do
     end
   end
 
+  def mailer_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/app_template_web/templates",
+        namespace: MyAppWeb
+
+      use Phoenix.HTML
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
