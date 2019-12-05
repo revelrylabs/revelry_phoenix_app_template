@@ -2,7 +2,7 @@ defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Pow.Phoenix.Router
   use Plug.ErrorHandler
-  alias AppTemplateWeb.RequireAdmin
+  alias AppTemplateWeb.{RequireAdmin, LoadUser}
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -18,15 +18,12 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-
-    plug Pow.Plug.Session,
-      otp_app: :app_template,
-      current_user_assigns_key: :current_user
+    plug LoadUser, otp_app: :my_app
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug AppTemplateWeb.APIAuthPlug, otp_app: :my_app
+    plug LoadUser, otp_app: :my_app
   end
 
   pipeline :require_admin do
