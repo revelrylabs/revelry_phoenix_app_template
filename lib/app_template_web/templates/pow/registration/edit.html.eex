@@ -17,6 +17,11 @@
         <%= row do %>
           <%= col do %>
             <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+            <%= if @changeset.data.unconfirmed_email do %>
+              <div>
+                <p>Click the link in the confirmation email to change your email to <%= content_tag(:span, @changeset.data.unconfirmed_email) %>.</p>
+              </div>
+            <% end %>
           <% end %>
           <%= col do %>
             <%= password_input_stack f, :current_password, placeholder: "Current Password", required: true, label: "Current Password *" %>
@@ -25,7 +30,7 @@
             <%= password_input_stack f, :password, placeholder: "New Password", required: true, label: "New Password *" %>
           <% end %>
           <%= col do %>
-            <%= password_input_stack f, :password_confirmation, placeholder: "Confirm New Password", required: true, label: "Confirm New Password *" %>
+            <%= password_input_stack f, :confirm_password, placeholder: "Confirm New Password", required: true, label: "Confirm New Password *" %>
           <% end %>
           <%= col do %>
             <%= submit "Update", class: button_class() %>

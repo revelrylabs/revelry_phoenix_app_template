@@ -48,7 +48,10 @@ config :app_template, :pow,
   user: AppTemplate.User,
   repo: AppTemplate.Repo,
   web_module: AppTemplateWeb,
-  mailer_backend: AppTemplate.Mailer
+  mailer_backend: AppTemplate.Mailer,
+  extensions: [PowResetPassword, PowEmailConfirmation],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  web_mailer_module: AppTemplateWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

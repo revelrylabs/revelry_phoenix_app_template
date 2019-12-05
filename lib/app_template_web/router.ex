@@ -1,6 +1,10 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Pow.Phoenix.Router
+
+  use Pow.Extension.Phoenix.Router,
+    extensions: [PowResetPassword, PowEmailConfirmation]
+
   use Plug.ErrorHandler
   alias AppTemplateWeb.{RequireAdmin, BrowserAuthentication, APIAuthentication}
 
@@ -18,12 +22,12 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug BrowserAuthentication, otp_app: :my_app
+    plug BrowserAuthentication, otp_app: :app_template
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug APIAuthentication, otp_app: :my_app
+    plug APIAuthentication, otp_app: :app_template
   end
 
   pipeline :require_admin do
@@ -43,6 +47,7 @@ defmodule AppTemplateWeb.Router do
     pipe_through :browser
 
     pow_routes()
+    pow_extension_routes()
   end
 
   scope "/", AppTemplateWeb do

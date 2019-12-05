@@ -32,7 +32,7 @@
                   <%= link "Settings", to: Routes.pow_registration_path(@conn, :edit) %>
                 <% end %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Sign Out", to: Routes.pow_session_path(@conn, :delete) %>
+                  <%= link "Sign Out", to: Routes.pow_session_path(@conn, :delete), method: :delete %>
                 <% end %>
               <% end %>
             <% end %>
