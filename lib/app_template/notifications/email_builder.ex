@@ -26,7 +26,7 @@ defmodule AppTemplate.EmailBuilder do
 
   defp base_email do
     new_email()
-    |> from({"AppTemplate", "noreply@app_template.org"})
+    |> from(Application.get_env(:app_template, :email))
     |> put_html_layout({AppTemplateWeb.LayoutView, "email.html"})
   end
 end

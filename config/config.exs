@@ -42,6 +42,8 @@ config :app_template, jwt_secret: "secret"
 # see releases.exs for production config
 config :app_template, cluster_topologies: []
 
+config :app_template, email: {"AppTemplate", "noreply@app_template.org"}
+
 config :app_template, :pow,
   user: AppTemplate.User,
   repo: AppTemplate.Repo,

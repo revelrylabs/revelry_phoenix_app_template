@@ -10,7 +10,7 @@ defmodule AppTemplate.Mailer do
   def cast(%{user: user, subject: subject, text: text, html: html}) do
     new_email(
       to: user.email,
-      from: "myapp@example.com",
+      from: Application.get_env(:app_template, :email),
       subject: subject,
       html_body: html,
       text_body: text
