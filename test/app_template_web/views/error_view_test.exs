@@ -6,16 +6,16 @@ defmodule AppTemplateWeb.ErrorViewTest do
 
   test "renders 404.html" do
     assert render_to_string(AppTemplateWeb.ErrorView, "404.html", []) ==
-           "Page not found"
+             "Not Found"
   end
 
   test "render 500.html" do
     assert render_to_string(AppTemplateWeb.ErrorView, "500.html", []) ==
-           "Internal server error"
+             "Internal Server Error"
   end
 
   test "render any other" do
     assert render_to_string(AppTemplateWeb.ErrorView, "505.html", []) ==
-           "Internal server error"
+             "Internal Server Error"
   end
 end

@@ -1,6 +1,6 @@
 <%= row do %>
   <%= col do %>
-    <h1>Reset Password</h1>
+    <h1><%= gettext("Reset Password") %></h1>
   <% end %>
 <% end %>
 <%= form_for @changeset, @action, [as: :user], fn f -> %>
@@ -8,14 +8,14 @@
     <%= col do %>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
-          <p>Oops, something went wrong! Please check the errors below.</p>
+          <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
         </div>
       <% end %>
     <% end %>
   <% end %>
   <%= row do %>
     <%= col do %>
-      <%= email_input_stack f, :email, label: "Email", input: [required: true, placeholder: "Email"] %>
+      <%= email_input_stack f, :email, label: gettext("Email"), input: [required: true, placeholder: gettext("Email")] %>
     <% end %>
     <%= col do %>
       <%= submit gettext("Submit"), class: button_class() %>

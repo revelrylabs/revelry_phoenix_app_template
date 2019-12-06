@@ -1,5 +1,5 @@
 <%= row do %>
   <%= col do %>
-    <h1>Welcome</h1>
+    <h1><%= gettext("Welcome") %></h1>
   <% end %>
 <% end %>

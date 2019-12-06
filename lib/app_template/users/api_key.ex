@@ -2,6 +2,7 @@ defmodule AppTemplate.APIKey do
   use Ecto.Schema
   alias AppTemplate.User
   import Ecto.{Query, Changeset}, warn: false
+  import AppTemplateWeb.Gettext, only: [gettext: 1]
 
   @type t :: %__MODULE__{}
   schema "api_keys" do
@@ -18,7 +19,7 @@ defmodule AppTemplate.APIKey do
     |> cast(attrs, [:user_id, :name])
     |> validate_required([:user_id, :name])
     |> unique_constraint(:name,
-      message: "already in use",
+      message: gettext("already in use"),
       name: :api_keys_user_id_lower_name_index
     )
     |> generate_client_and_secret
@@ -32,7 +33,7 @@ defmodule AppTemplate.APIKey do
       :name
     ])
     |> unique_constraint(:name,
-      message: "already in use",
+      message: gettext("already in use"),
       name: :api_keys_user_id_lower_name_index
     )
   end

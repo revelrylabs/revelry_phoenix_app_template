@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello app_template!</title>
+    <title><%= gettext("Hello app_template!") %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -18,21 +18,21 @@
           <div class="rev-TopBar-item">
             <%= menu :ul, horizontalLeft: true do %>
               <%= menu_item :li, [] do %>
-                <%= link "Home", to: Routes.page_path(@conn, :index) %>
+                <%= link gettext("Home"), to: Routes.page_path(@conn, :index) %>
               <% end %>
               <%= if Pow.Plug.current_user(@conn) == nil do %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Register", to: Routes.pow_registration_path(@conn, :new) %>
+                  <%= link gettext("Register"), to: Routes.pow_registration_path(@conn, :new) %>
                 <% end %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Sign In", to: Routes.pow_session_path(@conn, :new) %>
+                  <%= link gettext("Sign In"), to: Routes.pow_session_path(@conn, :new) %>
                 <% end %>
               <% else %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Settings", to: Routes.pow_registration_path(@conn, :edit) %>
+                  <%= link gettext("Settings"), to: Routes.pow_registration_path(@conn, :edit) %>
                 <% end %>
                 <%= menu_item :li, [] do %>
-                  <%= link "Sign Out", to: Routes.pow_session_path(@conn, :delete), method: :delete %>
+                  <%= link gettext("Sign Out"), to: Routes.pow_session_path(@conn, :delete), method: :delete %>
                 <% end %>
               <% end %>
             <% end %>

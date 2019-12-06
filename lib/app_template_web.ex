@@ -67,6 +67,7 @@ defmodule AppTemplateWeb do
         namespace: MyAppWeb
 
       use Phoenix.HTML
+      import AppTemplateWeb.Gettext
     end
   end
 

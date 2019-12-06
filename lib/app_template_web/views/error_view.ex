@@ -1,16 +1,17 @@
 defmodule AppTemplateWeb.ErrorView do
   use AppTemplateWeb, :view
+  alias Plug.Conn.Status
 
   def render("403.html", _assigns) do
-    "Unauthorized"
+    Status.reason_phrase(403)
   end
 
   def render("404.html", _assigns) do
-    "Page not found"
+    Status.reason_phrase(404)
   end
 
   def render("500.html", _assigns) do
-    "Internal server error"
+    Status.reason_phrase(500)
   end
 
   # In case no render clause matches or no
