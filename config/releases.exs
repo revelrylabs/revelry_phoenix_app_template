@@ -3,7 +3,7 @@ import Config
 
 config :app_template, AppTemplate.Repo,
   url:
-    "postgresql://#{System.get_env("POSTGRES_USER")}:#{System.get_env("POSTGRES_PASSWORD")}@app-template-database/app-template-database",
+    "postgresql://#{System.get_env("POSTGRES_USER")}:#{System.get_env("POSTGRES_PASSWORD")}@app-template-database-0:5432/app-template-database",
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 config :app_template, AppTemplateWeb.Endpoint,
