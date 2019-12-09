@@ -2,8 +2,10 @@ import Config
 # NOTE: Runtime production configuration goes here
 
 config :app_template, AppTemplate.Repo,
-  url:
-    "postgresql://#{System.get_env("POSTGRES_USER")}:#{System.get_env("POSTGRES_PASSWORD")}@app-template-database-0:5432/app-template-database",
+  database: "app-template-database",
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  hostname: "app-template-database-0",
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 config :app_template, AppTemplateWeb.Endpoint,
