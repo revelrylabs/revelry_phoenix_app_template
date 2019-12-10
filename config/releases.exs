@@ -5,7 +5,7 @@ config :app_template, AppTemplate.Repo,
   database: "app-template-database",
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
-  hostname: "app-template-database.app-template",
+  hostname: "app-template-database-0",
   ssl: true,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
