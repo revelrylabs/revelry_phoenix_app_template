@@ -11,10 +11,12 @@ config :app_template, AppTemplateWeb.Endpoint,
   version: Application.spec(:app_template, :vsn)
 
 config :app_template, AppTemplate.Repo,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  database: "postgres",
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  hostname: "app-template-database-0",
   ssl: true,
-  types: AppTemplate.PostgresTypes
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 # Do not print debug messages in production
 config :logger, level: :info
