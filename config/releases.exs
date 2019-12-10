@@ -2,7 +2,7 @@ import Config
 # NOTE: Runtime production configuration goes here
 
 config :app_template, AppTemplate.Repo,
-  database: "app-template-database",
+  database: "postgres",
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
   hostname: "app-template-database-0",

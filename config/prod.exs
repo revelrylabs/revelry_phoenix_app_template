@@ -11,7 +11,7 @@ config :app_template, AppTemplateWeb.Endpoint,
   version: Application.spec(:app_template, :vsn)
 
 config :app_template, AppTemplate.Repo,
-  database: "app-template-database",
+  database: "postgres",
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
   hostname: "app-template-database-0",
