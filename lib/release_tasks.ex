@@ -71,7 +71,6 @@ defmodule AppTemplate.ReleaseTasks do
   defp run_migrations_for(repo) do
     app = Keyword.get(repo.config, :otp_app)
     IO.puts("Running migrations for #{app}")
-    IO.puts("Using #{repo.config |> Keyword.drop([:password]) |> inspect()}")
     migrations_path = priv_path_for(repo, "migrations")
     Ecto.Migrator.run(repo, migrations_path, :up, all: true)
   end
