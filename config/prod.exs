@@ -14,8 +14,7 @@ config :app_template, AppTemplate.Repo,
   database: "postgres",
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
-  hostname: "app-template-database-0",
-  ssl: true,
+  hostname: "app-template-database",
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 # Do not print debug messages in production
