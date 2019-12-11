@@ -1,5 +1,7 @@
 import 'phoenix_html'
 import {DateTime} from 'luxon'
+import feather from 'feather-icons'
+import Harmonium from './harmonium'
 
 /**
  * Updates <time> tags with a datetime attribute in ISO 8601 format to
@@ -24,7 +26,13 @@ function updateTimeTags() {
 
 function init(_config) {
   updateTimeTags()
+  feather.replace()
+  Harmonium.setup()
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  init()
+})
 
 export default {
   init,
