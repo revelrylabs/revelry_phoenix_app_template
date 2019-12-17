@@ -3,6 +3,7 @@ defmodule AppTemplateWeb.ErrorReporter do
   Takes care of reporting router errors.
   """
   alias Plug.Conn
+  require Logger
 
   @filtered_params [
     "current_password",
@@ -20,6 +21,12 @@ defmodule AppTemplateWeb.ErrorReporter do
   def handle_errors(%{request_path: request_path}, _)
       when request_path in @ignore_error_routes do
     nil
+  end
+
+  # Write to logs instead of triggering Rollbar on 404s
+  # the message looks like `404: no route found for GET /bad-url (AppTemplateWeb.Router)`
+  def handle_errors(_conn, %{reason: %Phoenix.Router.NoRouteError{} = reason}) do
+    Logger.info("404: #{reason.message}")
   end
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: stacktrace}) do
