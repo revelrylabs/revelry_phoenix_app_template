@@ -1,1 +1,3 @@
 baseApp: app-template
+envSecret: app-template-env-secret
+namespace: app-template
