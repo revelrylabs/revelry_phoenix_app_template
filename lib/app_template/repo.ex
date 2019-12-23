@@ -7,6 +7,6 @@ defmodule AppTemplate.Repo do
   DATABASE_URL environment variable.
   """
   def init(_, opts) do
-    {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
+    {:ok, opts}
   end
 end

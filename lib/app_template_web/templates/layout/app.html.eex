@@ -41,10 +41,20 @@
       </div>
 
       <%= unless is_nil(get_flash(@conn, :info)) do %>
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <div class="Flash Flash--success">
+          <span><%= get_flash(@conn, :info) %></span>
+          <%= link to: "#", class: "rev-Close" do %>
+            <i data-feather="x"></i>
+          <% end %>
+        </div>
       <% end %>
       <%= unless is_nil(get_flash(@conn, :error)) do %>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="Flash Flash--alert">
+          <span><%= get_flash(@conn, :error) %></span>
+          <%= link to: "#", class: "rev-Close" do %>
+            <i data-feather="x"></i>
+          <% end %>
+        </div>
       <% end %>
 
       <main role="main">
