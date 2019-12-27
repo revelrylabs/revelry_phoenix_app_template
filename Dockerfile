@@ -39,10 +39,10 @@ RUN mix compile
 COPY rel rel
 RUN mix release
 
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 RUN apt-get -qq update
-RUN apt-get -qq install -y locales locales-all
+RUN apt-get -qq install -y locales locales-all libtinfo6
 
 # Set LOCALE to UTF8
 RUN locale-gen en_US.UTF-8
