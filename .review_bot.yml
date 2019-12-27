@@ -2,3 +2,4 @@ baseApp: app-template
 envSecret: app-template-env-secret
 namespace: app-template
 applicationPort: 4000
+registrySecretName: harbor
