@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
-    "core-js": "^3.4.8",
+    "core-js": "^3.6.2",
     "feather-icons": "^4.25.0",
     "harmonium": "^4.5.2",
     "phoenix": "file:../deps/phoenix",
