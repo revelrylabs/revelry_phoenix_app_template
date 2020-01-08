@@ -6,7 +6,13 @@ defmodule AppTemplateWeb.Router do
     extensions: [PowResetPassword, PowEmailConfirmation]
 
   use Plug.ErrorHandler
-  alias AppTemplateWeb.{RequireAdmin, BrowserAuthentication, APIAuthentication}
+
+  alias AppTemplateWeb.{
+    APIAuthentication,
+    AppDomainRedirect,
+    BrowserAuthentication,
+    RequireAdmin
+  }
 
   defp handle_errors(conn, error_data) do
     AppTemplateWeb.ErrorReporter.handle_errors(conn, error_data)
@@ -22,6 +28,7 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug AppDomainRedirect
     plug BrowserAuthentication, otp_app: :app_template
   end
 
