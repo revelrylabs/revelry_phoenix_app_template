@@ -30,6 +30,10 @@ defmodule AppTemplateWeb.Router do
     plug APIAuthentication, otp_app: :app_template
   end
 
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: AppTemplateWeb.APIAuthErrorHandler
+  end
+
   pipeline :require_admin do
     plug RequireAdmin
   end
@@ -80,6 +84,14 @@ defmodule AppTemplateWeb.Router do
 
   scope "/api", AppTemplateWeb.API, as: :api do
     pipe_through [:api]
+
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api", AppTemplateWeb.API, as: :api do
+    pipe_through [:api, :api_protected]
 
     get "/", MeController, :show
   end
