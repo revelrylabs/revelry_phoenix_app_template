@@ -25,7 +25,9 @@ defmodule AppTemplateWeb.APIAuthentication do
   @impl true
   @spec create(Conn.t(), map(), Config.t()) :: {Conn.t(), map()}
   def create(conn, user, _config) do
-    IO.puts("create")
+    Enum.each(Users.list_api_keys_for_user(user.id), fn api_key ->
+      Users.delete_api_key_for_user(api_key.id)
+    end)
 
     {:ok, api_key} = Users.create_api_key_for_user(%{user_id: user.id, name: "high"})
 
