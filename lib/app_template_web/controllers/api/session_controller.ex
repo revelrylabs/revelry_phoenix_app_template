@@ -6,14 +6,20 @@ defmodule AppTemplateWeb.API.SessionController do
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
+    IO.puts("controller create")
+
     conn
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        IO.inspect(conn.private[:api_key])
-        render(conn, "new.json", token: conn.private[:api_key].key_hash)
+        IO.puts("okok ")
+
+        render(conn, "new.json",
+          token: "#{conn.private[:api_key].prefix}.#{conn.private[:api_key].key}"
+        )
 
       error ->
+        IO.inspect(error)
         error
     end
   end

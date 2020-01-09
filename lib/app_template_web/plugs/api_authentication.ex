@@ -11,6 +11,8 @@ defmodule AppTemplateWeb.APIAuthentication do
   @impl true
   @spec fetch(Conn.t(), Config.t()) :: {Conn.t(), map() | nil}
   def fetch(conn, _config) do
+    IO.puts("fetch")
+
     case fetch_auth_token(conn) do
       {:ok, %APIKey{} = api_key} ->
         {conn, api_key.user}
@@ -23,6 +25,8 @@ defmodule AppTemplateWeb.APIAuthentication do
   @impl true
   @spec create(Conn.t(), map(), Config.t()) :: {Conn.t(), map()}
   def create(conn, user, _config) do
+    IO.puts("create")
+
     {:ok, api_key} = Users.create_api_key_for_user(%{user_id: user.id, name: "high"})
 
     conn =
