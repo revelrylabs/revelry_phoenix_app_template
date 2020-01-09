@@ -4,8 +4,13 @@ defmodule AppTemplateWeb.APIAuthErrorHandler do
 
   @spec call(Conn.t(), :not_authenticated) :: Conn.t()
   def call(conn, :not_authenticated) do
+    errors = %{
+      http: ["401: Not Authenticated"]
+    }
+
     conn
-    |> put_status(401)
-    |> json(%{error: %{code: 401, message: "Not authenticated"}})
+    |> Plug.Conn.put_status(401)
+    |> put_view(AppTemplateWeb.API.ErrorView)
+    |> render("401.json", errors: errors)
   end
 end

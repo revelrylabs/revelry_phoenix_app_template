@@ -87,7 +87,6 @@ defmodule AppTemplateWeb.Router do
 
     resources "/registration", RegistrationController, singleton: true, only: [:create]
     resources "/session", SessionController, singleton: true, only: [:create, :delete]
-    post "/session/renew", SessionController, :renew
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do

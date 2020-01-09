@@ -3,13 +3,17 @@ defmodule AppTemplateWeb.API.MeControllerTest do
 
   setup %{conn: conn} do
     user = insert(:user)
-    api_key = insert(:api_key, user: user)
+
+    api_key =
+      insert(:api_key, user: user)
+      |> IO.inspect()
 
     conn = Plug.Conn.put_req_header(conn, "authorization", "Bearer #{api_key.prefix}.test")
 
     [conn: conn, user: user, api_key: api_key]
   end
 
+  @tag :cool
   test "me", %{conn: conn, user: user} do
     conn = get(conn, Routes.api_me_path(conn, :show))
     assert json_response(conn, 200) == %{"data" => %{"email" => user.email, "id" => user.id}}

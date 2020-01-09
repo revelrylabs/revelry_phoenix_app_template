@@ -3,90 +3,56 @@ defmodule AppTemplateWeb.APIAuthentication do
   Loads user from API token
   """
   use Pow.Plug.Base
+  import Bcrypt, only: [check_pass: 3, no_user_verify: 1]
 
   alias Plug.Conn
-  alias Pow.{Config, Store.CredentialsCache}
-  alias PowPersistentSession.Store.PersistentSessionCache
+  alias AppTemplate.{Users, APIKey}
 
   @impl true
   @spec fetch(Conn.t(), Config.t()) :: {Conn.t(), map() | nil}
-  def fetch(conn, config) do
-    token = fetch_auth_token(conn)
+  def fetch(conn, _config) do
+    case fetch_auth_token(conn) do
+      {:ok, %APIKey{} = api_key} ->
+        {conn, api_key.user}
 
-    config
-    |> store_config()
-    |> CredentialsCache.get(token)
-    |> case do
-      :not_found -> {conn, nil}
-      {user, _metadata} -> {conn, user}
+      _ ->
+        {conn, nil}
     end
   end
 
   @impl true
   @spec create(Conn.t(), map(), Config.t()) :: {Conn.t(), map()}
-  def create(conn, user, config) do
-    store_config = store_config(config)
-    token = Pow.UUID.generate()
-    renew_token = Pow.UUID.generate()
+  def create(conn, user, _config) do
+    {:ok, api_key} = Users.create_api_key_for_user(%{user_id: user.id, name: "high"})
 
     conn =
       conn
-      |> Conn.put_private(:api_auth_token, token)
-      |> Conn.put_private(:api_renew_token, renew_token)
-
-    CredentialsCache.put(store_config, token, {user, []})
-    PersistentSessionCache.put(store_config, renew_token, {[id: user.id], []})
+      |> Conn.put_private(:api_key, api_key)
 
     {conn, user}
   end
 
   @impl true
   @spec delete(Conn.t(), Config.t()) :: Conn.t()
-  def delete(conn, config) do
-    token = fetch_auth_token(conn)
-
-    config
-    |> store_config()
-    |> CredentialsCache.delete(token)
+  def delete(conn, _config) do
+    {:ok, %APIKey{} = api_key} = fetch_auth_token(conn)
+    Users.delete_api_key_for_user(api_key.id)
 
     conn
-  end
-
-  @doc """
-  Create a new token with the provided authorization token.
-
-  The renewal authorization token will be deleted from the store after the user id has been fetched.
-  """
-  @spec renew(Conn.t(), Config.t()) :: {Conn.t(), map() | nil}
-  def renew(conn, config) do
-    renew_token = fetch_auth_token(conn)
-    store_config = store_config(config)
-    res = PersistentSessionCache.get(store_config, renew_token)
-
-    PersistentSessionCache.delete(store_config, renew_token)
-
-    case res do
-      :not_found -> {conn, nil}
-      res -> load_and_create_session(conn, res, config)
-    end
-  end
-
-  defp load_and_create_session(conn, {clauses, _metadata}, config) do
-    case Pow.Operations.get_by(clauses, config) do
-      nil -> {conn, nil}
-      user -> create(conn, user, config)
-    end
   end
 
   defp fetch_auth_token(conn) do
-    conn
-    |> Plug.Conn.get_req_header("authorization")
-    |> List.first()
-  end
+    with ["Bearer " <> token] <- Plug.Conn.get_req_header(conn, "authorization") |> IO.inspect(),
+         [app, prefix, key] <- String.split(token, "."),
+         api_key when not is_nil(api_key) <-
+           Users.get_api_key_for_user("#{app}.#{prefix}"),
+         {:ok, _} = check_pass(api_key, key, hash_key: :key_hash) do
+      {:ok, api_key}
+    else
+      _error ->
+        no_user_verify([])
 
-  defp store_config(config) do
-    backend = Config.get(config, :cache_store_backend, Pow.Store.Backend.EtsCache)
-
-    [backend: backend]
+        {:error, nil}
+    end
   end
 end

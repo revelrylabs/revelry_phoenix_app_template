@@ -1,9 +1,8 @@
 defmodule AppTemplateWeb.API.RegistrationController do
   use AppTemplateWeb, :controller
-
-  alias Ecto.Changeset
   alias Plug.Conn
-  alias AppTemplateWeb.ErrorHelpers
+
+  action_fallback(AppTemplateWeb.API.FallbackController)
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
@@ -11,19 +10,14 @@ defmodule AppTemplateWeb.API.RegistrationController do
     |> Pow.Plug.create_user(user_params)
     |> case do
       {:ok, _user, conn} ->
-        json(conn, %{
-          data: %{
-            token: conn.private[:api_auth_token],
-            renew_token: conn.private[:api_renew_token]
-          }
-        })
+        IO.inspect(conn.private[:api_key])
 
-      {:error, changeset, conn} ->
-        errors = Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1)
+        render(conn, "new.json",
+          token: "#{conn.private[:api_key].prefix}.#{conn.private[:api_key].key}"
+        )
 
-        conn
-        |> put_status(500)
-        |> json(%{error: %{status: 500, message: "Couldn't create user", errors: errors}})
+      error ->
+        error
     end
   end
 end
