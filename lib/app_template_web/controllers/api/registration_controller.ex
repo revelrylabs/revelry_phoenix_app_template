@@ -1,5 +1,6 @@
 defmodule AppTemplateWeb.API.RegistrationController do
   use AppTemplateWeb, :controller
+  alias AppTemplateWeb.ErrorHelpers
   alias Plug.Conn
 
   action_fallback(AppTemplateWeb.API.FallbackController)
@@ -14,8 +15,10 @@ defmodule AppTemplateWeb.API.RegistrationController do
           token: "#{conn.private[:api_key].prefix}.#{conn.private[:api_key].key}"
         )
 
-      error ->
-        error
+      {:error, %Ecto.Changeset{} = changeset, _conn} ->
+        errors = Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1)
+
+        {:error, errors}
     end
   end
 end

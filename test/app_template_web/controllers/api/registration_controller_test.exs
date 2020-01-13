@@ -1,25 +1,32 @@
 defmodule AppTemplateWeb.API.RegistrationControllerTest do
   use AppTemplateWeb.ConnCase, async: true
 
-  setup %{conn: conn} do
-    user = insert(:user)
+  describe "create/2" do
+    @valid_params %{
+      "user" => %{
+        "email" => "test@example.com",
+        "password" => "secret1234",
+        "confirm_password" => "secret1234"
+      }
+    }
+    @invalid_params %{
+      "user" => %{"email" => "invalid", "password" => "secret1234", "confirm_password" => ""}
+    }
 
-    api_key =
-      insert(:api_key, user: user)
-      |> IO.inspect()
+    test "with valid params", %{conn: conn} do
+      conn = post(conn, Routes.api_registration_path(conn, :create, @valid_params))
 
-    conn = Plug.Conn.put_req_header(conn, "authorization", "Bearer #{api_key.prefix}.test")
+      assert json = json_response(conn, 200)
+      assert json["data"]["token"]
+    end
 
-    [conn: conn, user: user, api_key: api_key]
-  end
+    test "with invalid params", %{conn: conn} do
+      conn = post(conn, Routes.api_registration_path(conn, :create, @invalid_params))
 
-  test "register", %{conn: conn, user: user} do
-    conn = get(conn, Routes.api_me_path(conn, :show))
-    assert json_response(conn, 200) == %{"data" => %{"email" => user.email, "id" => user.id}}
-  end
+      assert json = json_response(conn, 422)
 
-  test "resgister wth error", %{conn: conn} do
-    conn = get(build_conn(), Routes.api_me_path(conn, :show))
-    assert json_response(conn, 401) == %{"errors" => %{"http" => ["401: Unauthorized"]}}
+      assert json["errors"]["confirm_password"] == ["not same as password"]
+      assert json["errors"]["email"] == ["has invalid format"]
+    end
   end
 end

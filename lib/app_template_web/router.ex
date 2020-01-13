@@ -86,7 +86,10 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:api]
 
     resources "/registration", RegistrationController, singleton: true, only: [:create]
-    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+
+    resources "/authentication", AuthenticationController,
+      singleton: true,
+      only: [:create, :delete]
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do

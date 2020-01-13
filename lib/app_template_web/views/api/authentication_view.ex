@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.API.SessionView do
+defmodule AppTemplateWeb.API.AuthenticationView do
   use AppTemplateWeb, :view
 
   def render("new.json", %{token: token}) do

@@ -25,6 +25,8 @@ defmodule AppTemplateWeb.APIAuthentication do
   @impl true
   @spec create(Conn.t(), map(), Config.t()) :: {Conn.t(), map()}
   def create(conn, user, _config) do
+    IO.puts("create")
+
     Enum.each(Users.list_api_keys_for_user(user.id), fn api_key ->
       Users.delete_api_key_for_user(api_key.id)
     end)
@@ -48,7 +50,7 @@ defmodule AppTemplateWeb.APIAuthentication do
   end
 
   defp fetch_auth_token(conn) do
-    with ["Bearer " <> token] <- Plug.Conn.get_req_header(conn, "authorization") |> IO.inspect(),
+    with ["Bearer " <> token] <- Plug.Conn.get_req_header(conn, "authorization"),
          [app, prefix, key] <- String.split(token, "."),
          api_key when not is_nil(api_key) <-
            Users.get_api_key_for_user("#{app}.#{prefix}"),

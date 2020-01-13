@@ -1,4 +1,4 @@
-defmodule AppTemplateWeb.API.SessionController do
+defmodule AppTemplateWeb.API.AuthenticationController do
   use AppTemplateWeb, :controller
   alias Plug.Conn
 
@@ -6,21 +6,20 @@ defmodule AppTemplateWeb.API.SessionController do
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
-    IO.puts("controller create")
+    IO.puts("hey!")
+
+    IO.inspect(user_params)
 
     conn
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        IO.puts("okok ")
-
         render(conn, "new.json",
           token: "#{conn.private[:api_key].prefix}.#{conn.private[:api_key].key}"
         )
 
-      error ->
-        IO.inspect(error)
-        error
+      _error ->
+        {:error, ["Invalid email or password"]}
     end
   end
 
