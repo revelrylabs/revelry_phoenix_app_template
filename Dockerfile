@@ -39,7 +39,7 @@ RUN mix compile
 COPY rel rel
 RUN mix release
 
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 RUN apt-get -qq update
 RUN apt-get -qq install -y locales locales-all
