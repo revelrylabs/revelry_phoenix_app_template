@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This handles submitting coverage reports to Coveralls or OpenCov. It prepares
+# and merges all reports for submission. This is to ensure that we have coverage
+# information for various languages used within the code repository.
+
+
+# Prepare JS Coverage Report
+#
+# This ensures that nyc, which builds our coverage reports, contains the correct
+# path relative to the root of the project, which this script is executed from.
+
+# - merge assets reports to root project folder
+npx nyc merge assets/.nyc_output .nyc_output/assets.json
+# - generate lcov report in root project fodler
+npx nyc report --reporter=lcov
+
+
+# Merge & Submit Coverage Reports to Coveralls or OpenCov
+coveralls-multi
