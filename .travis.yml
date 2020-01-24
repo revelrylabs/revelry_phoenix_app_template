@@ -37,7 +37,7 @@ jobs:
       script:
         - MIX_ENV=test mix coveralls.json
         - npm test --prefix assets
-        - coveralls-multi
+        - bin/ci-coverage
     - stage: 'Tests'
       name: 'Integration Tests'
       language: elixir
