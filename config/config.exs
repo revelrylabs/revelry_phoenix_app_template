@@ -53,6 +53,15 @@ config :app_template, :pow,
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   web_mailer_module: AppTemplateWeb
 
+config :app_template, ExOauth2Provider,
+  repo: AppTemplate.Repo,
+  resource_owner: AppTemplate.User
+
+config :app_template,
+       PhoenixOauth2Provider,
+       web_module: AppTemplateWeb,
+       current_resource_owner: :current_user
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config("#{Mix.env()}.exs")

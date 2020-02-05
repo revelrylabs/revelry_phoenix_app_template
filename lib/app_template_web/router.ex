@@ -5,6 +5,8 @@ defmodule AppTemplateWeb.Router do
   use Pow.Extension.Phoenix.Router,
     extensions: [PowResetPassword, PowEmailConfirmation]
 
+  use PhoenixOauth2Provider.Router, otp_app: :app_template
+
   use Plug.ErrorHandler
 
   alias AppTemplateWeb.{
@@ -64,6 +66,12 @@ defmodule AppTemplateWeb.Router do
     get "/styleguide", PageController, :styleguide
   end
 
+  scope "/" do
+    pipe_through [:browser, :protected]
+
+    oauth_routes()
+  end
+
   scope "/admin" do
     pipe_through [:browser, :protected, :require_admin]
 
@@ -89,5 +97,11 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:api]
 
     get "/", MeController, :show
+  end
+
+  scope "/api" do
+    pipe_through [:api]
+
+    oauth_api_routes()
   end
 end
