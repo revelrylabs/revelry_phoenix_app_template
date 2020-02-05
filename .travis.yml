@@ -42,9 +42,9 @@ jobs:
       name: 'Integration Tests'
       language: elixir
       elixir:
-        - 1.9
+        - 1.8
       otp_release:
-        - 22.0
+        - 21.0
       cache:
         directories:
           - _build
