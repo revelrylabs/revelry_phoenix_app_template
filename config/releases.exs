@@ -20,11 +20,6 @@ config :rollbax,
   # TODO: turn on when your app is deployed
   enabled: false
 
-config :app_template, :statix,
-  prefix: "app_template",
-  host: System.get_env("DATADOG_HOST") || "100.66.67.91",
-  port: String.to_integer(System.get_env("DATADOG_PORT") || "8125")
-
 config :app_template, AppTemplate.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
