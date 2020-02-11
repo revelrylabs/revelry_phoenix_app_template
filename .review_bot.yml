@@ -1,3 +1,4 @@
 namespace: app-template
 applicationPort: 5000
 envSecret: app-template-env-secret
+registrySecretName: harbor
