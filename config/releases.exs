@@ -32,7 +32,10 @@ config :app_template, AppTemplate.Mailer,
 config :app_template,
   jwt_secret: System.get_env("JWT_SECRET") || System.get_env("SECRET_KEY_BASE")
 
+# Configure Cluster Nodes
 app_name = System.get_env("APP_NAME") || "app-template"
+
+config :app_template, cluster_disabled: System.get_env("CLUSTER_DISABLED") == "1"
 
 config :app_template,
   cluster_topologies: [
