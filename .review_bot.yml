@@ -1,1 +1,2 @@
-baseApp: app-template
+namespace: app-template
+applicationPort: 5000
