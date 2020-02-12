@@ -1,8 +1,8 @@
 #!/bin/bash
 
 BUILD_PATH=$1
-DOCKER_REPO=$1
-DOCKER_HOST=$2
+DOCKER_REPO=$2
+DOCKER_HOST=$3
 
 HEAD_SHA=$(git rev-parse --short HEAD)
 
