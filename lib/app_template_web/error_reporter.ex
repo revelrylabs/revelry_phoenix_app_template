@@ -10,7 +10,8 @@ defmodule AppTemplateWeb.ErrorReporter do
     "new_password",
     "new_confirm_password",
     "password",
-    "confirm_password"
+    "confirm_password",
+    "password_confirmation"
   ]
   @ignore_error_routes [
     "/wp-login.php",

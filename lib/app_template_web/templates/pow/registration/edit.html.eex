@@ -30,7 +30,7 @@
             <%= password_input_stack f, :password, placeholder: gettext("New Password"), required: true, label: gettext("New Password *") %>
           <% end %>
           <%= col do %>
-            <%= password_input_stack f, :confirm_password, placeholder: gettext("Confirm New Password"), required: true, label: gettext("Confirm New Password *") %>
+            <%= password_input_stack f, :password_confirmation, placeholder: gettext("Confirm New Password"), required: true, label: gettext("Confirm New Password *") %>
           <% end %>
           <%= col do %>
             <%= submit gettext("Update"), class: button_class() %>

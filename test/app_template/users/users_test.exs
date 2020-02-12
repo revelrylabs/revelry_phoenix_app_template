@@ -7,7 +7,7 @@ defmodule AppTemplate.Users.Test do
       Users.create_user(%{
         "email" => "joe@example.com",
         "password" => "hihihihihi",
-        "confirm_password" => "hihihihihi"
+        "password_confirmation" => "hihihihihi"
       })
 
     assert user.email == "joe@example.com"
