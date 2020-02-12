@@ -91,6 +91,6 @@ jobs:
         - ./bin/rollbar_release succeeded
       deploy:
         provider: script
-        script: bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
+        script: bin/docker_pub . library/app-template harbor.revelry-prod.revelry.net
         on:
           branch: master
