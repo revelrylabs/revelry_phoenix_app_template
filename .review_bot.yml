@@ -4,4 +4,3 @@ envSecret: app-template-env-secret
 registrySecretName: harbor
 database:
   backend: kubedb
-  copyFrom: app-template-database-20200211-212231
