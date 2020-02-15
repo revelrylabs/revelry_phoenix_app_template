@@ -41,13 +41,13 @@ defmodule AppTemplate.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0-rc", override: true},
+      {:phoenix, "~> 1.4.0", override: true},
       {:phoenix_pubsub, "~> 1.0"},
-      {:ecto_sql, "~> 3.0-rc"},
+      {:ecto_sql, "~> 3.3"},
       {:phoenix_ecto, "~> 4.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
-      {:phoenix_live_reload, "~> 1.2.0-rc.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.2.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
