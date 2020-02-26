@@ -1,4 +1,4 @@
-defmodule Mold.Organization.Role do
+defmodule AppTemplate.Role do
   @moduledoc """
   A struct representating a role in the system.
 
