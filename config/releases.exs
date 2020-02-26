@@ -30,7 +30,7 @@ config :app_template,
 # Configure Cluster Nodes
 app_name = System.get_env("APP_NAME") || "app-template"
 
-config :app_template, cluster_disabled: System.get_env("CLUSTER_DISABLED") == "1"
+config :app_template, cluster_enabled: System.get_env("CLUSTER_ENABLED") == "1"
 
 config :app_template,
   cluster_topologies: [
