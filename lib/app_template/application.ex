@@ -33,10 +33,10 @@ defmodule AppTemplate.Application do
   end
 
   defp cluster_topologies do
-    disabled = Application.get_env(:app_template, :cluster_disabled)
+    enabled = Application.get_env(:app_template, :cluster_enabled)
     topologies = Application.get_env(:app_template, :cluster_topologies)
 
-    if disabled, do: [], else: topologies
+    if enabled, do: topologies, else: []
   end
 
   defp setup do

@@ -2,10 +2,10 @@ import Config
 # NOTE: Runtime production configuration goes here
 
 config :app_template, AppTemplate.Repo,
-  database: "postgres",
+  database: System.get_env("POSTGRES_DATABASE") || "postgres",
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
-  hostname: "app-template-database",
+  hostname: System.get_env("POSTGRES_HOSTNAME") || "app-template-database",
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 config :app_template, AppTemplateWeb.Endpoint,
@@ -30,7 +30,7 @@ config :app_template,
 # Configure Cluster Nodes
 app_name = System.get_env("APP_NAME") || "app-template"
 
-config :app_template, cluster_disabled: System.get_env("CLUSTER_DISABLED") == "1"
+config :app_template, cluster_enabled: System.get_env("CLUSTER_ENABLED") == "1"
 
 config :app_template,
   cluster_topologies: [
