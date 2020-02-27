@@ -11,6 +11,6 @@ defmodule Mix.Tasks.AppTemplate.GrantAdmin.Test do
              GrantAdmin.run([user.email])
            end) =~ "is now an admin"
 
-    assert Users.get_user(user.id).admin
+    assert Users.get_user(user.id).role == "admin"
   end
 end
