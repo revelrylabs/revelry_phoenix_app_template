@@ -11,6 +11,6 @@ defmodule Mix.Tasks.AppTemplate.RevokeAdmin.Test do
              RevokeAdmin.run([user.email])
            end) =~ "admin access revoked"
 
-    assert Users.get_user(user.id).role == "member"
+    assert Users.get_user(user.id).role == "user"
   end
 end

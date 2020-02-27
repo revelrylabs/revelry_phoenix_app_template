@@ -27,7 +27,7 @@ defmodule AppTemplate.Users do
   end
 
   def revoke_user_admin_permissions(user) do
-    update_admin_permissions(user, "member")
+    update_admin_permissions(user, "user")
   end
 
   defp update_admin_permissions(user, role) do

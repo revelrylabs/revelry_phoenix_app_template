@@ -11,7 +11,7 @@ defmodule AppTemplate.User do
   @type t :: %__MODULE__{}
   schema "users" do
     pow_user_fields()
-    field(:role, :string, default: "member")
+    field(:role, :string, default: "user")
     field(:email_verified, :boolean, default: false)
     timestamps()
   end
