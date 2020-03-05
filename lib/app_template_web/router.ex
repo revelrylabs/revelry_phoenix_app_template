@@ -36,6 +36,9 @@ defmodule AppTemplateWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :api_proctected do
     plug APIAuthentication, otp_app: :app_template
   end
 
@@ -93,15 +96,15 @@ defmodule AppTemplateWeb.Router do
     )
   end
 
-  scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:api]
-
-    get "/", MeController, :show
-  end
-
   scope "/api" do
     pipe_through [:api]
 
     oauth_api_routes()
+  end
+
+  scope "/api", AppTemplateWeb.API, as: :api do
+    pipe_through [:api, :api_proctected]
+
+    get "/", MeController, :show
   end
 end
