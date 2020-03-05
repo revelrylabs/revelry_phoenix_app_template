@@ -4,3 +4,16 @@ envSecret: app-template-env-secret
 registrySecretName: harbor
 database:
   backend: kubedb
+  copyFrom:
+    user:
+      secretRef:
+        name: app-template-database-auth
+        key: POSTGRES_USER
+    database:
+      value: postgres
+    host:
+      value: app-template-database
+    password:
+      secretRef:
+        name: app-template-database-auth
+        key: POSTGRES_PASSWORD
