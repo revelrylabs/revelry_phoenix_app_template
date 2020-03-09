@@ -5,7 +5,7 @@ defmodule AppTemplate.Users do
 
   import Ecto.{Query}, warn: false
   alias Ecto.Changeset
-  alias AppTemplate.{Repo, User, APIKey}
+  alias AppTemplate.{Repo, User, APIKey, Role}
 
   def create_user(params) do
     %User{}
@@ -23,15 +23,15 @@ defmodule AppTemplate.Users do
   end
 
   def grant_user_admin_permissions(user) do
-    update_admin_permissions(user, true)
+    update_admin_permissions(user, "admin")
   end
 
   def revoke_user_admin_permissions(user) do
-    update_admin_permissions(user, false)
+    update_admin_permissions(user, "user")
   end
 
-  defp update_admin_permissions(user, admin?) do
-    user_changeset = Changeset.change(user, admin: admin?)
+  defp update_admin_permissions(user, role) do
+    user_changeset = Changeset.change(user, role: role)
     Repo.update(user_changeset)
   end
 
@@ -64,5 +64,10 @@ defmodule AppTemplate.Users do
     APIKey
     |> Repo.get(api_key_id)
     |> Repo.delete()
+  end
+
+  def user_has_permission?(user = %User{}, permission) do
+    permission = if is_bitstring(permission), do: String.to_atom(permission), else: permission
+    Role.has_permission?(user.role, permission)
   end
 end

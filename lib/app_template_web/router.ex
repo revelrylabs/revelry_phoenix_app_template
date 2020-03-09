@@ -13,7 +13,7 @@ defmodule AppTemplateWeb.Router do
     APIAuthentication,
     AppDomainRedirect,
     BrowserAuthentication,
-    RequireAdmin
+    RequirePermission
   }
 
   defp handle_errors(conn, error_data) do
@@ -43,7 +43,7 @@ defmodule AppTemplateWeb.Router do
   end
 
   pipeline :require_admin do
-    plug RequireAdmin
+    plug RequirePermission, permission: :administrator
   end
 
   pipeline :protected do

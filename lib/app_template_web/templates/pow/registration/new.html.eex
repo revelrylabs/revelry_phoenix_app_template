@@ -21,7 +21,7 @@
       <%= password_input_stack f, :password, placeholder: gettext("Password"), required: true, label: gettext("Password *") %>
     <% end %>
     <%= col do %>
-      <%= password_input_stack f, :confirm_password, placeholder: gettext("Confirm Password"), required: true, label: gettext("Confirm Password *") %>
+      <%= password_input_stack f, :password_confirmation, placeholder: gettext("Confirm Password"), required: true, label: gettext("Confirm Password *") %>
     <% end %>
     <%= col do %>
       <%= submit gettext("Register"), class: button_class() %>
