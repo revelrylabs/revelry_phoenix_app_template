@@ -2,9 +2,6 @@ defmodule AppTemplate.OAuthPasswordGrant do
   alias AppTemplate.{User, Repo}
 
   def authenticate(username, password) do
-    IO.inspect(username)
-    IO.inspect(password)
-
     User
     |> Repo.get_by(email: String.downcase(username))
     |> verify_password(password)
