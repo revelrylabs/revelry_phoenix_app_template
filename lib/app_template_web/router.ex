@@ -10,7 +10,6 @@ defmodule AppTemplateWeb.Router do
   use Plug.ErrorHandler
 
   alias AppTemplateWeb.{
-    APIAuthentication,
     AppDomainRedirect,
     BrowserAuthentication,
     RequirePermission
@@ -38,8 +37,13 @@ defmodule AppTemplateWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_ensure_authenticated do
+    plug ExOauth2Provider.Plug.EnsureAuthenticated
+  end
+
   pipeline :api_proctected do
-    plug APIAuthentication, otp_app: :app_template
+    plug ExOauth2Provider.Plug.EnsureScopes,
+      scopes: ~w(read write)
   end
 
   pipeline :require_admin do
@@ -103,8 +107,12 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:api, :api_proctected]
+    pipe_through [:api, :api_ensure_authenticated]
+  end
 
-    get "/", MeController, :show
+  scope "/api", AppTemplateWeb.API, as: :api do
+    pipe_through [:api, :api_ensure_authenticated, :api_proctected]
+
+    get "/user", MeController, :show
   end
 end
