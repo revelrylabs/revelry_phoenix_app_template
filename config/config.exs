@@ -57,7 +57,9 @@ config :app_template, ExOauth2Provider,
   repo: AppTemplate.Repo,
   resource_owner: AppTemplate.User,
   password_auth: {AppTemplate.OAuthPasswordGrant, :authenticate},
-  use_refresh_token: true
+  use_refresh_token: true,
+  default_scopes: ~w(public),
+  optional_scopes: ~w(read write)
 
 config :app_template,
        PhoenixOauth2Provider,

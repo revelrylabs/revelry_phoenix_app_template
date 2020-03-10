@@ -111,7 +111,7 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:api, :api_ensure_authenticated, :api_proctected]
+    pipe_through [:api, :api_ensure_authenticated]
 
     get "/user", MeController, :show
   end
