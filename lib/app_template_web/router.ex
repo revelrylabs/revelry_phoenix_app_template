@@ -12,7 +12,8 @@ defmodule AppTemplateWeb.Router do
   alias AppTemplateWeb.{
     AppDomainRedirect,
     BrowserAuthentication,
-    RequirePermission
+    RequirePermission,
+    LoadUserFromToken
   }
 
   defp handle_errors(conn, error_data) do
@@ -41,9 +42,15 @@ defmodule AppTemplateWeb.Router do
     plug ExOauth2Provider.Plug.EnsureAuthenticated
   end
 
-  pipeline :api_proctected do
+  pipeline :api_ensure_scopes do
     plug ExOauth2Provider.Plug.EnsureScopes,
       scopes: ~w(read write)
+
+    plug LoadUserFromToken
+  end
+
+  pipeline :api_load_user_from_token do
+    plug LoadUserFromToken
   end
 
   pipeline :require_admin do
@@ -111,8 +118,8 @@ defmodule AppTemplateWeb.Router do
   end
 
   scope "/api", AppTemplateWeb.API, as: :api do
-    pipe_through [:api, :api_ensure_authenticated]
+    pipe_through [:api, :api_ensure_authenticated, :api_ensure_scopes, :api_load_user_from_token]
 
-    get "/user", MeController, :show
+    get "/me", MeController, :show
   end
 end

@@ -76,7 +76,7 @@ defmodule AppTemplate.Mixfile do
       {:prometheus_process_collector, "~> 1.4"},
       {:libcluster, "~> 3.0"},
       {:pow, "~> 1.0"},
-      {:phoenix_oauth2_provider, "~> 0.5.1"}
+      {:phoenix_oauth2_provider, "~> 0.5.1", path: "deps/phoenix_oauth2_provider"}
     ]
   end
 
