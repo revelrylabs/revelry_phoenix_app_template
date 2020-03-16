@@ -53,7 +53,7 @@ defmodule AppTemplate.Mixfile do
       {:plug, "~> 1.7"},
       {:credo, "~> 1.0", only: :dev},
       {:excoveralls, "~> 0.7", only: :test},
-      {:comeonin, "~> 5.2"},
+      {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:harmonium, "~> 2.1.0", override: true},
       {:jason, "~> 1.0"},
