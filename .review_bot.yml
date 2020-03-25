@@ -21,5 +21,4 @@ database:
         name: app-template-database-auth
         key: POSTGRES_PASSWORD
 ignoreBranches:
-  - /dependabot.*/
-  - ignore-me-2
+  - /ignore.*/
