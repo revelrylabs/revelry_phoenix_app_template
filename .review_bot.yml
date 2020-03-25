@@ -1,1 +1,25 @@
-baseApp: app-template
+namespace: app-template
+applicationPort: 5000
+envSecret: app-template-env-secret
+registrySecretName: harbor
+migrate:
+  command: ["./bin/app_template"]
+  args: ["eval", "AppTemplate.ReleaseTasks.migrate()"]
+database:
+  backend: kubedb
+  copyFrom:
+    user:
+      secretRef:
+        name: app-template-database-auth
+        key: POSTGRES_USER
+    database:
+      value: postgres
+    host:
+      value: app-template-database
+    password:
+      secretRef:
+        name: app-template-database-auth
+        key: POSTGRES_PASSWORD
+ignoreBranches:
+  - /dependabot.*/
+  - ignore-me
