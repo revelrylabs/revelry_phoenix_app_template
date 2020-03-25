@@ -1,5 +1,5 @@
 |            | Build Status                                                                                                                                                                                   |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Production | [![Build Status](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template.svg?token=eDnMwv6sT4GHB9E2RzXt&branch=master)](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template) |
 
 # Phoenix App Template
@@ -29,3 +29,5 @@ Note that Elixir 1.5 or greater is required in order to start it.
 Once run, follow directions and start app by running `sh ./bin/server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+hi mom

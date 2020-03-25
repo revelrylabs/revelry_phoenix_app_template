@@ -22,4 +22,4 @@ database:
         key: POSTGRES_PASSWORD
 ignoreBranches:
   - /dependabot.*/
-  - ignore-me
+  - ignore-me-2
