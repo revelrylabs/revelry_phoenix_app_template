@@ -10,13 +10,15 @@ defmodule AppTemplate.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the PubSub system
+      {Phoenix.PubSub, name: AppTemplate.PubSub},
       # Start the Ecto repository
       supervisor(AppTemplate.Repo, []),
       # Start the endpoint when the application starts
       supervisor(AppTemplateWeb.Endpoint, []),
       # Start your own worker by calling: AppTemplate.Worker.start_link(arg1, arg2, arg3)
       # worker(AppTemplate.Worker, [arg1, arg2, arg3]),
-      {Cluster.Supervisor, [cluster_topologies(), [name: AppTemplate.ClusterSupervisor]]},
+      {Cluster.Supervisor, [cluster_topologies(), [name: AppTemplate.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -40,7 +42,6 @@ defmodule AppTemplate.Application do
   end
 
   defp setup do
-    AppTemplateWeb.Phoenix.Instrumenter.setup()
     AppTemplateWeb.PipelineInstrumenter.setup()
     AppTemplateWeb.Repo.Instrumenter.setup()
     Prometheus.Registry.register_collector(:prometheus_process_collector)

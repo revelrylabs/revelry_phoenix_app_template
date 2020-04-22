@@ -17,8 +17,10 @@ config :app_template, AppTemplateWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "ot1FLrZNFgZtCRO1Qm3mPuleg4WZoEZURicyDhj4/Y/++uGBPQBz390gYH3L3Oda",
   render_errors: [view: AppTemplateWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: AppTemplate.PubSub, adapter: Phoenix.PubSub.PG2],
-  instrumenters: [AppTemplateWeb.Phoenix.Instrumenter]
+  pubsub_server: AppTemplate.PubSub,
+  live_view: [
+    signing_salt: "SECRET_SALT"
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

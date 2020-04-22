@@ -2,6 +2,7 @@ import 'phoenix_html'
 import {DateTime} from 'luxon'
 import feather from 'feather-icons'
 import Harmonium from './harmonium'
+import LiveSocket from 'phoenix_live_view'
 
 /**
  * Updates <time> tags with a datetime attribute in ISO 8601 format to
@@ -24,10 +25,28 @@ function updateTimeTags() {
   }
 }
 
+function setupLiveView() {
+  let csrfToken = document
+    .querySelector("meta[name='csrf-token']")
+    .getAttribute('content')
+  let liveSocket = new LiveSocket('/live', Socket, {
+    params: {_csrf_token: csrfToken},
+  })
+
+  // connect if there are any LiveViews on the page
+  liveSocket.connect()
+
+  // expose liveSocket on window for web console debug logs and latency simulation:
+  // >> liveSocket.enableDebug()
+  // >> liveSocket.enableLatencySim(1000)
+  window.liveSocket = liveSocket
+}
+
 function init(_config) {
   updateTimeTags()
   feather.replace()
   Harmonium.setup()
+  setupLiveView()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -41,22 +41,22 @@ defmodule AppTemplate.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0", override: true},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:ecto_sql, "~> 3.3"},
+      {:phoenix, "~> 1.5.0", override: true},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:ecto_sql, "~> 3.4"},
       {:phoenix_ecto, "~> 4.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.2.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 2.0"},
-      {:plug, "~> 1.7"},
+      {:plug_cowboy, "~> 2.1"},
+      {:plug, "~> 1.0"},
       {:credo, "~> 1.0", only: :dev},
       {:excoveralls, "~> 0.7", only: :test},
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:harmonium, "~> 2.1.0", override: true},
-      {:jason, "~> 1.0"},
+      {:jason, "~> 1.2", override: true},
       {:rollbax, "~> 0.9"},
       {:bamboo, "~> 1.4.0"},
       {:ex_aws, "~> 2.1"},
@@ -75,7 +75,10 @@ defmodule AppTemplate.Mixfile do
       {:prometheus_plugs, "~> 1.1"},
       {:prometheus_process_collector, "~> 1.4"},
       {:libcluster, "~> 3.0"},
-      {:pow, "~> 1.0"}
+      {:pow, "~> 1.0"},
+      {:phoenix_live_view, "~> 0.12.0"},
+      {:floki, ">= 0.0.0", only: :test},
+      {:phoenix_live_dashboard, "~> 0.1"}
     ]
   end
 

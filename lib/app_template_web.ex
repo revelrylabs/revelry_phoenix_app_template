@@ -23,6 +23,7 @@ defmodule AppTemplateWeb do
       import Plug.Conn
       alias AppTemplateWeb.Router.Helpers, as: Routes
       import AppTemplateWeb.Gettext
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -42,6 +43,7 @@ defmodule AppTemplateWeb do
       import AppTemplateWeb.ErrorHelpers
       import AppTemplateWeb.Gettext
       import Harmonium
+      import Phoenix.LiveView.Helpers
     end
   end
 
@@ -50,6 +52,7 @@ defmodule AppTemplateWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
