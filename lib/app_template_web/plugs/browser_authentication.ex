@@ -26,8 +26,13 @@ defmodule AppTemplateWeb.BrowserAuthentication do
   end
 
   @impl true
-  def delete(conn, _config) do
-    configure_session(conn, drop: true)
+  def delete(conn, config) do
+    # Don't destroy the whole session, which includes flash. Just remove the
+    # current user.
+    conn
+    |> Pow.Plug.assign_current_user(nil, config)
+    |> assign(:user_id, nil)
+    |> put_session(:user_id, nil)
   end
 
   defp browser_auth(conn) do
