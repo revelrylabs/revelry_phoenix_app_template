@@ -40,28 +40,7 @@
           </div>
         </nav>
       </div>
-
-      <%= unless is_nil(get_flash(@conn, :info)) do %>
-        <div class="Flash Flash--success">
-          <span><%= get_flash(@conn, :info) %></span>
-          <%= link to: "#", class: "rev-Close" do %>
-            <i data-feather="x"></i>
-          <% end %>
-        </div>
-      <% end %>
-      <%= unless is_nil(get_flash(@conn, :error)) do %>
-        <div class="Flash Flash--alert">
-          <span><%= get_flash(@conn, :error) %></span>
-          <%= link to: "#", class: "rev-Close" do %>
-            <i data-feather="x"></i>
-          <% end %>
-        </div>
-      <% end %>
-
-      <main role="main">
-        <%= @inner_content %>
-      </main>
-
+      <%= @inner_content %>
     </div> <!-- /container -->
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
