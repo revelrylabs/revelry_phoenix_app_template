@@ -1,6 +1,7 @@
 defmodule AppTemplateWeb.Router do
   use AppTemplateWeb, :router
   use Pow.Phoenix.Router
+  import Phoenix.LiveDashboard.Router
 
   use Pow.Extension.Phoenix.Router,
     extensions: [PowResetPassword, PowEmailConfirmation]
@@ -25,7 +26,7 @@ defmodule AppTemplateWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug AppDomainRedirect
@@ -62,6 +63,13 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
+  end
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through :browser
+      live_dashboard "/dashboard"
+    end
   end
 
   scope "/admin" do
