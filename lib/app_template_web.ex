@@ -48,7 +48,6 @@ defmodule AppTemplateWeb do
     end
   end
 
-
   def live_view do
     quote do
       use Phoenix.LiveView,
