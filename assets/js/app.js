@@ -3,6 +3,7 @@ import {DateTime} from 'luxon'
 import feather from 'feather-icons'
 import Harmonium from './harmonium'
 import LiveSocket from 'phoenix_live_view'
+import {Socket} from 'phoenix'
 
 /**
  * Updates <time> tags with a datetime attribute in ISO 8601 format to

@@ -1,0 +1,16 @@
+<%= unless is_nil(live_flash(@flash, :info)) do %>
+  <div class="Flash Flash--success">
+    <span><%= live_flash(@flash, :info) %></span>
+    <i data-feather="x" phx-click="lv:clear-flash" phx-value-key="info"></i>
+  </div>
+<% end %>
+<%= unless is_nil(live_flash(@flash, :error)) do %>
+  <div class="Flash Flash--alert">
+    <span><%= live_flash(@flash, :error) %></span>
+    <i data-feather="x" phx-click="lv:clear-flash" phx-value-key="error"></i>
+  </div>
+<% end %>
+
+<main role="main">
+  <%= @inner_content %>
+</main>

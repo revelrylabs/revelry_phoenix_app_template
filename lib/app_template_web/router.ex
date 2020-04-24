@@ -29,6 +29,7 @@ defmodule AppTemplateWeb.Router do
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_root_layout, {AppTemplateWeb.LayoutView, :root}
     plug AppDomainRedirect
     plug BrowserAuthentication, otp_app: :app_template
   end

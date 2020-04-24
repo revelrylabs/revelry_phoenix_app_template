@@ -34,7 +34,7 @@ defmodule AppTemplateWeb do
         namespace: AppTemplateWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -44,6 +44,42 @@ defmodule AppTemplateWeb do
       import AppTemplateWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
+      import AppTemplateWeb.LiveHelpers
+    end
+  end
+
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {AppTemplateWeb.LayoutView, "live.html"}
+
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+      import Phoenix.View
+
+      alias AppTemplateWeb.Router.Helpers, as: Routes
+      import AppTemplateWeb.ErrorHelpers
+      import AppTemplateWeb.Gettext
+      import Harmonium
+      import Phoenix.LiveView.Helpers
+      import AppTemplateWeb.LiveHelpers
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+      import Phoenix.View
+
+      alias AppTemplateWeb.Router.Helpers, as: Routes
+      import AppTemplateWeb.ErrorHelpers
+      import AppTemplateWeb.Gettext
+      import Harmonium
+      import Phoenix.LiveView.Helpers
+      import AppTemplateWeb.LiveHelpers
     end
   end
 
