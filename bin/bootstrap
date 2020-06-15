@@ -8,6 +8,7 @@ if which asdf >/dev/null; then
     asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
     asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
     asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+    asdf plugin-add kubectl https://github.com/Banno/asdf-kubectl.git
     asdf plugin update --all
     asdf install
 else
