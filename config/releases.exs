@@ -17,6 +17,8 @@ config :rollbax,
   client_token: System.get_env("ROLLBAR_CLIENT_TOKEN"),
   access_token: System.get_env("ROLLBAR_SERVER_TOKEN"),
   environment: System.get_env("ROLLBAR_ENVIRONMENT"),
+  enable_crash_reports: true,
+  reporters: [AppTemplate.RollbaxReporter],
   # TODO: turn on when your app is deployed
   enabled: false
 
