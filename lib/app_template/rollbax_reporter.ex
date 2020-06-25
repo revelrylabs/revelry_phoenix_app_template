@@ -3,17 +3,9 @@ defmodule AppTemplate.RollbaxReporter do
   A `Rollbax.Reporter` that translates crashes and exits from processes to nicely-formatted
   Rollbar exceptions.
   """
+  alias AppTemplate.Scrubber
 
   @behaviour Rollbax.Reporter
-
-  @filter_atoms [
-    :client_token,
-    :access_token,
-    :device_token,
-    :password
-  ]
-
-  @filter_strings Enum.map(@filter_atoms, &Atom.to_string/1)
 
   def handle_event(:error, {_pid, format, data}) do
     handle_error_format(format, data)
@@ -107,25 +99,7 @@ defmodule AppTemplate.RollbaxReporter do
     :next
   end
 
-  defp scrub(data) when is_tuple(data) do
-    case data do
-      {k, _v} when k in @filter_strings or k in @filter_atoms ->
-        {k, "[FILTERED]"}
-
-      {k, v} when is_map(v) or is_list(v) ->
-        {k, scrub(v)}
-
-      _ ->
-        data |> Tuple.to_list() |> scrub() |> List.to_tuple()
-    end
-  end
-
-  defp scrub(%{__struct__: _} = data), do: data |> Map.from_struct() |> scrub()
-  defp scrub(data) when is_list(data), do: Enum.map(data, &scrub/1)
-  defp scrub(data) when is_map(data), do: Enum.map(data, &scrub/1)
-  defp scrub(other), do: other
-
-  defp scrub_and_inspect(data), do: data |> scrub() |> inspect()
+  defp scrub_and_inspect(data), do: data |> Scrubber.scrub() |> inspect()
 
   defp handle_gen_fsm_error([name, last_event, state, data, reason]) do
     {class, message, stacktrace} = format_as_exception(reason, "State machine terminating")
