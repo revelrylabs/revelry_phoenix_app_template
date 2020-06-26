@@ -29,15 +29,4 @@ defmodule AppTemplateWeb.ErrorReporter.Test do
              stack: []
            }) == :ok
   end
-
-  test "sanitize sensitive data" do
-    params = %{"password" => "password", "user" => %{"new_password" => "new_password"}}
-
-    assert ErrorReporter.sanitize(params) == %{
-      "password" => "[FILTERED]",
-      "user" => %{
-        "new_password" => "[FILTERED]"
-      }
-    }
-  end
 end
