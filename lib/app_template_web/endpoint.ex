@@ -16,7 +16,7 @@ defmodule AppTemplateWeb.Endpoint do
     websocket: [connect_info: [session: @session_options]]
 
   # Heartbeat/Health Endpoint
-  plug PlugHeartBeat, path: "/healthz"
+  plug PlugHeartbeat, path: "/healthz"
 
   # Serve at "/" the static files from "priv/static" directory.
   #
