@@ -37,7 +37,7 @@
     "csswring": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.20.3",
-    "exports-loader": "^0.7.0",
+    "exports-loader": "^1.1.0",
     "image-webpack-loader": "^6.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "imports-loader": "^0.8.0",
