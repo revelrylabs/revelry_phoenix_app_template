@@ -17,7 +17,7 @@ env:
 
 addons:
   chrome: stable
-  postgresql: '12'
+  postgresql: '11'
 
 cache:
   directories:
