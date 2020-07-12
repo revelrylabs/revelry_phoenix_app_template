@@ -14,6 +14,8 @@ services:
     command: sleep infinity
     ports:
       - 4000:4000
+    environment:
+      POSTGRES_HOSTNAME: db
     links:
       - db
 
