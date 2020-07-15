@@ -1,5 +1,5 @@
 # Set the Docker image you want to base your image off.
-FROM elixir:1.10.2 as builder
+FROM elixir:1.10.4 as builder
 
 ENV MIX_ENV="prod" \
   PORT="5000"
