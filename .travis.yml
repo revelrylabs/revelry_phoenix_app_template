@@ -1,64 +1,57 @@
-sudo: required
-git:
-  depth: false
+dist: xenial
+sudo: false
+language: elixir
+
+elixir:
+  - 1.10.4
+
+otp_release:
+  - 22.1.5
+
 services:
   - docker
+
 env:
   global:
     - DOCKER_USERNAME=travis
+
+addons:
+  chrome: stable
+  postgresql: '10'
+
+cache:
+  directories:
+    - _build
+    - deps
+    - assets/node_modules
+
+install:
+  - psql -c 'create database app_template_test;' -U postgres
+  - nvm install 12.4.0 && nvm use 12.4.0
+
+before_script:
+  - mix local.hex --force
+  - mix local.rebar --force
+  - mix deps.get
+  - npm install --prefix assets
+
 jobs:
   include:
     - stage: 'Tests' # naming the Tests stage
       name: 'Unit Tests' # names the first Tests stage job
-      language: elixir
-      elixir:
-        - 1.9
-      otp_release:
-        - 22.0
-      cache:
-        directories:
-          - _build
-          - deps
-          - assets/node_modules
-      addons:
-        chrome: stable
-        postgresql: '9.6'
       services:
         - postgresql
-      before_script:
-        - psql -c 'create database app_template_test;' -U postgres
-      install:
+      before_install:
         - gem install coveralls-multi
-        - mix local.hex --force
-        - mix local.rebar --force
-        - mix deps.get
-        - nvm install 12.4.0 && nvm use 12.4.0
-        - npm install --prefix assets
       script:
         - MIX_ENV=test mix coveralls.json
         - npm test --prefix assets
         - bin/ci-coverage
     - stage: 'Tests'
       name: 'Integration Tests'
-      language: elixir
-      elixir:
-        - 1.8
-      otp_release:
-        - 21.0
-      cache:
-        directories:
-          - _build
-          - deps
-          - assets/node_modules
-      addons:
-        chrome: stable
-        postgresql: '9.6'
-      dist: xenial
       services:
         - postgresql
         - xvfb
-      before_script:
-        - psql -c 'create database app_template_test;' -U postgres
       before_install:
         - CHROME_VERSION=`google-chrome --version | grep -oP " ([0-9]{1,3})" | cut -d" " -f2`
         - DRIVER_VERSION=`wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}`
@@ -73,11 +66,6 @@ jobs:
         - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
         - nohup java -Dselenium.LOGGER.level=WARNING -jar selenium-server-standalone-2.48.2.jar > /dev/null 2>&1 &
         - chromedriver > /dev/null 2>&1 &
-      install:
-        - mix local.hex --force
-        - mix local.rebar --force
-        - mix deps.get
-        - npm install --prefix assets
       script:
         - mix integration_tests
     - stage: docker deploy

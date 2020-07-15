@@ -39,12 +39,14 @@ module.exports = {
   },
   plugins: [
     // Copy all of our assets to the priv/static folder
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'static'),
-        to: path.resolve(__dirname, '..', 'priv', 'static'),
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'static'),
+          to: path.resolve(__dirname, '..', 'priv', 'static'),
+        },
+      ],
+    }),
     new ImageminPlugin({
       disable: devMode,
       test: /\.(jpe?g|png|gif|svg)$/i,
