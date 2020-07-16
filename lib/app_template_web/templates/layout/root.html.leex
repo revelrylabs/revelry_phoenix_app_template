@@ -8,8 +8,9 @@
     <meta name="author" content="">
     <%= csrf_meta_tag() %>
 
-    <title><%= gettext("Hello app_template!") %></title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+    <%= live_title_tag assigns[:page_title] || gettext("Hello app_template!") %>
+
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" phx-track-static>
   </head>
 
   <body>
@@ -42,6 +43,6 @@
       </div>
       <%= @inner_content %>
     </div> <!-- /container -->
-    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>" phx-track-static></script>
   </body>
 </html>
