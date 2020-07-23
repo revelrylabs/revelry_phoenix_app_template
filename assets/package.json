@@ -15,7 +15,7 @@
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "regenerator-runtime": "^0.13.5",
+    "regenerator-runtime": "^0.13.7",
     "transmit": "file:../deps/transmit"
   },
   "devDependencies": {
