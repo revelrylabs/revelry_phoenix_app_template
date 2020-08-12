@@ -5,7 +5,7 @@ ENV MIX_ENV="prod" \
   PORT="5000"
 
 # Add nodejs
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # Install other stable dependencies that don't change often
 RUN apt-get update && \
