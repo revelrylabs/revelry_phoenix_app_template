@@ -25,14 +25,17 @@ defmodule AppTemplate.Scrubber do
     iex> scrub(password: "password")
     [password: "[FILTERED]"]
 
-    iex> scrub(%{thing: %{in: %{thing: %{password: "asdf"}}}})
-    [thing: [in: [thing: [password: "[FILTERED]"]]]]
+    iex> scrub(%{"thing" => %{"with" => "strings", "creds" => %{"password" =>  "filterme"}}})
+    %{"thing" => %{"with" => "strings", "creds" => %{"password" => "[FILTERED]"}}}
 
-    iex> scrub(keyword_list: [%{inside_a_list_of_maps: [password: "bad"]}])
-    [keyword_list: [[inside_a_list_of_maps: [password: "[FILTERED]"]]]]
+    iex> scrub(%{thing: %{in: %{thing: %{password: "asdf"}}}})
+    %{thing: %{in: %{thing: %{password: "[FILTERED]"}}}}
+
+    iex> scrub(keyword_list: [%{inside_a_list_of_maps: %{password: "bad"}}])
+    [keyword_list: [%{inside_a_list_of_maps: %{password: "[FILTERED]"}}]]
 
     iex> scrub({[%{password: "test"}]})
-    {[[password: "[FILTERED]"]]}
+    {[%{password: "[FILTERED]"}]}
   """
   def scrub(data) when is_tuple(data) do
     case data do
@@ -49,6 +52,6 @@ defmodule AppTemplate.Scrubber do
 
   def scrub(%{__struct__: _} = data), do: data |> Map.from_struct() |> scrub()
   def scrub(data) when is_list(data), do: Enum.map(data, &scrub/1)
-  def scrub(data) when is_map(data), do: Enum.map(data, &scrub/1)
+  def scrub(data) when is_map(data), do: Enum.into(data, %{}, &scrub/1)
   def scrub(other), do: other
 end
