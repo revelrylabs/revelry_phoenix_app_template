@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "installing mix dependencies..."
+mix local.hex --force
+mix local.rebar --force
+mix deps.get
+
+echo "installing nodejs dependencies..."
+npm install --prefix assets

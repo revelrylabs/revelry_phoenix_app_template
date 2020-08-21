@@ -1,0 +1,13 @@
+{
+	"name": "app-template",
+	"workspaceFolder": "/workspace",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "web",
+	"appPort": 4000,
+	"postCreateCommand": "bash bin/setup-devcontainer",
+	"shutdownAction": "stopCompose",
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"jakebecker.elixir-ls"
+	]
+}

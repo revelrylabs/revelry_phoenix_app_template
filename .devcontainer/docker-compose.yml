@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ../:/workspace:cached
+      - node-modules:/workspace/assets/node_modules
+      - elixir-build:/workspace/_build
+      - elixir-deps:/workspace/deps
+      - elixir-ls:/workspace/.elixir_ls
+    command: sleep infinity
+    ports:
+      - 4000:4000
+    environment:
+      POSTGRES_HOSTNAME: db
+    links:
+      - db
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+  node-modules:
+  elixir-build:
+  elixir-deps:
+  elixir-ls:

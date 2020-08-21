@@ -46,7 +46,7 @@ config :app_template, AppTemplate.Repo,
   username: "postgres",
   password: "postgres",
   database: "app_template_dev",
-  hostname: "localhost",
+  hostname: System.get_env("POSTGRES_HOSTNAME") || "localhost",
   port: String.to_integer(System.get_env("PGPORT") || "5432"),
   pool_size: 10,
   types: AppTemplate.PostgresTypes
