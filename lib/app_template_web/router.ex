@@ -84,16 +84,6 @@ defmodule AppTemplateWeb.Router do
     )
   end
 
-  scope "/images" do
-    pipe_through([:browser, :protected])
-
-    forward("/sign", Transmit,
-      signer: Transmit.S3Signer,
-      bucket: "app-template",
-      path: "uploads"
-    )
-  end
-
   scope "/api", AppTemplateWeb.API, as: :api do
     pipe_through [:api]
 
