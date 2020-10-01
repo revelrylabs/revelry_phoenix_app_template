@@ -17,7 +17,7 @@ env:
 
 addons:
   chrome: stable
-  postgresql: '10'
+  postgresql: "10"
 
 cache:
   directories:
@@ -37,8 +37,8 @@ before_script:
 
 jobs:
   include:
-    - stage: 'Tests' # naming the Tests stage
-      name: 'Unit Tests' # names the first Tests stage job
+    - stage: "Tests" # naming the Tests stage
+      name: "Unit Tests" # names the first Tests stage job
       services:
         - postgresql
       before_install:
@@ -47,8 +47,8 @@ jobs:
         - MIX_ENV=test mix coveralls.json
         - npm test --prefix assets
         - bin/ci-coverage
-    - stage: 'Tests'
-      name: 'Integration Tests'
+    - stage: "Tests"
+      name: "Integration Tests"
       services:
         - postgresql
         - xvfb
@@ -69,8 +69,8 @@ jobs:
       script:
         - mix integration_tests
     - stage: docker deploy
-      name: 'Deploy'
-      if: branch = master
+      name: "Deploy"
+      if: branch = main
       script: skip
       before_deploy:
         - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net -u $DOCKER_USERNAME --password-stdin
@@ -81,4 +81,4 @@ jobs:
         provider: script
         script: bin/docker_pub . library/app-template harbor.revelry-prod.revelry.net
         on:
-          branch: master
+          branch: main
