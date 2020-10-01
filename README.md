@@ -1,6 +1,6 @@
 |            | Build Status                                                                                                                                                                                   |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Production | [![Build Status](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template.svg?token=eDnMwv6sT4GHB9E2RzXt&branch=master)](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template) |
+| Production | [![Build Status](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template.svg?token=eDnMwv6sT4GHB9E2RzXt&branch=main)](https://travis-ci.com/revelrylabs/revelry_phoenix_app_template) |
 
 # Phoenix App Template
 
