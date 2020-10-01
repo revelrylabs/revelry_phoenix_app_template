@@ -13,7 +13,7 @@ if [ "$ROLLBAR_ACCESS_TOKEN" = "" ]; then
   exit 1
 fi
 
-if [ "$TRAVIS_BRANCH" != "master" ]; then
+if [ "$TRAVIS_BRANCH" != "main" ]; then
   # if you want to track non-prod deploys, add some logic
   # to set the environment (in OUTPUT below) based on $TRAVIS_BRANCH
   echo "Skipping release ping for branch $TRAVIS_BRANCH"

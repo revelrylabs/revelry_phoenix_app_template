@@ -8,8 +8,8 @@ env:
     - DOCKER_USERNAME=travis
 jobs:
   include:
-    - stage: 'Tests' # naming the Tests stage
-      name: 'Unit Tests' # names the first Tests stage job
+    - stage: "Tests" # naming the Tests stage
+      name: "Unit Tests" # names the first Tests stage job
       language: elixir
       elixir:
         - 1.9
@@ -22,7 +22,7 @@ jobs:
           - assets/node_modules
       addons:
         chrome: stable
-        postgresql: '9.6'
+        postgresql: "9.6"
       services:
         - postgresql
       before_script:
@@ -38,8 +38,8 @@ jobs:
         - MIX_ENV=test mix coveralls.json
         - npm test --prefix assets
         - bin/ci-coverage
-    - stage: 'Tests'
-      name: 'Integration Tests'
+    - stage: "Tests"
+      name: "Integration Tests"
       language: elixir
       elixir:
         - 1.8
@@ -52,7 +52,7 @@ jobs:
           - assets/node_modules
       addons:
         chrome: stable
-        postgresql: '9.6'
+        postgresql: "9.6"
       dist: xenial
       services:
         - postgresql
@@ -79,8 +79,8 @@ jobs:
       script:
         - mix integration_tests
     - stage: docker deploy
-      name: 'Deploy'
-      if: branch = master
+      name: "Deploy"
+      if: branch = main
       script: skip
       before_deploy:
         - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net -u $DOCKER_USERNAME --password-stdin
@@ -91,4 +91,4 @@ jobs:
         provider: script
         script: bin/docker_pub library/app-template harbor.revelry-prod.revelry.net
         on:
-          branch: master
+          branch: main
