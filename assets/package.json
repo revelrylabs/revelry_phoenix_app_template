@@ -41,7 +41,7 @@
     "image-webpack-loader": "^6.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "imports-loader": "^1.1.0",
-    "jsdom": "^16.3.0",
+    "jsdom": "^16.4.0",
     "jsdom-global": "3.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^8.0.1",
