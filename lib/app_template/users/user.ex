@@ -12,7 +12,6 @@ defmodule AppTemplate.User do
   schema "users" do
     pow_user_fields()
     field(:role, :string, default: "user")
-    field(:email_verified, :boolean, default: false)
     timestamps()
   end
 
