@@ -32,3 +32,5 @@ npm-debug.log
 /config/*.secret.exs
 
 .env
+
+Brewfile.lock.json
