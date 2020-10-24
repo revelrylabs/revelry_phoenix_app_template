@@ -35,7 +35,7 @@
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
     "csswring": "^7.0.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.12.0",
     "eslint-plugin-react": "^7.20.3",
     "exports-loader": "^1.1.0",
     "image-webpack-loader": "^6.0.0",
