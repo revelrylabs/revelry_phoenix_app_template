@@ -16,7 +16,7 @@ config :app_template, AppTemplateWeb.Endpoint,
       "run",
       "build",
       "--",
-      "--watch-stdin",
+      "--watch",
       "--progress",
       "--color",
       cd: Path.expand("../assets", __DIR__)
