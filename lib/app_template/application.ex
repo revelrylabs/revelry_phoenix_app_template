@@ -13,6 +13,8 @@ defmodule AppTemplate.Application do
       {Phoenix.PubSub, name: AppTemplate.PubSub},
       # Start the Ecto repository
       AppTemplate.Repo,
+      # Start the Telemetry
+      AppTemplate.Telemetry,
       # Start the endpoint when the application starts
       AppTemplateWeb.Endpoint,
       # Start your own worker by calling: AppTemplate.Worker.start_link(arg1, arg2, arg3)

@@ -70,6 +70,8 @@ defmodule AppTemplate.Mixfile do
       {:transmit, "~> 0.2"},
       {:adminable, "~> 0.1"},
       {:telemetry, "~> 0.4.0"},
+      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"},
       {:prometheus_ex, git: "https://github.com/deadtrickster/prometheus.ex", override: true},
       {:prometheus_phoenix, "~> 1.3"},
       {:prometheus_ecto, "~> 1.4.3"},
