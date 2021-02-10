@@ -12,9 +12,9 @@ defmodule AppTemplate.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: AppTemplate.PubSub},
       # Start the Ecto repository
-      AppTemplate.Repo, [],
+      AppTemplate.Repo,
       # Start the endpoint when the application starts
-    AppTemplateWeb.Endpoint, [],
+      AppTemplateWeb.Endpoint,
       # Start your own worker by calling: AppTemplate.Worker.start_link(arg1, arg2, arg3)
       # worker(AppTemplate.Worker, [arg1, arg2, arg3]),
       {Cluster.Supervisor, [cluster_topologies(), [name: AppTemplate.ClusterSupervisor]]}
