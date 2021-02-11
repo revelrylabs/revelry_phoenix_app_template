@@ -1,3 +1,6 @@
+#https://hexdocs.pm/telemetry_metrics/Telemetry.Metrics.html
+#Telemetry defines the apps metrics and starts the reporters. 
+
 defmodule AppTemplate.Telemetry do
   use Supervisor
 
