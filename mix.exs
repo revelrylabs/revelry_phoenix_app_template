@@ -28,7 +28,7 @@ defmodule AppTemplate.Mixfile do
   def application do
     [
       mod: {AppTemplate.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -70,10 +70,13 @@ defmodule AppTemplate.Mixfile do
       {:transmit, "~> 0.2"},
       {:adminable, "~> 0.1"},
       {:telemetry, "~> 0.4.0"},
-      {:prometheus_phoenix, "~> 1.2"},
-      {:prometheus_ecto, "~> 1.4"},
-      {:prometheus_plugs, "~> 1.1"},
-      {:prometheus_process_collector, "~> 1.4"},
+      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"},
+      {:prometheus_ex, git: "https://github.com/deadtrickster/prometheus.ex", ref: "d09a312e68767bceb82bb1be08fdf7d4c538220c", override: true},
+      {:prometheus_phoenix, "~> 1.3"},
+      {:prometheus_ecto, "~> 1.4.3"},
+      {:prometheus_plugs, "~> 1.1.5"},
+      {:prometheus_process_collector, "~> 1.6"},
       {:libcluster, "~> 3.0"},
       {:pow, "~> 1.0"},
       {:phoenix_live_view, "~> 0.13.3"},
