@@ -1,11 +1,12 @@
-#https://hexdocs.pm/telemetry_metrics/Telemetry.Metrics.html
-#Telemetry defines the apps metrics and starts the reporters. 
-
 defmodule AppTemplate.Telemetry do
   use Supervisor
 
   import Telemetry.Metrics
 
+  @moduledoc """
+    This module is used to gain metrics data using Telemetry. It provides a view of the system's behavior over time.
+    Here is a [link](https://hexdocs.pm/telemetry_metrics/Telemetry.Metrics.html) to the Telemetry Metrics Docs.
+  """
   def start_link(arg) do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
