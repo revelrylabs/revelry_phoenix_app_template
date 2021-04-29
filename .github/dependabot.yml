@@ -1,0 +1,170 @@
+version: 2
+registries:
+  git-github-com:
+    type: git
+    url: https://github.com
+    username: x-access-token
+    password: "${{secrets.GIT_GITHUB_COM_PASSWORD}}"
+
+updates:
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ex_aws
+    versions:
+    - 2.1.7
+    - 2.1.8
+    - 2.1.9
+    - 2.2.0
+  - dependency-name: ecto_sql
+    versions:
+    - 3.5.4
+    - 3.6.0
+  - dependency-name: bamboo
+    versions:
+    - 1.7.0
+    - 1.7.1
+    - 2.0.0
+    - 2.0.1
+    - 2.0.2
+  - dependency-name: pow
+    versions:
+    - 1.0.22
+    - 1.0.23
+  - dependency-name: phoenix
+    versions:
+    - 1.5.8
+  - dependency-name: plug
+    versions:
+    - 1.11.1
+  - dependency-name: libcluster
+    versions:
+    - 3.2.2
+  - dependency-name: ex_machina
+    versions:
+    - 2.5.0
+    - 2.6.0
+    - 2.7.0
+  - dependency-name: excoveralls
+    versions:
+    - 0.14.0
+  - dependency-name: credo
+    versions:
+    - 1.5.4
+    - 1.5.5
+  - dependency-name: floki
+    versions:
+    - 0.30.0
+  - dependency-name: postgrex
+    versions:
+    - 0.15.8
+  - dependency-name: comeonin
+    versions:
+    - 5.3.2
+  - dependency-name: bcrypt_elixir
+    versions:
+    - 2.3.0
+  registries:
+  - git-github-com
+- package-ecosystem: npm
+  directory: "/assets"
+  schedule:
+    interval: daily
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: eslint
+    versions:
+    - 7.18.0
+    - 7.19.0
+    - 7.20.0
+    - 7.21.0
+    - 7.22.0
+    - 7.23.0
+    - 7.24.0
+  - dependency-name: ts-loader
+    versions:
+    - 8.0.14
+    - 8.0.15
+    - 8.0.16
+    - 8.0.17
+    - 8.0.18
+    - 8.1.0
+    - 9.0.0
+    - 9.1.0
+  - dependency-name: mini-css-extract-plugin
+    versions:
+    - 1.3.5
+    - 1.3.6
+    - 1.3.7
+    - 1.3.8
+    - 1.3.9
+    - 1.4.0
+    - 1.4.1
+    - 1.5.0
+  - dependency-name: css-loader
+    versions:
+    - 5.0.1
+    - 5.0.2
+    - 5.1.0
+    - 5.1.1
+    - 5.1.2
+    - 5.1.3
+    - 5.2.0
+    - 5.2.1
+    - 5.2.4
+  - dependency-name: chai
+    versions:
+    - 4.3.0
+    - 4.3.1
+    - 4.3.3
+    - 4.3.4
+  - dependency-name: autoprefixer
+    versions:
+    - 10.2.3
+    - 10.2.4
+    - 10.2.5
+  - dependency-name: "@babel/cli"
+    versions:
+    - 7.13.0
+    - 7.13.10
+    - 7.13.14
+  - dependency-name: "@babel/plugin-proposal-json-strings"
+    versions:
+    - 7.13.8
+  - dependency-name: webpack-cli
+    versions:
+    - 4.4.0
+    - 4.5.0
+  - dependency-name: webpack
+    versions:
+    - 4.46.0
+  - dependency-name: babel-loader
+    versions:
+    - 8.2.2
+  - dependency-name: ts-node
+    versions:
+    - 9.1.1
+  registries:
+  - git-github-com
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: elixir
+    versions:
+    - 1.11.3
+    - 1.11.4
+  registries:
+  - git-github-com
