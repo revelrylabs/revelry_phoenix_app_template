@@ -13,4 +13,4 @@ cask "chromedriver"
 cask 'postgres'
 
 # needed for building erlang's jav interop
-cask "java"
+cask "adoptopenjdk8"
