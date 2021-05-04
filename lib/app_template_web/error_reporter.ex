@@ -7,7 +7,6 @@ defmodule AppTemplateWeb.ErrorReporter do
   require Logger
 
   @ignore_error_routes [
-    "/wp-login.php",
     "/favicon.ico"
   ]
 
