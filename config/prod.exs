@@ -20,6 +20,15 @@ config :app_template, AppTemplate.Repo,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+       domain: System.get_env("AUTH0_DOMAIN"),
+       client_id: System.get_env("AUTH0_CLIENT_ID"),
+       client_secret: System.get_env("AUTH0_CLIENT_SECRET")
+
+config :guardian, Guardian,
+       issuer: System.get_env("AUTH0_DOMAIN"),
+       secret_key: System.get_env("AUTH0_CLIENT_SECRET")
+
 config :rollbax,
   client_token: System.get_env("ROLLBAR_CLIENT_TOKEN"),
   access_token: System.get_env("ROLLBAR_SERVER_TOKEN"),

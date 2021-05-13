@@ -29,6 +29,16 @@ config :app_template, AppTemplate.Mailer,
 config :app_template,
   jwt_secret: System.get_env("JWT_SECRET") || System.get_env("SECRET_KEY_BASE")
 
+# Auth 0
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+       domain: System.get_env("AUTH0_DOMAIN"),
+       client_id: System.get_env("AUTH0_CLIENT_ID"),
+       client_secret: System.get_env("AUTH0_CLIENT_SECRET")
+
+config :guardian, Guardian,
+       issuer: System.get_env("AUTH0_DOMAIN"),
+       secret_key: System.get_env("AUTH0_CLIENT_SECRET")
+
 # Configure Cluster Nodes
 app_name = System.get_env("APP_NAME") || "app-template"
 

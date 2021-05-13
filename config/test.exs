@@ -11,6 +11,14 @@ config :app_template, :sql_sandbox, true
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# Auth 0
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+       domain: "revelry.auth0.com",
+       client_id: "fake client id",
+       client_secret: "fake client secret"
+
+config :guardian, Guardian, secret_key: "fake client secret"
+
 # Configure your database
 config :app_template, AppTemplate.Repo,
   username: "postgres",

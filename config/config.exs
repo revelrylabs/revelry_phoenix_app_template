@@ -31,6 +31,18 @@ config :rollbax,
   enabled: false,
   environment: "dev"
 
+# Auth0
+config :ueberauth, Ueberauth,
+       providers: [
+         auth0: {Ueberauth.Strategy.Auth0, [default_scope: "openid email"]}
+       ]
+
+config :guardian, Guardian,
+       allowed_algos: ["HS256", "RS256"],
+       issuer: "AppTemplate.#{Mix.env()}",
+       verify_issuer: false,
+       secret_key: "This is for dev, the prod key will come from an env var"
+
 config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
 
 config :bamboo, :json_library, Jason

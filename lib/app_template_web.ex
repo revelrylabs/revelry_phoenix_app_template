@@ -24,6 +24,7 @@ defmodule AppTemplateWeb do
       alias AppTemplateWeb.Router.Helpers, as: Routes
       import AppTemplateWeb.Gettext
       import Phoenix.LiveView.Controller
+      import AppTemplateWeb.Helpers.AuthHelpers
     end
   end
 
