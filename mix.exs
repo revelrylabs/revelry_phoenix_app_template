@@ -65,6 +65,7 @@ defmodule AppTemplate.Mixfile do
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
       {:hackney, "~> 1.17"},
+      {:elixir_uuid, "~> 1.2"},
       {:guardian, "~> 0.14"},
       {:httpoison, "~> 1.0"},
       {:ueberauth, "~> 0.6"},
