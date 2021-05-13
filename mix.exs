@@ -28,7 +28,7 @@ defmodule AppTemplate.Mixfile do
   def application do
     [
       mod: {AppTemplate.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon, :ueberauth_auth0]
     ]
   end
 
@@ -64,6 +64,12 @@ defmodule AppTemplate.Mixfile do
       {:ex_machina, "~> 2.2", only: :test},
       {:stream_data, "~> 0.4.2", only: :test},
       {:joken, "~> 2.0"},
+      {:hackney, "~> 1.17"},
+      {:guardian, "~> 0.14"},
+      {:httpoison, "~> 1.0"},
+      {:elixir_uuid, "~> 1.2"},
+      {:ueberauth, "~> 0.6"},
+      {:ueberauth_auth0, "~> 0.8"},
       {:hound, "~> 1.0", only: :test},
       {:cabbage, "~> 0.3.5", only: :test},
       {:scrivener_ecto, "~> 2.0"},
