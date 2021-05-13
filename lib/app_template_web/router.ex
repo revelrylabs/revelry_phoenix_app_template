@@ -43,6 +43,14 @@ defmodule AppTemplateWeb.Router do
     plug RequirePermission, permission: :administrator
   end
 
+  pipeline :require_auth0_authentication do
+    plug :accepts, ["json", "html"]
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.EnsureAuthenticated, handler: AppTemplateWeb.ErrorView
+    plug Guardian.Plug.LoadResource
+    plug AppTemplate.Guardian.Pipeline
+  end
+
   pipeline :protected do
     plug Pow.Plug.RequireAuthenticated,
       error_handler: Pow.Phoenix.PlugErrorHandler
@@ -64,6 +72,13 @@ defmodule AppTemplateWeb.Router do
     pipe_through [:browser]
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
+  end
+
+  scope "/auth", AppTemplateWeb do
+    pipe_through :browser
+    get "/sign_out", AuthController, :logout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   if Mix.env() == :dev do
