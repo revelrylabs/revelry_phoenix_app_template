@@ -67,7 +67,6 @@ defmodule AppTemplate.Mixfile do
       {:hackney, "~> 1.17"},
       {:guardian, "~> 0.14"},
       {:httpoison, "~> 1.0"},
-      {:elixir_uuid, "~> 1.2"},
       {:ueberauth, "~> 0.6"},
       {:ueberauth_auth0, "~> 0.8"},
       {:hound, "~> 1.0", only: :test},

@@ -31,17 +31,6 @@ config :rollbax,
   enabled: false,
   environment: "dev"
 
-# Auth0
-config :ueberauth, Ueberauth,
-       providers: [
-         auth0: {Ueberauth.Strategy.Auth0, [default_scope: "openid email"]}
-       ]
-
-config :guardian, Guardian,
-       allowed_algos: ["HS256", "RS256"],
-       issuer: "AppTemplate.#{Mix.env()}",
-       verify_issuer: false,
-       secret_key: "This is for dev, the prod key will come from an env var"
 
 config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
 
@@ -66,6 +55,18 @@ config :app_template, :pow,
   extensions: [PowResetPassword, PowEmailConfirmation],
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   web_mailer_module: AppTemplateWeb
+
+# Auth0
+config :ueberauth, Ueberauth,
+       providers: [
+         auth0: {Ueberauth.Strategy.Auth0, [default_scope: "openid email"]}
+       ]
+
+config :app_template, AppTemplate.Guardian,
+       allowed_algos: ["HS256", "RS256"],
+       issuer: "AppTemplate.#{Mix.env()}",
+       verify_issuer: false,
+       secret_key: "This is for dev, the prod key will come from an env var"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
