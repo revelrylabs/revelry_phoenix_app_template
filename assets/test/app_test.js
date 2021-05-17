@@ -3,6 +3,7 @@ const {JSDOM} = require('jsdom')
 
 import App from '../js/app'
 
+/* eslint-disable indent */
 describe('App', () => {
     describe('init', () => {
         it('updates times', () => {
