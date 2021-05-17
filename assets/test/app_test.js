@@ -10,6 +10,7 @@ describe('App', () => {
             const timeTagHTML = `
       <time datetime="2018-12-06T22:56:17Z" title="2018-12-06T22:56:17Z">2018-12-06T22:56:17Z</time>
       `
+
             const jsdom = new JSDOM(timeTagHTML)
 
             const {window} = jsdom
@@ -26,4 +27,3 @@ describe('App', () => {
         })
     })
 })
-
