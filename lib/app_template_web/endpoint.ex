@@ -59,7 +59,7 @@ defmodule AppTemplateWeb.Endpoint do
   plug(Plug.Session, @session_options)
 
   plug(AppTemplateWeb.MetricsExporter)
-  plug AppTemplateWeb.PipelineInstrumenter
+  plug(AppTemplateWeb.PipelineInstrumenter)
   plug(AppTemplateWeb.Router)
 
   @doc """

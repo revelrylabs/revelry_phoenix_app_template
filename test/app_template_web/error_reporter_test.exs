@@ -3,7 +3,7 @@ defmodule AppTemplateWeb.ErrorReporter.Test do
   alias AppTemplateWeb.ErrorReporter
 
   test "handle_errors when one of ignored routes" do
-    assert ErrorReporter.handle_errors(%{request_path: "/wp-login.php"}, []) == nil
+    assert ErrorReporter.handle_errors(%{request_path: "/favicon.ico"}, []) == nil
   end
 
   test "handle_errors when there is an error and user logged in" do
