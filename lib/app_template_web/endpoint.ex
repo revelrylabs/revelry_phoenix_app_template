@@ -1,5 +1,6 @@
 defmodule AppTemplateWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :app_template
+
   @session_options [
     store: :cookie,
     key: "_app_template_key",
@@ -12,8 +13,7 @@ defmodule AppTemplateWeb.Endpoint do
 
   socket("/socket", AppTemplateWeb.UserSocket, websocket: true)
 
-  socket "/live", Phoenix.LiveView.Socket,
-    websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Heartbeat/Health Endpoint
   plug PlugHeartbeat, path: "/healthz"
@@ -40,7 +40,7 @@ defmodule AppTemplateWeb.Endpoint do
   plug Phoenix.LiveDashboard.RequestLogger,
     param_key: "request_logger",
     cookie_key: "request_logger"
-    
+
   plug(Plug.RequestId)
   plug(Plug.Logger)
 

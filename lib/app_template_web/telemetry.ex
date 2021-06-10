@@ -6,6 +6,7 @@ defmodule AppTemplate.Telemetry do
   use Supervisor
 
   import Telemetry.Metrics
+
   def start_link(arg) do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
@@ -22,11 +23,14 @@ defmodule AppTemplate.Telemetry do
 
   def metrics do
     [
-      #Phoenix Metrics
+      # Phoenix Metrics
       summary("phoenix.endpoint.stop.duration", unit: {:native, :millisecond}),
-      summary("phoenix.router_dispatch.stop.duration", tags: [:route], unit: {:native, :millisecond}),
+      summary("phoenix.router_dispatch.stop.duration",
+        tags: [:route],
+        unit: {:native, :millisecond}
+      ),
 
-      #Database Metrics
+      # Database Metrics
 
       summary("app_template.repo.query.total_time", unit: {:native, :millisecond}),
       summary("app_template.repo.query.decode_time", unit: {:native, :millisecond}),
@@ -34,7 +38,7 @@ defmodule AppTemplate.Telemetry do
       summary("app_template.repo.query.queue_time", unit: {:native, :millisecond}),
       summary("app_template.repo.query.idle_time", unit: {:native, :millisecond}),
 
-      #VM Metrics
+      # VM Metrics
 
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),
