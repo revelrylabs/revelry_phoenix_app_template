@@ -35,6 +35,9 @@ config :app_template, AppTemplate.Mailer, adapter: Bamboo.LocalAdapter
 
 config :bamboo, :json_library, Jason
 
+config :harmonium,
+  error_helper: {AppTemplateWeb.ErrorHelpers, :translate_error}
+
 config :ex_aws,
   access_key_id: [System.get_env("AWS_ACCESS_KEY_ID"), :instance_role],
   secret_access_key: [System.get_env("AWS_SECRET_ACCESS_KEY"), :instance_role]

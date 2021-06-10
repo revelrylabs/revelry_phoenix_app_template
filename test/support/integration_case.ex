@@ -34,19 +34,22 @@ defmodule AppTemplateWeb.IntegrationCase do
     metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(AppTemplate.Repo, self())
 
     # starts hound session in a headless chrome instance
-    hound_session = Hound.start_session(
-      additional_capabilities: %{
-        javascriptEnabled: true,
-        chromeOptions: %{
-          "args" => [
-            "--user-agent=#{Hound.Browser.user_agent(:chrome) |> Hound.Metadata.append(metadata)}",
-            "--headless",
-            "--disable-gpu",
-            "--window-size=1024x768"
-          ]
+    hound_session =
+      Hound.start_session(
+        additional_capabilities: %{
+          javascriptEnabled: true,
+          chromeOptions: %{
+            "args" => [
+              "--user-agent=#{
+                Hound.Browser.user_agent(:chrome) |> Hound.Metadata.append(metadata)
+              }",
+              "--headless",
+              "--disable-gpu",
+              "--window-size=1024x768"
+            ]
+          }
         }
-      }
-    )
+      )
 
     on_exit(fn ->
       Hound.end_session(hound_session)

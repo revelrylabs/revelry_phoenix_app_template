@@ -13,7 +13,7 @@ defmodule AppTemplate.Generators do
   }
 
   def generator(:user) do
-    gen all email <- generator(:email) do
+    gen all(email <- generator(:email)) do
       %User{
         email: email,
         password: Bcrypt.hash_pwd_salt("password")
@@ -22,8 +22,10 @@ defmodule AppTemplate.Generators do
   end
 
   def generator(:email) do
-    gen all local <- string(:alphanumeric, min_length: 1),
-            domain <- string(:alphanumeric, min_length: 1) do
+    gen all(
+          local <- string(:alphanumeric, min_length: 1),
+          domain <- string(:alphanumeric, min_length: 1)
+        ) do
       String.downcase(local <> to_string(System.unique_integer()) <> "@" <> domain)
     end
   end
