@@ -58,7 +58,7 @@ defmodule AppTemplate.Mixfile do
       {:harmonium, "~> 2.1.0", override: true},
       {:jason, "~> 1.2", override: true},
       {:rollbax, "~> 0.9"},
-      {:bamboo, "~> 1.4.0"},
+      {:bamboo, "~> 2.2.0"},
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
       {:ex_machina, "~> 2.2", only: :test},
