@@ -47,7 +47,7 @@ defmodule AppTemplate.Mixfile do
       {:phoenix_ecto, "~> 4.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
-      {:phoenix_live_reload, "~> 1.2.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.3.3", only: :dev},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.1"},
       {:plug, "~> 1.0"},
