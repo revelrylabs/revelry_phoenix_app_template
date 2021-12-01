@@ -36,6 +36,7 @@ install:
   - nvm install 12.4.0 && nvm use 12.4.0
 
 before_script:
+  - sudo rm /etc/ssl/certs/DST_Root_CA_X3.pem || echo "expired LetsEncrypt root not found at /etc/ssl/certs/DST_Root_CA_X3.pem"
   - mix local.hex --force
   - mix local.rebar --force
   - mix deps.get
