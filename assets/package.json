@@ -51,7 +51,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-loader": "^4.0.4",
-    "resolve-url-loader": "^3.1.2",
+    "resolve-url-loader": "^3.1.5",
     "sass-loader": "^10.0.4",
     "script-loader": "^0.7.2",
     "style-loader": "^2.0.0",
