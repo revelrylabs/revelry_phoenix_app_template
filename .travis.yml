@@ -48,12 +48,9 @@ jobs:
       name: "Unit Tests" # names the first Tests stage job
       services:
         - postgresql
-      before_install:
-        - gem install coveralls-multi
       script:
-        - MIX_ENV=test mix coveralls.json
+        - MIX_ENV=test mix test
         - npm test --prefix assets
-        - bin/ci-coverage
     - stage: "Tests"
       name: "Integration Tests"
       services:
